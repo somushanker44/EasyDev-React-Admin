@@ -12,7 +12,3 @@ export const SidebarProps = shape({
 export const ThemeProps = shape({
   className: string,
 });
-
-export const RTLProps = shape({
-  direction: string,
-});

@@ -31,8 +31,8 @@
     }],
     "max-len": ["error", {"code": 120, "ignoreRegExpLiterals": true, "tabWidth": 2}],
     "no-console": [1],
-    "react/jsx-props-no-spreading": 0,
     "linebreak-style": "off",
+    "react/jsx-props-no-spreading": 0,
     "react/jsx-one-expression-per-line": [0, { "allow": "literal" }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/jsx-fragments" : ["off", "element"]

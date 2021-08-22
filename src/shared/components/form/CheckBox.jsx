@@ -5,7 +5,13 @@ import CheckIcon from 'mdi-react/CheckIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
 
 const CheckBoxField = ({
-  disabled, className, name, value, onChange, label, color,
+  disabled,
+  className,
+  name,
+  value,
+  onChange,
+  label,
+  color,
 }) => {
   const CheckboxClass = classNames({
     'checkbox-btn': true,

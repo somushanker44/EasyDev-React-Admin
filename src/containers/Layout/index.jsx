@@ -1,57 +1,38 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
 import classNames from 'classnames';
 import Topbar from './topbar/Topbar';
 import Sidebar from './sidebar/Sidebar';
-import { changeThemeToDark, changeThemeToLight } from '../../redux/actions/themeActions';
-import { changeMobileSidebarVisibility, changeSidebarVisibility } from '../../redux/actions/sidebarActions';
-import { SidebarProps } from '../../shared/prop-types/ReducerProps';
 
-const Layout = ({ dispatch, sidebar }) => {
+const Layout = () => {
+  const [isSidebarShown, setIsSidebarShown] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const layoutClass = classNames({
     layout: true,
-    'layout--collapse': sidebar.collapse,
+    'layout--collapse': isSidebarCollapsed,
   });
 
-  const sidebarVisibility = () => {
-    dispatch(changeSidebarVisibility());
+  const changeSidebarVisibility = () => {
+    setIsSidebarCollapsed(!isSidebarCollapsed);
   };
 
-  const mobileSidebarVisibility = () => {
-    dispatch(changeMobileSidebarVisibility());
-  };
-
-  const changeToDark = () => {
-    dispatch(changeThemeToDark());
-  };
-
-  const changeToLight = () => {
-    dispatch(changeThemeToLight());
+  const changeMobileSidebarVisibility = () => {
+    setIsSidebarShown(!isSidebarShown);
   };
 
   return (
     <div className={layoutClass}>
       <Topbar
-        changeMobileSidebarVisibility={mobileSidebarVisibility}
-        changeSidebarVisibility={sidebarVisibility}
+        changeMobileSidebarVisibility={changeMobileSidebarVisibility}
+        changeSidebarVisibility={changeSidebarVisibility}
       />
       <Sidebar
-        sidebar={sidebar}
-        changeToDark={changeToDark}
-        changeToLight={changeToLight}
-        changeMobileSidebarVisibility={mobileSidebarVisibility}
+        sidebarShow={isSidebarShown}
+        sidebarCollapse={isSidebarCollapsed}
+        changeMobileSidebarVisibility={changeMobileSidebarVisibility}
       />
     </div>
   );
 };
 
-Layout.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  sidebar: SidebarProps.isRequired,
-};
-
-export default withRouter(connect((state) => ({
-  sidebar: state.sidebar,
-}))(Layout));
+export default withRouter(Layout);

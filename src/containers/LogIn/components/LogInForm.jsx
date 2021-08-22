@@ -1,30 +1,32 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Field, reduxForm } from 'redux-form';
 import EyeIcon from 'mdi-react/EyeIcon';
 import KeyVariantIcon from 'mdi-react/KeyVariantIcon';
 import AccountOutlineIcon from 'mdi-react/AccountOutlineIcon';
-import renderCheckBoxField from '../../../shared/components/form/CheckBox';
+import { Link } from 'react-router-dom';
+import CheckBox from '../../../shared/components/form/CheckBox';
 
-const LogInForm = ({ handleSubmit }) => {
+const LogInForm = () => {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
+  const [isToggleCheckboxEnabled, setIsToggleCheckboxEnabled] = useState(false);
 
-  const showPassword = () => {
+  const handleShowPassword = () => {
     setIsPasswordShown(!isPasswordShown);
   };
 
+  const handleToggleCheckBox = () => {
+    setIsToggleCheckboxEnabled(!isToggleCheckboxEnabled);
+  };
+
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="form">
       <div className="form__form-group">
         <span className="form__form-group-label">Username</span>
         <div className="form__form-group-field">
           <div className="form__form-group-icon">
             <AccountOutlineIcon />
           </div>
-          <Field
+          <input
             name="name"
-            component="input"
             type="text"
             placeholder="Name"
           />
@@ -36,15 +38,14 @@ const LogInForm = ({ handleSubmit }) => {
           <div className="form__form-group-icon">
             <KeyVariantIcon />
           </div>
-          <Field
+          <input
             name="password"
-            component="input"
             type={isPasswordShown ? 'text' : 'password'}
             placeholder="Password"
           />
           <button
             className={`form__form-group-button${isPasswordShown ? ' active' : ''}`}
-            onClick={() => showPassword()}
+            onClick={() => handleShowPassword()}
             type="button"
           ><EyeIcon />
           </button>
@@ -55,10 +56,11 @@ const LogInForm = ({ handleSubmit }) => {
       </div>
       <div className="form__form-group">
         <div className="form__form-group-field">
-          <Field
+          <CheckBox
             name="remember_me"
-            component={renderCheckBoxField}
             label="Remember me"
+            value={isToggleCheckboxEnabled}
+            onChange={handleToggleCheckBox}
           />
         </div>
       </div>
@@ -68,10 +70,4 @@ const LogInForm = ({ handleSubmit }) => {
   );
 };
 
-LogInForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-};
-
-export default reduxForm({
-  form: 'log_in_form',
-})(LogInForm);
+export default LogInForm;

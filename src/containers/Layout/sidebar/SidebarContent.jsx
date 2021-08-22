@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SidebarLink from './SidebarLink';
 import SidebarCategory from './SidebarCategory';
 
-const SidebarContent = ({ onClick, changeToDark, changeToLight }) => {
+const SidebarContent = ({ onClick }) => {
   const handleHideSidebar = () => {
     onClick();
   };
@@ -11,15 +11,7 @@ const SidebarContent = ({ onClick, changeToDark, changeToLight }) => {
   return (
     <div className="sidebar__content">
       <ul className="sidebar__block">
-        <SidebarLink title="Log In" icon="exit" route="/log_in" onClick={handleHideSidebar} />
-        <SidebarCategory title="Layout" icon="layers">
-          <button type="button" className="sidebar__link" onClick={changeToLight}>
-            <p className="sidebar__link-title">Light Theme</p>
-          </button>
-          <button type="button" className="sidebar__link" onClick={changeToDark}>
-            <p className="sidebar__link-title">Dark Theme</p>
-          </button>
-        </SidebarCategory>
+        <SidebarLink title="Log Out" icon="exit" route="/log_in" onClick={handleHideSidebar} />
       </ul>
       <ul className="sidebar__block">
         <SidebarCategory title="Example Pages" icon="diamond">
@@ -32,8 +24,6 @@ const SidebarContent = ({ onClick, changeToDark, changeToLight }) => {
 };
 
 SidebarContent.propTypes = {
-  changeToDark: PropTypes.func.isRequired,
-  changeToLight: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 

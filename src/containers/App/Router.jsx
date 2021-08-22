@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Layout from '../Layout/index';
 import MainWrapper from './MainWrapper';
+
 import LogIn from '../LogIn/index';
 import ExamplePageOne from '../Example/index';
 import ExamplePageTwo from '../ExampleTwo/index';

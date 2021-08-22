@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Collapse } from 'reactstrap';
 import PropTypes from 'prop-types';
+import { Collapse } from 'reactstrap';
 import classNames from 'classnames';
 
 const SidebarCategory = ({

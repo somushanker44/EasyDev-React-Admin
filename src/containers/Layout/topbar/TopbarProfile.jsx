@@ -7,13 +7,14 @@ const Ava = `${process.env.PUBLIC_URL}/img/ava.png`;
 
 const TopbarProfile = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+
   const handleToggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
 
   return (
     <div className="topbar__profile">
-      <button type="button" className="topbar__avatar" onClick={setIsCollapsed}>
+      <button type="button" className="topbar__avatar" onClick={handleToggleCollapse}>
         <img className="topbar__avatar-img" src={Ava} alt="avatar" />
         <p className="topbar__avatar-name">Roman Johanson</p>
         <DownIcon className="topbar__icon" />

@@ -16,7 +16,7 @@ const LogIn = () => (
           </h3>
           <h4 className="account__subhead subhead">Start your business easily</h4>
         </div>
-        <LogInForm onSubmit />
+        <LogInForm />
         <div className="account__or">
           <p>Or Easily Using</p>
         </div>
@@ -24,12 +24,14 @@ const LogIn = () => (
           <Link
             className="account__social-btn account__social-btn--facebook"
             to="/pages/one"
-          ><FacebookIcon />
+          >
+            <FacebookIcon />
           </Link>
           <Link
             className="account__social-btn account__social-btn--google"
             to="/pages/one"
-          ><GooglePlusIcon />
+          >
+            <GooglePlusIcon />
           </Link>
         </div>
       </div>
