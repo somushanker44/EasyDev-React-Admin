@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody, Table } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const Modals = () => (
   <Card className="card--not-full-height">
@@ -13,19 +13,21 @@ const Modals = () => (
         Example of using this component here:
       </p>
       <CodeHighlither>
-        {`import React from 'react';
+        {`import React, {PureComponent} from 'react';
 import {Button} from 'reactstrap';
 import Modal from 'template/src/components/Modal';
 
-const Example = () => (
-  <Modal color='primary' title='Congratulations!'
-         message='Expect warmly its tended garden him esteem had remove off. Effects dearest staying
-       now sixteen nor improve.'>
-    <Button color='primary'>Default</Button>
-  </Modal>
-);
-
-export default Example;`}
+export default class Example extends PureComponent {
+  render() {
+    return (
+      <Modal color='primary' title='Congratulations!'
+             message='Expect warmly its tended garden him esteem had remove off. Effects dearest staying
+           now sixteen nor improve.'>
+        <Button color='primary'>Default</Button>
+      </Modal>
+    )
+  }
+}`}
       </CodeHighlither>
       <p>Props of Modal:</p>
       <Table responsive className="table--bordered table--head-accent">

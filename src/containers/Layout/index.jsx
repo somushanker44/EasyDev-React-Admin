@@ -1,169 +1,176 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+/* eslint-disable no-return-assign */
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  CustomizerProps, SidebarProps, ThemeProps, RTLProps, UserProps, BlocksShadowsProps, RoundBordersProps,
-} from '@/shared/prop-types/ReducerProps';
-import { changeMobileSidebarVisibility, changeSidebarVisibility } from '@/redux/actions/sidebarActions';
-import {
-  changeThemeToDark, changeThemeToLight,
-} from '@/redux/actions/themeActions';
-import {
-  changeDirectionToRTL, changeDirectionToLTR,
-} from '@/redux/actions/rtlActions';
-import { toggleTopNavigation } from '@/redux/actions/customizerActions';
-import {
-  changeRoundBordersToOnAction, changeRoundBordersToOffAction,
-} from '@/redux/actions/roundBordersActions';
-import {
-  changeBlocksShadowsToOnAction, changeBlocksShadowsToOffAction,
-} from '@/redux/actions/blocksShadowsActions';
+import NotificationSystem from 'rc-notification';
 import Topbar from './topbar/Topbar';
 import TopbarWithNavigation from './topbar_with_navigation/TopbarWithNavigation';
 import Sidebar from './sidebar/Sidebar';
 import SidebarMobile from './topbar_with_navigation/sidebar_mobile/SidebarMobile';
 import Customizer from './customizer/Customizer';
-import WelcomeNotification from './components/WelcomeNotification';
+import { BasicNotification } from '../../shared/components/Notification';
+import { changeMobileSidebarVisibility, changeSidebarVisibility } from '../../redux/actions/sidebarActions';
+import {
+  changeThemeToDark, changeThemeToLight,
+} from '../../redux/actions/themeActions';
+import {
+  changeDirectionToRTL, changeDirectionToLTR,
+} from '../../redux/actions/rtlActions';
+import { changeBorderRadius, toggleBoxShadow, toggleTopNavigation } from '../../redux/actions/customizerActions';
+import {
+  CustomizerProps, SidebarProps, ThemeProps, RTLProps, UserProps,
+} from '../../shared/prop-types/ReducerProps';
 
-/* TODO: Delete below when building an archive */
-import BuyNowButton from './components/BuyNowButton';
+let notification = null;
 
-const Layout = ({
-  dispatch, customizer, sidebar, theme, rtl, roundBorders, blocksShadows, user,
-}) => {
-  const [isNotificationShown, setIsNotificationShown] = useState(false);
+const showNotification = (rtl) => {
+  notification.notice({
+    content: <BasicNotification
+      title="👋 Welcome to the EasyDev!"
+      message="You have successfully registered in the EasyDev. Now you can start to explore the dashboard
+                interface with a bunch of components and applications. Enjoy!"
+    />,
+    duration: 5,
+    closable: true,
+    style: { top: 0, left: 'calc(100vw - 100%)' },
+    className: `right-up ${rtl}-support`,
+  });
+};
 
-  useEffect(() => {
-    if (!isNotificationShown) {
-      WelcomeNotification(theme, rtl, setIsNotificationShown, isNotificationShown);
-    }
-  }, [theme, rtl, isNotificationShown]);
+class Layout extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    sidebar: SidebarProps.isRequired,
+    customizer: CustomizerProps.isRequired,
+    theme: ThemeProps.isRequired,
+    rtl: RTLProps.isRequired,
+    user: UserProps.isRequired,
+  };
 
-  const sidebarVisibility = () => {
+  componentDidMount() {
+    const { rtl } = this.props;
+    NotificationSystem.newInstance({ style: { top: 65 } }, n => notification = n);
+    setTimeout(() => showNotification(rtl.direction), 700);
+  }
+
+  componentWillUnmount() {
+    notification.destroy();
+  }
+
+  changeSidebarVisibility = () => {
+    const { dispatch } = this.props;
     dispatch(changeSidebarVisibility());
   };
 
-  const mobileSidebarVisibility = () => {
+  changeMobileSidebarVisibility = () => {
+    const { dispatch } = this.props;
     dispatch(changeMobileSidebarVisibility());
   };
 
-  const changeToDark = () => {
+  changeToDark = () => {
+    const { dispatch } = this.props;
     dispatch(changeThemeToDark());
   };
 
-  const changeToLight = () => {
+  changeToLight = () => {
+    const { dispatch } = this.props;
     dispatch(changeThemeToLight());
   };
 
-  const changeToRTL = () => {
+  changeToRTL = () => {
+    const { dispatch } = this.props;
     dispatch(changeDirectionToRTL());
   };
 
-  const changeToLTR = () => {
+  changeToLTR = () => {
+    const { dispatch } = this.props;
     dispatch(changeDirectionToLTR());
   };
 
-  const topNavigation = () => {
+  toggleTopNavigation = () => {
+    const { dispatch } = this.props;
     dispatch(toggleTopNavigation());
   };
 
-  const changeRoundBordersOn = () => {
-    dispatch(changeRoundBordersToOnAction());
+  changeBorderRadius = () => {
+    const { dispatch } = this.props;
+    dispatch(changeBorderRadius());
   };
 
-  const changeRoundBordersOff = () => {
-    dispatch(changeRoundBordersToOffAction());
+  toggleBoxShadow = () => {
+    const { dispatch } = this.props;
+    dispatch(toggleBoxShadow());
   };
 
-  const changeBlocksShadowsOn = () => {
-    dispatch(changeBlocksShadowsToOnAction());
-  };
+  render() {
+    const {
+      customizer, sidebar, theme, rtl, user,
+    } = this.props;
+    const layoutClass = classNames({
+      layout: true,
+      'layout--collapse': sidebar.collapse,
+      'layout--top-navigation': customizer.topNavigation,
+    });
 
-  const changeBlocksShadowsOff = () => {
-    dispatch(changeBlocksShadowsToOffAction());
-  };
-
-  const layoutClass = classNames({
-    layout: true,
-    'layout--collapse': sidebar.collapse,
-    'layout--top-navigation': customizer.topNavigation,
-  });
-
-  return (
-    <div className={layoutClass}>
-      <Customizer
-        customizer={customizer}
-        sidebar={sidebar}
-        theme={theme}
-        rtl={rtl}
-        roundBorders={roundBorders}
-        blocksShadows={blocksShadows}
-        changeSidebarVisibility={sidebarVisibility}
-        toggleTopNavigation={topNavigation}
-        changeToDark={changeToDark}
-        changeToLight={changeToLight}
-        changeToRTL={changeToRTL}
-        changeToLTR={changeToLTR}
-        changeRoundBordersOn={changeRoundBordersOn}
-        changeRoundBordersOff={changeRoundBordersOff}
-        changeBlocksShadowsOn={changeBlocksShadowsOn}
-        changeBlocksShadowsOff={changeBlocksShadowsOff}
-      />
-      { /* TODO: Delete below when building an archive */ }
-      <BuyNowButton />
-      {customizer.topNavigation
-        ? (
-          <TopbarWithNavigation
-            changeMobileSidebarVisibility={mobileSidebarVisibility}
-          />
-        )
-        : (
-          <Topbar
-            changeMobileSidebarVisibility={mobileSidebarVisibility}
-            changeSidebarVisibility={sidebarVisibility}
-            user={user}
-          />
-        )}
-      {customizer.topNavigation
-        ? (
-          <SidebarMobile
-            sidebar={sidebar}
-            changeToDark={changeToDark}
-            changeToLight={changeToLight}
-            changeMobileSidebarVisibility={changeMobileSidebarVisibility}
-          />
-        )
-        : (
-          <Sidebar
-            sidebar={sidebar}
-            changeToDark={changeToDark}
-            changeToLight={changeToLight}
-            changeMobileSidebarVisibility={changeMobileSidebarVisibility}
-          />
-        )}
-    </div>
-  );
-};
-
-Layout.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  sidebar: SidebarProps.isRequired,
-  customizer: CustomizerProps.isRequired,
-  theme: ThemeProps.isRequired,
-  rtl: RTLProps.isRequired,
-  roundBorders: RoundBordersProps.isRequired,
-  blocksShadows: BlocksShadowsProps.isRequired,
-  user: UserProps.isRequired,
-};
+    return (
+      <div className={layoutClass}>
+        <Customizer
+          customizer={customizer}
+          sidebar={sidebar}
+          theme={theme}
+          rtl={rtl}
+          changeSidebarVisibility={this.changeSidebarVisibility}
+          toggleTopNavigation={this.toggleTopNavigation}
+          changeToDark={this.changeToDark}
+          changeToLight={this.changeToLight}
+          changeToRTL={this.changeToRTL}
+          changeToLTR={this.changeToLTR}
+          changeBorderRadius={this.changeBorderRadius}
+          toggleBoxShadow={this.toggleBoxShadow}
+        />
+        {customizer.topNavigation
+          ? (
+            <TopbarWithNavigation
+              changeMobileSidebarVisibility={this.changeMobileSidebarVisibility}
+            />
+          )
+          : (
+            <Topbar
+              changeMobileSidebarVisibility={this.changeMobileSidebarVisibility}
+              changeSidebarVisibility={this.changeSidebarVisibility}
+              user={user}
+            />
+          )
+        }
+        {customizer.topNavigation
+          ? (
+            <SidebarMobile
+              sidebar={sidebar}
+              changeToDark={this.changeToDark}
+              changeToLight={this.changeToLight}
+              changeMobileSidebarVisibility={this.changeMobileSidebarVisibility}
+            />
+          )
+          : (
+            <Sidebar
+              sidebar={sidebar}
+              changeToDark={this.changeToDark}
+              changeToLight={this.changeToLight}
+              changeMobileSidebarVisibility={this.changeMobileSidebarVisibility}
+            />
+          )
+        }
+      </div>
+    );
+  }
+}
 
 export default withRouter(connect(state => ({
   customizer: state.customizer,
   sidebar: state.sidebar,
   theme: state.theme,
   rtl: state.rtl,
-  roundBorders: state.roundBorders,
-  blocksShadows: state.blocksShadows,
   user: state.user,
 }))(Layout));

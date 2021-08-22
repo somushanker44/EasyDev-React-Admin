@@ -1,38 +1,27 @@
-import { combineReducers, createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { combineReducers, createStore } from 'redux';
 import { reducer as reduxFormReducer } from 'redux-form';
 import {
-  themeReducer,
-  rtlReducer,
   cryptoTableReducer,
-  customizerReducer,
   newOrderTableReducer,
   sidebarReducer,
+  themeReducer,
+  customizerReducer,
+  todoReducer,
+  rtlReducer,
   authReducer,
-  roundBordersReducer,
-  blocksShadowsReducer,
-  pokemonReducer,
-} from '@/redux/reducers/index';
-import appConfigReducer from '@/redux/reducers/appConfigReducer';
-import covidReducer from '../Maps/VectorMapWithRequestData/redux/covidReducer';
-import todoReducer from '../Todo/redux/reducer';
+} from '../../redux/reducers/index';
 
 const reducer = combineReducers({
   form: reduxFormReducer, // mounted under "form",
   theme: themeReducer,
   rtl: rtlReducer,
-  roundBorders: roundBordersReducer,
-  blocksShadows: blocksShadowsReducer,
-  appConfig: appConfigReducer,
-  cryptoTable: cryptoTableReducer,
-  customizer: customizerReducer,
-  newOrder: newOrderTableReducer,
   sidebar: sidebarReducer,
+  cryptoTable: cryptoTableReducer,
+  newOrder: newOrderTableReducer,
+  customizer: customizerReducer,
+  todos: todoReducer,
   user: authReducer,
-  covid: covidReducer,
-  todo: todoReducer,
-  pokemon: pokemonReducer,
 });
-const store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(reducer);
 
 export default store;

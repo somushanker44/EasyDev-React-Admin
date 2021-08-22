@@ -1,14 +1,16 @@
+/* eslint-disable react/no-typos */
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   Button, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown,
 } from 'reactstrap';
+import PropTypes from 'prop-types';
+
 import CheckIcon from 'mdi-react/CheckIcon';
 import MenuDownIcon from 'mdi-react/MenuDownIcon';
 import ReloadIcon from 'mdi-react/ReloadIcon';
 import MagnifyIcon from 'mdi-react/MagnifyIcon';
-import PaginationComponent from '@/shared/components/pagination/PaginationComponent';
-import { EmailsProps } from '@/shared/prop-types/EmailProps';
+import Pagination from '../../../shared/components/pagination/PaginationSmall';
+import { EmailsProps } from '../../../shared/prop-types/EmailProps';
 
 const EmailsControls = ({ emails, onChangePage, onChangeSelect }) => (
   <div className="inbox__emails-controls-wrap">
@@ -38,7 +40,7 @@ const EmailsControls = ({ emails, onChangePage, onChangeSelect }) => (
         <input placeholder="Search" />
         <div className="inbox__emails-control-search-icon"><MagnifyIcon /></div>
       </div>
-      <PaginationComponent items={emails} onChangePage={onChangePage} initialPage={1} />
+      <Pagination items={emails} onChangePage={onChangePage} initialPage={1} />
     </div>
   </div>
 );

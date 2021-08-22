@@ -1,61 +1,98 @@
-import React, { useEffect, useState } from 'react';
+import React, { PureComponent } from 'react';
+import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
-import Panel from '@/shared/components/Panel';
-import todoCard from '../../../Todo/types';
+import Panel from '../../../../shared/components/Panel';
 import ToDo from './ToDo';
 
-const editTodoElementData = ({ todoElements, editTodoElement }) => (e) => {
-  const todoId = e.target.id;
-  const elementData = todoElements.find(item => Number(item.data.id) === Number(todoId)).data;
-  elementData.isCompleted = !elementData.isCompleted;
-  editTodoElement(elementData);
-};
+class MyTodos extends PureComponent {
+  static propTypes = {
+    t: PropTypes.func.isRequired,
+  };
 
-const MyTodos = ({ todoElements, editTodoElement }) => {
-  const { t } = useTranslation('common');
-  const [noArchivedTodoElements, setNoArchivedTodoElements] = useState(null);
-  const [archivedTodoElements, setArchivedTodoElements] = useState(null);
+  state = {
+    checkedItems: [
+      {
+        id: '1',
+        label: 'Call to Margaret and tell about EasyDEV',
+        checked: true,
+      },
+      {
+        id: '2',
+        label: 'Prepare docs for boss',
+        checked: false,
+      },
+      {
+        id: '3',
+        label: 'Calculate the company budget',
+        checked: true,
+      },
+      {
+        id: '4',
+        label: 'Find a manager',
+        checked: true,
+      },
+      {
+        id: '5',
+        label: 'Call to Sarah',
+        checked: true,
+      },
+      {
+        id: '6',
+        label: 'Make a sandwich',
+        checked: true,
+      },
+      {
+        id: '7',
+        label: 'Drink a coffee',
+        checked: true,
+      },
+      {
+        id: '8',
+        label: 'Walk with my dog',
+        checked: true,
+      },
+      {
+        id: '9',
+        label: 'Buy some milk, bread and a new car',
+        checked: true,
+      },
+    ],
+  };
 
-  useEffect(() => {
-    const filteredData = [...todoElements];
-    setNoArchivedTodoElements(filteredData.filter(item => !item.data.isArchived));
-    setArchivedTodoElements(filteredData.filter(item => item.data.isArchived));
-  }, [todoElements]);
+  onChange = (e) => {
+    const { checkedItems } = this.state;
+    const item = e.target.name;
+    const index = checkedItems.findIndex(check => check.id === item);
+    checkedItems[index].checked = !checkedItems[index].checked;
+    this.setState({ checkedItems: [...checkedItems] });
+  };
 
-  return (
-    <Panel
-      md={12}
-      lg={5}
-      xl={3}
-      xs={12}
-      title={t('dashboard_commerce.my_todos')}
-      subhead="Do not forget to do everything"
-    >
-      {noArchivedTodoElements && noArchivedTodoElements.map(todo => (
-        <ToDo
-          key={todo.data.id}
-          id={todo.data.id}
-          label={todo.data.title}
-          checked={todo.data.isCompleted}
-          onChange={editTodoElementData({ todoElements, editTodoElement })}
-        />
-      ))}
-      {archivedTodoElements && archivedTodoElements.map(todo => (
-        <ToDo
-          key={todo.data.id}
-          id={todo.data.id}
-          label={todo.data.title}
-          disabled
-        />
-      ))}
-    </Panel>
-  );
-};
+  render() {
+    const { t } = this.props;
+    const { checkedItems } = this.state;
+    return (
+      <Panel
+        md={12}
+        lg={5}
+        xl={3}
+        xs={12}
+        title={t('dashboard_commerce.my_todos')}
+        subhead="Do not forget to do everything"
+      >
+        {
+          checkedItems.map(todo => (
+            <ToDo
+              key={todo.id}
+              id={todo.id}
+              label={todo.label}
+              checked={todo.checked}
+              onChange={this.onChange}
+            />
+          ))
+        }
+      </Panel>
+    );
+  }
+}
 
-MyTodos.propTypes = {
-  editTodoElement: PropTypes.func.isRequired,
-  todoElements: PropTypes.arrayOf(todoCard).isRequired,
-};
-
-export default MyTodos;
+export default withTranslation('common')(MyTodos);

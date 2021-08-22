@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react/no-array-index-key */
+import React, { PureComponent } from 'react';
 import { Button } from 'reactstrap';
 import PenIcon from 'mdi-react/PenIcon';
 import InboxArrowDownIcon from 'mdi-react/InboxArrowDownIcon';
@@ -7,12 +8,12 @@ import TooltipEditIcon from 'mdi-react/TooltipEditIcon';
 import StarIcon from 'mdi-react/StarIcon';
 import DeleteIcon from 'mdi-react/DeleteIcon';
 import MenuIcon from 'mdi-react/MenuIcon';
-import { EmailsProps } from '@/shared/prop-types/EmailProps';
 import MailBox from './MailBox';
 import ComposeEmail from './ComposeEmail';
 import Email from './Email';
 import showResults from '../../Form/Show';
 import InboxTable from './InboxTable';
+import { EmailsProps } from '../../../shared/prop-types/EmailProps';
 
 const mailboxes = [
   { icon: <InboxArrowDownIcon />, title: 'Inbox', amount: 21 },
@@ -39,12 +40,12 @@ const emailExample = [{
   <div className="typography-message">
     <h4><b>Congratulations! You are win! </b></h4>
     <p>Knowledge nay estimable questions repulsive daughters boy. Solicitude gay way unaffected expression for.
-      His mistress ladyship required off horrible disposed rejoiced. Unpleasing pianoforte unreserved as oh he
-      unpleasant no inquietude insipidity. Advantages can discretion possession add favourable cultivated
-      admiration far. Why rather assure how esteem end hunted nearer and before. By an truth after heard going
-      early given he. Charmed to it excited females whether at examine. Him abilities suffering may are yet
-      dependent. Barton did feebly change man she afford square add. Want eyes by neat so just must. Past
-      draw tall up face show rent oh mr.
+        His mistress ladyship required off horrible disposed rejoiced. Unpleasing pianoforte unreserved as oh he
+        unpleasant no inquietude insipidity. Advantages can discretion possession add favourable cultivated
+        admiration far. Why rather assure how esteem end hunted nearer and before. By an truth after heard going
+        early given he. Charmed to it excited females whether at examine. Him abilities suffering may are yet
+        dependent. Barton did feebly change man she afford square add. Want eyes by neat so just must. Past
+        draw tall up face show rent oh mr.
     </p>
     <p>Best regards,</p>
     <p>Nikolay</p>
@@ -55,109 +56,116 @@ const emailExample = [{
   ],
 }];
 
-const Inbox = ({ emails }) => {
-  const [isComposed, setIsComposed] = useState(false);
-  const [email, setEmail] = useState(false);
-  const [mailbox, setMailbox] = useState(0);
-  const [label, setLabel] = useState(0);
-  const [isOpenedMailboxes, setIsOpenedMailboxes] = useState(false);
-
-  const mailboxesWithID = mailboxes.map((item, index) => ({ ...item, id: index }));
-  const labelsWithID = labels.map((item, index) => ({ ...item, id: index }));
-
-  const onCompose = () => {
-    setIsComposed(true);
-    setEmail(false);
+export default class Inbox extends PureComponent {
+  static propTypes = {
+    emails: EmailsProps.isRequired,
   };
 
-  const onMailBox = (index) => {
-    setMailbox(index);
-    setIsComposed(false);
-    setEmail(false);
+  constructor() {
+    super();
+    this.state = {
+      compose: false,
+      email: false,
+      mailbox: 0,
+      label: 0,
+      openMailboxes: false,
+    };
+  }
+
+  onCompose = (e) => {
+    e.preventDefault();
+    this.setState({ compose: true, email: false });
   };
 
-  const onLabel = (index) => {
-    setLabel(index);
-    setIsComposed(false);
-    setEmail(false);
+  onMailBox = (mailbox, e) => {
+    e.preventDefault();
+    this.setState({
+      mailbox, compose: false, email: false,
+    });
   };
 
-  const onLetter = () => {
-    setEmail(true);
+  onLabel = (label, e) => {
+    e.preventDefault();
+    this.setState({
+      label, compose: false, email: false,
+    });
   };
 
-  const onOpenMailboxes = () => {
-    setIsOpenedMailboxes(!isOpenedMailboxes);
+  onLetter = (e) => {
+    e.preventDefault();
+    this.setState({ email: true });
   };
 
-  return (
-    <div
-      className={`inbox${isOpenedMailboxes ? ' inbox--show-mailboxes' : ''}`}
-      onClick={isOpenedMailboxes ? onOpenMailboxes : null}
-      role="presentation"
-    >
-      <div className="inbox__mailbox-list">
-        <Button
-          color="primary"
-          className="icon inbox__mailbox-list-btn"
-          size="sm"
-          onClick={onCompose}
-        >
-          <PenIcon />Compose
-        </Button>
-        {mailboxesWithID.map((item, index) => (
-          <button
-            type="button"
-            className="inbox__list-button"
-            key={item.id}
-            onClick={() => onMailBox(index)}
+  onOpenMailboxes = () => {
+    this.setState(prevState => ({ openMailboxes: !prevState.openMailboxes }));
+  };
+
+  render() {
+    const {
+      compose, openMailboxes, email, mailbox, label,
+    } = this.state;
+
+    const { emails } = this.props;
+
+    return (
+      <div
+        className={`inbox${openMailboxes ? ' inbox--show-mailboxes' : ''}`}
+        onClick={openMailboxes ? this.onOpenMailboxes : null}
+        role="presentation"
+      >
+        <div className="inbox__mailbox-list">
+          <Button
+            color="primary"
+            className="icon inbox__mailbox-list-btn"
+            size="sm"
+            onClick={this.onCompose}
           >
-            <MailBox title={item.title} amount={item.amount} selected={index === mailbox}>
-              {item.icon}
-            </MailBox>
-          </button>
-        ))}
-        <p className="inbox__labels">Labels</p>
-        {labelsWithID.map((item, index) => (
-          <button
-            type="button"
-            key={item.id}
-            onClick={() => onLabel(index)}
-            className={`inbox__list-button inbox__label${label === index ? ' active' : ''}`}
-          >
-            <span className={`inbox__label-color inbox__label-color--${item.color}`} />{item.title}
-          </button>
-        ))}
-      </div>
-      <div className="inbox__container">
-        <div className={`inbox__topbar${email ? ' inbox__topbar--hide' : ''}`}>
-          <button className="inbox__topbar-button" type="button" onClick={onOpenMailboxes}>
-            <MenuIcon className="inbox__topbar-button-icon" />
-          </button>
+            <PenIcon />Compose
+          </Button>
+          {mailboxes.map((m, i) => (
+            <button type="button" className="inbox__list-button" key={i} onClick={e => this.onMailBox(i, e)}>
+              <MailBox title={m.title} amount={m.amount} selected={i === mailbox}>
+                {m.icon}
+              </MailBox>
+            </button>
+          ))}
+          <p className="inbox__labels">Labels</p>
+          {labels.map((l, i) => (
+            <button
+              type="button"
+              key={i}
+              onClick={e => this.onLabel(i, e)}
+              className={`inbox__list-button inbox__label${label === i ? ' active' : ''}`}
+            >
+              <span className={`inbox__label-color inbox__label-color--${l.color}`} />{l.title}
+            </button>
+          ))}
         </div>
-        {!isComposed
-          ? (
-            <div>
-              {email
-                ? (
-                  <Email
-                    email={emailExample[0]}
-                    onReply={onCompose}
-                    onSubmit
-                    onBack={() => onMailBox(mailbox)}
-                  />
-                )
-                : <InboxTable emails={emails} onLetter={onLetter} />}
-            </div>
-          )
-          : <ComposeEmail onSubmit={showResults} />}
+        <div className="inbox__container">
+          <div className={`inbox__topbar${email ? ' inbox__topbar--hide' : ''}`}>
+            <button className="inbox__topbar-button" type="button" onClick={this.onOpenMailboxes}>
+              <MenuIcon className="inbox__topbar-button-icon" />
+            </button>
+          </div>
+          {!compose
+            ? (
+              <div>
+                {email
+                  ? (
+                    <Email
+                      email={emailExample[0]}
+                      onReply={this.onCompose}
+                      onSubmit
+                      onBack={e => this.onMailBox(mailbox, e)}
+                    />
+                  )
+                  : <InboxTable emails={emails} onLetter={this.onLetter} />
+              }
+              </div>
+            )
+            : <ComposeEmail onSubmit={showResults} />}
+        </div>
       </div>
-    </div>
-  );
-};
-
-Inbox.propTypes = {
-  emails: EmailsProps.isRequired,
-};
-
-export default Inbox;
+    );
+  }
+}

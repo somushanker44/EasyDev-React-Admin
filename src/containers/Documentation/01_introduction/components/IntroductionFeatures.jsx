@@ -8,33 +8,11 @@ const IntroductionFeatures = () => (
         <h5 className="bold-text">Introduction</h5>
       </div>
       <p>EasyDEV is a modern dashboard template based on React Components and Bootstrap 4 Framework. We’ve used
-        modern technologies and best practices to make our product easy to work with. It’s the most
-        convenient template for developers, because of React Components, clean code and detailed documentation,
-        which allows you to build any projects easily! Use it for e-commerce, analytics, sports and other types of
-        web or mobile applications.
+            modern technologies and best practices to make our product easy to work with. It’s the most
+            convenient template for developers, because of React Components, clean code and detailed documentation,
+            which allows you to build any projects easily! Use it for e-commerce, analytics, sports and other types of
+            web or mobile applications.
       </p>
-      <p>
-        Here is our discord server!&nbsp;
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://discord.gg/8aJkBc8gFN"
-        >
-          Click here to join now.
-        </a>
-      </p>
-      <p>If you want to get the HTML EasyDev template for free you&rsquo;ll need to:</p>
-      <p>1. join our&nbsp;
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://discord.gg/8aJkBc8gFN"
-        >
-          Discord server;
-        </a>
-      </p>
-      <p>2. write a private message with your purchase code and e-mail to Alexey, the admin (green nickname);</p>
-      <p>3. wait a bit and get your template within a day that&rsquo;s it! :)</p>
       <div className="card__title">
         <h5 className="bold-text">Features</h5>
       </div>

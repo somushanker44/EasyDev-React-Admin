@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody, Table } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const RadioButtons = () => (
   <Card className="card--not-full-height">
@@ -9,7 +9,7 @@ const RadioButtons = () => (
         <h5 className="bold-text">Radiobutton</h5>
       </div>
       <p>Checkbox is placed in <b>template/src/components/form/RadioButton.js</b>. Example of
-        using this component here:
+            using this component here:
       </p>
       <CodeHighlither>
         {'import renderRadioButtonField from \'../../../../components/form/RadioButton\';'}

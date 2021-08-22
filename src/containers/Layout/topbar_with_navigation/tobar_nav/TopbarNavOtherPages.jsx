@@ -19,7 +19,7 @@ const TopbarNavOtherPages = () => (
         <TopbarNavLink title="Chat Application" icon="bubble" route="/chat" />
       </DropdownItem>
       <DropdownItem>
-        <TopbarNavLink title="Todo Application" newLink icon="book" route="/todo" />
+        <TopbarNavLink title="Todo Application" icon="book" route="/todo" />
       </DropdownItem>
       <DropdownItem>
         <TopbarNavCategory title="Forms" icon="file-add">
@@ -37,13 +37,11 @@ const TopbarNavOtherPages = () => (
         </TopbarNavCategory>
       </DropdownItem>
       <DropdownItem>
-        <TopbarNavCategory title="Tables" icon="list" isNew>
+        <TopbarNavCategory title="Tables" icon="list">
           <TopbarNavLink title="Basic tables" route="/tables/basic_tables" />
-          <TopbarNavLink title="Data table" newLink route="/tables/data_table" />
-          <TopbarNavLink title="Drag & Drop table" newLink route="/tables/dnd_table" />
+          <TopbarNavLink title="Data table" route="/tables/data_table" />
           <TopbarNavLink title="Editable table" route="/tables/editable_table" />
           <TopbarNavLink title="Material table" route="/tables/material_table" />
-          <TopbarNavLink title="Width Resizable table" newLink route="/tables/resizable_table" />
         </TopbarNavCategory>
       </DropdownItem>
       <DropdownItem>
@@ -54,14 +52,13 @@ const TopbarNavOtherPages = () => (
         </TopbarNavCategory>
       </DropdownItem>
       <DropdownItem>
-        <TopbarNavCategory title="Maps" icon="map" isNew>
+        <TopbarNavCategory title="Maps" icon="map">
           <TopbarNavLink title="Google map" route="/maps/google_map" />
           <TopbarNavLink title="Vector map" route="/maps/vector_map" />
-          <TopbarNavLink title="Map with api request" newLink route="/maps/map_with_request" />
         </TopbarNavCategory>
       </DropdownItem>
       <DropdownItem>
-        <TopbarNavCategory title="Account" icon="user" isNew>
+        <TopbarNavCategory title="Account" icon="user">
           <TopbarNavLink title="Email Confirmation" route="/account/email_confirmation" />
           <TopbarNavLink title="Lock Screen" route="/lock_screen" />
           <TopbarNavLink title="Log In" route="/log_in" />
@@ -69,8 +66,6 @@ const TopbarNavOtherPages = () => (
           <TopbarNavLink title="Profile" route="/account/profile" />
           <TopbarNavLink title="Register" route="/register" />
           <TopbarNavLink title="Register Photo" route="/register_photo" />
-          <TopbarNavLink title="Reset Password" route="/reset_password" />
-          <TopbarNavLink title="Reset Password Photo" route="/reset_password_photo" />
         </TopbarNavCategory>
       </DropdownItem>
       <DropdownItem>

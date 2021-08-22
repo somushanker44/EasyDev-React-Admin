@@ -1,90 +1,74 @@
-import React from 'react';
+/* eslint-disable react/no-multi-comp */
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Notification from 'rc-notification';
-import { ThemeProps } from '@/shared/prop-types/ReducerProps';
 
-let notification = null;
-// eslint-disable-next-line no-return-assign
-Notification.newInstance({ style: { top: 65 } }, n => notification = n);
-
-const showNotification = (theme, rtl, title, message) => {
-  const notificationInitialProps = {
-    content: <BasicNotification
-      color="danger"
-      title={title}
-      message={message}
-      theme={theme}
-    />,
-    closable: true,
-    duration: 5,
-    style: { top: 0, left: 'calc(100vw - 100%)' },
-    className: `right-up ${rtl.direction}-support`,
+export class BasicNotification extends PureComponent {
+  static propTypes = {
+    color: PropTypes.string,
+    title: PropTypes.string,
+    message: PropTypes.string.isRequired,
   };
-  notification.notice(notificationInitialProps);
-};
 
-const BasicNotification = ({
-  color, title, message, theme,
-}) => (
-  <div className={`notification notification--${color} notification--${theme.className}`}>
-    <h5 className="notification__title bold-text">{title}</h5>
-    <p className="notification__message">{message}</p>
-  </div>
-);
+  static defaultProps = {
+    color: '',
+    title: '',
+  };
 
-BasicNotification.propTypes = {
-  theme: ThemeProps.isRequired,
-  color: PropTypes.string,
-  title: PropTypes.string,
-  message: PropTypes.string.isRequired,
-};
+  render() {
+    const { color, title, message } = this.props;
 
-BasicNotification.defaultProps = {
-  color: '',
-  title: '',
-};
+    return (
+      <div className={`notification notification--${color}`}>
+        <h5 className="notification__title bold-text">{title}</h5>
+        <p className="notification__message">{message}</p>
+      </div>
+    );
+  }
+}
 
-const ImageNotification = ({
-  img, title, message, theme,
-}) => (
-  <div className={`notification notification--image notification--${theme.className}`}>
-    <div className="notification__image">
-      <img src={img} alt="" />
-    </div>
-    <h5 className="notification__title bold-text">{title}</h5>
-    <p className="notification__message">{message}</p>
-  </div>
-);
+export class ImageNotification extends PureComponent {
+  static propTypes = {
+    img: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    message: PropTypes.string.isRequired,
+  };
 
-ImageNotification.propTypes = {
-  theme: ThemeProps.isRequired,
-  img: PropTypes.string.isRequired,
-  title: PropTypes.string,
-  message: PropTypes.string.isRequired,
-};
+  static defaultProps = {
+    title: '',
+  };
 
-ImageNotification.defaultProps = {
-  title: '',
-};
+  render() {
+    const { img, title, message } = this.props;
 
-const FullWideNotification = ({ color, message }) => (
-  <div className={`notification notification--full-wide notification--${color}`}>
-    <p className="notification__message">{message}</p>
-  </div>
-);
+    return (
+      <div className="notification notification--image">
+        <div className="notification__image">
+          <img src={img} alt="" />
+        </div>
+        <h5 className="notification__title bold-text">{title}</h5>
+        <p className="notification__message">{message}</p>
+      </div>
+    );
+  }
+}
 
-FullWideNotification.propTypes = {
-  color: PropTypes.string,
-  message: PropTypes.string.isRequired,
-};
+export class FullWideNotification extends PureComponent {
+  static propTypes = {
+    color: PropTypes.string,
+    message: PropTypes.string.isRequired,
+  };
 
-FullWideNotification.defaultProps = {
-  color: '',
-};
+  static defaultProps = {
+    color: '',
+  };
 
-export {
-  BasicNotification,
-  ImageNotification,
-  FullWideNotification,
-  showNotification,
-};
+  render() {
+    const { color, message } = this.props;
+
+    return (
+      <div className={`notification notification--full-wide notification--${color}`}>
+        <p className="notification__message">{message}</p>
+      </div>
+    );
+  }
+}

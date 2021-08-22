@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const Popovers = () => (
   <Card className="card--not-full-height">
@@ -13,35 +13,38 @@ const Popovers = () => (
         Example of using this component here:
       </p>
       <CodeHighlither>
-        {`import React, { useState } from 'react';
-import {
-  ButtonToolbar, Button, Popover, PopoverBody, PopoverHeader,
-} from 'reactstrap';
+        {`import React, {PureComponent} from 'react';
+import {ButtonToolbar, Button, Popover, PopoverBody, PopoverHeader} from 'reactstrap';
 
-const Example = () => {
-  const [isOpenedPopover, setIsOpenedPopover] = useState(false);
-
-  const handleOpenPopover = () => {
-    setIsOpenedPopover(!isOpenedPopover);
+export default class Example extends PureComponent {
+  constructor(props) {
+    super(props);
+    
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      popoverOpen: false
+    };
   }
-
-  return (
-    <ButtonToolbar className='btn-toolbar--center'>
-      <Button id='PopoverTop' onClick={handleOpenPopover} outline>Popover on Top</Button>
-      <Popover
-        placement='top'
-        isOpen={isOpenedPopover}
-        target='PopoverTop'
-        toggle={handleOpenPopover}
-       >
-        <PopoverHeader>Popover on Top</PopoverHeader>
-        <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam.</PopoverBody>
-      </Popover>
-    </ButtonToolbar>
-  )
-};
-
-export default Example;`}
+  
+  toggle() {
+    this.setState({
+      popoverOpen: !this.state.popoverOpen
+    });
+  }
+  
+  render() {
+    return (
+      <ButtonToolbar className='btn-toolbar--center'>
+        <Button id='PopoverTop' onClick={this.toggle} outline>Popover on Top</Button>
+        <Popover placement='top' isOpen={this.state.popoverOpen} target='PopoverTop'
+                 toggle={this.toggle}>
+          <PopoverHeader>Popover on Top</PopoverHeader>
+          <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam.</PopoverBody>
+        </Popover>
+      </ButtonToolbar>
+    )
+  }
+}`}
       </CodeHighlither>
       <p>All props <a href="https://reactstrap.github.io/components/popovers/Popovers.jsx">here</a>.</p>
       <p>Stylesheet: <b>template/src/scss/components/popover.scss</b></p>

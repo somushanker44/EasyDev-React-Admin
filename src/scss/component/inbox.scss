@@ -22,7 +22,6 @@
 .inbox__mailbox-list-btn {
   width: 100%;
   margin-bottom: 15px;
-
   @include directify($directions) {
     #{directed('margin-right')}: 0px;
   }
@@ -50,7 +49,6 @@
   svg {
     width: 14px;
     height: 14px;
-
     @include directify($directions) {
       #{directed('margin-right')}: 10px;
     }
@@ -82,7 +80,7 @@
 
     .inbox__mailbox-label {
       background-color: $color-accent;
-      color: $color-white;
+      color: #ffffff;
     }
   }
 
@@ -102,12 +100,12 @@
 
 .inbox__mailbox-label {
   position: absolute;
-  color: $color-additional;
-  transition: 0.3s;
-
   @include directify($directions) {
     #{directed('right')}: 10px;
   }
+
+  color: $color-additional;
+  transition: 0.3s;
 
   @include themify($themes) {
     background-color: themed('colorBackgroundBody');
@@ -120,7 +118,6 @@
   width: 10px;
   border-radius: 50%;
   margin-top: 4px;
-
   @include directify($directions) {
     #{directed('margin-right')}: 10px;
   }
@@ -145,8 +142,6 @@
 .inbox__labels {
   font-size: 13px;
   font-weight: 700;
-  margin-top: 20px;
-  margin-bottom: 10px;
 
   @include directify($directions) {
     text-align: directed('left');
@@ -154,6 +149,8 @@
   @include directify($directions) {
     #{directed('padding-left')}: 10px;
   }
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .inbox__container {
@@ -208,7 +205,6 @@
     position: relative;
 
     svg {
-
       @include directify($directions) {
         #{directed('margin-left')}: 1px;
       }
@@ -223,7 +219,6 @@
 
 .inbox__email-table-preview {
   min-width: 200px;
-
   @include directify($directions) {
     text-align: directed('left');
   }
@@ -231,7 +226,6 @@
 
 .inbox__email-table-name, .inbox__email-table-date {
   white-space: nowrap;
-
   @include directify($directions) {
     text-align: directed('left');
   }
@@ -241,14 +235,12 @@
   margin-bottom: 10px;
 
   tr td:first-child {
-
     @include directify($directions) {
       #{directed('padding-left')}: 0px;
     }
   }
 
   tr td:last-child {
-
     @include directify($directions) {
       #{directed('padding-right')}: 0px;
       text-align: directed('right');
@@ -261,27 +253,25 @@
 }
 
 .inbox__emails-controls {
-  position: relative;
   display: flex;
   height: 50px;
-
   @include directify($directions) {
     #{directed('padding-left')}: 40px;
   }
+  position: relative;
 
   @include themify($themes) {
     border-bottom: 1px solid themed('colorBorder');
   }
 
   button {
-    padding-top: 2px;
-    padding-bottom: 2px;
-    height: 30px;
-
     @include directify($directions) {
       #{directed('padding-right')}: 20px;
       #{directed('padding-left')}: 25px;
     }
+    padding-top: 2px;
+    padding-bottom: 2px;
+    height: 30px;
   }
 
   .inbox__emails-control-reload {
@@ -295,42 +285,37 @@
 
 .inbox__emails-control-checkbox {
   position: absolute;
-  top: 5px;
-
   @include directify($directions) {
     #{directed('left')}: 0px;
   }
-
+  top: 5px
 }
 
 .inbox__emails-controls-right {
   display: flex;
   position: absolute;
-  top: 0;
-
   @include directify($directions) {
     #{directed('right')}: 0px;
   }
+  top: 0;
 }
 
 .inbox__emails-control-search {
   display: flex;
-
   @include directify($directions) {
     #{directed('margin-right')}: 16px;
   }
 
   input {
     height: 28px;
-    transition: all 0.3s;
-    border: 1px solid transparent;
-    width: 120px;
-
     @include directify($directions) {
       #{directed('padding-left')}: 10px;
       #{directed('border-top-left-radius')}: 14px;
       #{directed('border-bottom-left-radius')}: 14px;
     }
+    transition: all 0.3s;
+    border: 1px solid transparent;
+    width: 120px;
 
     @include themify($themes) {
       color: themed('colorText');
@@ -383,12 +368,11 @@
   width: 28px;
   padding: 5px;
   height: 28px;
-  transition: 0.3s;
-
   @include directify($directions) {
     #{directed('border-top-right-radius')}: 14px;
     #{directed('border-bottom-right-radius')}: 14px;
   }
+  transition: 0.3s;
 
   @include themify($themes) {
     background: themed('colorFieldsBorder');
@@ -430,11 +414,10 @@
   height: 35px;
   padding-top: 10px;
   width: 30px;
-  cursor: pointer;
-
   @include directify($directions) {
     #{directed('padding-left')}: 0px;
   }
+  cursor: pointer;
 
   svg {
     height: 18px;
@@ -488,18 +471,17 @@
   font-size: 10px;
   line-height: 13px;
   color: $color-additional;
-
   @include directify($directions) {
     text-align: directed('left');
   }
 }
 
 .inbox__email-right {
-  display: flex;
 
   @include directify($directions) {
     #{directed('margin-left')}: auto;
   }
+  display: flex;
 }
 
 .inbox__email-left {
@@ -507,33 +489,25 @@
 }
 
 .inbox__email-time {
-  margin-top: auto;
-  margin-bottom: auto;
-
   @include directify($directions) {
     #{directed('margin-right')}: 30px;
     #{directed('margin-left')}: 0px !important;
   }
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .inbox__email-btn {
   border: none;
+  @include directify($directions) {
+    #{directed('margin-right')}: 5px;
+  }
   height: 32px;
   width: 32px;
   cursor: pointer;
 
-  @include directify($directions) {
-    #{directed('margin-right')}: 5px;
-  }
-
   @include themify($themes) {
-    background: themed('inboxButtonBackground');
-  }
-
-  &:hover {
-    @include themify($themes) {
-      background: themed('inboxButtonBackgroundHover');
-    }
+    background: themed('colorBackgroundBody');
   }
 
   &:last-child {
@@ -565,7 +539,6 @@
 
 .inbox__email-attachment-title {
   font-size: 12px;
-
   @include directify($directions) {
     text-align: directed('left');
   }
@@ -580,7 +553,6 @@
     fill: $color-additional;
     height: 14px;
     width: 14px;
-
     @include directify($directions) {
       #{directed('margin-right')}: 5px;
     }
@@ -596,15 +568,14 @@
   width: 100%;
   max-width: 100%;
   min-height: 100px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  transition: all 0.3s;
-  background: transparent;
-
   @include directify($directions) {
     #{directed('padding-right')}: 35px;
     #{directed('padding-left')}: 15px;
   }
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transition: all 0.3s;
+  background: transparent;
 
   @include themify($themes) {
     border: 1px solid themed('colorFieldsBorder');
@@ -620,12 +591,11 @@
 .inbox__email-reply-placeholder {
   pointer-events: none;
   position: absolute;
-  top: 15px;
-  color: $color-additional;
-
   @include directify($directions) {
     #{directed('left')}: 15px;
   }
+  top: 15px;
+  color: $color-additional;
 
   span {
     color: $color-blue;
@@ -661,15 +631,14 @@
   background: transparent;
   border: none;
   position: absolute;
+  @include directify($directions) {
+    #{directed('right')}: 10px;
+  }
   top: 28px;
   height: 20px;
   width: 20px;
   padding: 0;
   cursor: pointer;
-
-  @include directify($directions) {
-    #{directed('right')}: 10px;
-  }
 
   svg {
     height: 15px;
@@ -697,7 +666,6 @@
   transition: all 0.3s;
   cursor: pointer;
   padding: 0;
-
   @include directify($directions) {
     #{directed('margin-left')}: -2px;
   }
@@ -722,13 +690,12 @@
 @media screen and (max-width: 1200px) {
 
   .inbox__email-time {
-    margin-top: auto;
-    margin-bottom: auto;
-
     @include directify($directions) {
       #{directed('margin-right')}: 20px;
       #{directed('margin-left')}: 0px;
     }
+    margin-top: auto;
+    margin-bottom: auto;
   }
 }
 
@@ -744,8 +711,7 @@
 
   .inbox__compose-title {
     position: absolute;
-    top: 3px;
-
+    top: 40px;
     @include directify($directions) {
       #{directed('left')}: 70px;
     }
@@ -766,17 +732,15 @@
 
   .inbox__container {
     width: 100%;
-    padding: 0;
   }
 
   .inbox__email-time {
-    margin-top: auto;
-    margin-bottom: auto;
-
     @include directify($directions) {
       #{directed('margin-right')}: 10px;
       #{directed('margin-left')}: 0px;
     }
+    margin-top: auto;
+    margin-bottom: auto;
   }
 
   .inbox:before {
@@ -786,21 +750,19 @@
     position: absolute;
     top: 0;
     bottom: 0;
+    @include directify($directions) {
+      #{directed('right')}: 0px;
+    }
     left: 0;
     opacity: 0;
     z-index: -1;
     transition: opacity 0.3s, z-index 0.3s 0.3s;
     background-color: $color-additional;
-
-    @include directify($directions) {
-      #{directed('right')}: 0px;
-    }
   }
 
   .inbox__emails-controls-right {
     position: absolute;
     top: -50px;
-
     @include directify($directions) {
       #{directed('right')}: 0px;
     }
@@ -820,20 +782,15 @@
     }
 
     .inbox__content {
-      pointer-events: none;
-
       @include directify($directions) {
         text-align: directed('left');
       }
+      pointer-events: none;
     }
   }
 }
 
 @media screen and (max-width: 767px) {
-
-  .inbox__container {
-    padding: 0;
-  }
 
   .inbox__email-left, .inbox__email-right {
     width: 100%;
@@ -844,7 +801,6 @@
   }
 
   .inbox__email-time {
-
     @include directify($directions) {
       #{directed('margin-right')}: auto;
     }
@@ -854,7 +810,6 @@
 @media screen and (max-width: 620px) {
 
   .inbox__emails-control-search {
-
     @include directify($directions) {
       #{directed('margin-right')}: 8px;
     }
@@ -868,7 +823,6 @@
 @media screen and (max-width: 480px) {
 
   .inbox__emails-control-reload {
-
     @include directify($directions) {
       #{directed('margin-right')}: 0px;
     }

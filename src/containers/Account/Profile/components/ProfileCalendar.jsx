@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
-import Calendar from '@/shared/components/Calendar';
+import Calendar from '../../../../shared/components/Calendar';
 import events from '../../../DefaultPage/Calendar/components/events';
 
 const ProfileCalendar = () => (

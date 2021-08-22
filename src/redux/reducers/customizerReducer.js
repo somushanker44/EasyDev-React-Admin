@@ -1,22 +1,24 @@
-import { handleActions } from 'redux-actions';
 import {
-  toggleBoxShadow,
-  toggleTopNavigation,
+  CHANGE_BORDER_RADIUS,
+  TOGGLE_BOX_SHADOW,
+  TOGGLE_TOP_NAVIGATION,
 } from '../actions/customizerActions';
 
-const defaultState = {
+const initialState = {
+  squaredCorners: false,
   withBoxShadow: false,
   topNavigation: false,
 };
 
-export default handleActions(
-  {
-    [toggleBoxShadow](state) {
+export default function (state = initialState, action) {
+  switch (action.type) {
+    case CHANGE_BORDER_RADIUS:
+      return { ...state, squaredCorners: !state.squaredCorners };
+    case TOGGLE_BOX_SHADOW:
       return { ...state, withBoxShadow: !state.withBoxShadow };
-    },
-    [toggleTopNavigation](state) {
+    case TOGGLE_TOP_NAVIGATION:
       return { ...state, topNavigation: !state.topNavigation };
-    },
-  },
-  defaultState,
-);
+    default:
+      return state;
+  }
+}

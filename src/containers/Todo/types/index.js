@@ -3,16 +3,11 @@ import {
 } from 'prop-types';
 
 const todoCard = shape({
-  data: {
-    id: number.isRequired,
-    title: string.isRequired,
-    description: string.isRequired,
-    priority: string.isRequired,
-    completed: bool.isRequired,
-    archived: bool.isRequired,
-  },
-  isFetching: bool.isRequired,
-  error: shape(),
+  id: number.isRequired,
+  title: string.isRequired,
+  description: string.isRequired,
+  priority: string.isRequired,
+  completed: bool.isRequired,
 });
 
 export default todoCard;

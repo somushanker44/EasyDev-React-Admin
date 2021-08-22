@@ -14,12 +14,12 @@
   }
 
   p {
-    color: $color-white;
+    color: #ffffff;
     margin-top: 0;
   }
 
   .close {
-    color: $color-white;
+    color: white;
     opacity: 1;
     font-weight: 100;
     @include directify($directions) {
@@ -45,7 +45,7 @@
     }
 
     &.alert--colored .alert__icon {
-      background-color: $color-light-blue;
+      background-color: #87c3f7;
     }
 
     &.alert--neutral .alert__icon svg {
@@ -62,7 +62,7 @@
     }
 
     &.alert--colored .alert__icon {
-      background-color: $color-light-accent;
+      background-color: #55e5bb;
     }
 
     &.alert--neutral .alert__icon svg {
@@ -79,7 +79,7 @@
     }
 
     &.alert--colored .alert__icon {
-      background-color: $color-light-yellow;
+      background-color: #f4dd87;
     }
 
     &.alert--neutral .alert__icon svg {
@@ -96,7 +96,7 @@
     }
 
     &.alert--colored .alert__icon {
-      background-color: $color-light-red;
+      background-color: #f88e7d;
     }
 
     &.alert--neutral .alert__icon svg {
@@ -120,10 +120,7 @@
 
   &.alert--neutral {
     background-color: transparent;
-
-    @include themify($themes) {
-      border-color: themed('colorFieldsBorder');
-    }
+    border-color: #f2f4f7;
 
     p {
       @include themify($themes) {
@@ -154,7 +151,7 @@
   display: flex;
 
   svg {
-    fill: $color-white;
+    fill: #ffffff;
     margin: auto 0;
   }
 }
@@ -172,8 +169,9 @@
 
 .login-form {
   .alert-danger {
-    color: $color-dark-red;
-    background-color: $color-very-light-red;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
   }
   .alert {
     position: relative;

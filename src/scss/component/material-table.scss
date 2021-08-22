@@ -127,20 +127,14 @@
   }
 
   .material-table__filter-menu-item {
+    color: #646777;
     transition: 0.3s;
     font-size: 13px;
     padding: 7px 24px;
     height: auto;
 
-    @include themify($themes) {
-      color: themed('colorText');
-      background: themed('colorBackground');
-    }
-
     &:hover {
-      @include themify($themes) {
-        background: themed('colorHover');
-      }
+      background: #fafbfe;
     }
   }
 }

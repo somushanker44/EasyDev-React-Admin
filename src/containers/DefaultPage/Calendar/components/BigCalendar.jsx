@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardBody, Col } from 'reactstrap';
-import Calendar from '@/shared/components/Calendar';
+import Calendar from '../../../../shared/components/Calendar';
 import events from './events';
 
 const BigCalendar = ({ dir }) => (

@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Col, Container, Row } from 'reactstrap';
-import { RTLProps } from '@/shared/prop-types/ReducerProps';
 import Summary from './components/Summary';
 import ProjectTeam from './components/ProjectTeam';
+import { RTLProps } from '../../../shared/prop-types/ReducerProps';
 
 const ProjectSummary = ({ rtl }) => (
   <Container>
@@ -11,7 +11,7 @@ const ProjectSummary = ({ rtl }) => (
       <Col md={12}>
         <h3 className="page-title">Project Summary</h3>
         <h3 className="page-subhead subhead">Use this elements, if you want to show some hints or additional
-          information
+              information
         </h3>
       </Col>
     </Row>

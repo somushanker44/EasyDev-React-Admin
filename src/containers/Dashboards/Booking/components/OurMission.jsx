@@ -1,4 +1,6 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 import TargetIcon from 'mdi-react/TargetIcon';
 
 const OurMission = () => (
@@ -11,4 +13,4 @@ const OurMission = () => (
   </div>
 );
 
-export default OurMission;
+export default withTranslation('common')(OurMission);

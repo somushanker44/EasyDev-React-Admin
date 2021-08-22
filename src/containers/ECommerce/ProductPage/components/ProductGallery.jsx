@@ -1,109 +1,95 @@
-import React, { useState } from 'react';
+/* eslint-disable react/no-array-index-key */
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from 'reactstrap';
-import Carousel from '@brainhubeu/react-carousel';
-import ChevronLeftIcon from 'mdi-react/ChevronLeftIcon';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
-import '@brainhubeu/react-carousel/lib/style.css';
+import Lightbox from 'react-images';
 
-const ProductGallery = ({ images }) => {
-  const [isOpenLightbox, setIsOpenLightbox] = useState(false);
-  const [currentImage, setCurrentImage] = useState(0);
-  const [currentImagePreview, setCurrentImagePreview] = useState(0);
-  const [carouselImages, setCarouselImages] = useState([]);
-
-  const changeImg = (item) => {
-    setCurrentImagePreview(item);
-    setCurrentImage(item);
+export default class ProductGallery extends PureComponent {
+  static propTypes = {
+    images: PropTypes.arrayOf(PropTypes.shape({
+      src: PropTypes.string,
+    })).isRequired,
   };
 
-  const carouselImage = () => {
-    setCarouselImages(images);
+  constructor() {
+    super();
+    this.state = {
+      lightboxIsOpen: false,
+      currentImage: 0,
+      currentImagePreview: 0,
+    };
+  }
+
+  changeImg = (i, e) => {
+    e.preventDefault();
+    this.setState({
+      currentImagePreview: i,
+      currentImage: i,
+    });
   };
 
-  const openLightbox = (index) => {
-    carouselImage();
-    setCurrentImage(index);
-    setIsOpenLightbox(true);
+  openLightbox = (index, event) => {
+    event.preventDefault();
+    this.setState({
+      currentImage: index,
+      lightboxIsOpen: true,
+    });
   };
 
-  const closeLightbox = () => {
-    setCurrentImage(0);
-    setIsOpenLightbox(false);
+  closeLightbox = () => {
+    this.setState(prevState => ({ currentImage: prevState.currentImagePreview, lightboxIsOpen: false }));
   };
 
-  const onChange = (value) => {
-    setCurrentImage(value);
+  gotoPrevious = () => {
+    this.setState(prevState => ({ currentImage: prevState.currentImage - 1 }));
   };
 
-  return (
-    <div className="product-gallery">
-      <button
-        type="button"
-        className="product-gallery__current-img"
-        onClick={() => openLightbox(currentImage)}
-      >
-        <img src={images[currentImagePreview].src} alt="product-img" />
-      </button>
-      <div className="product_gallery__gallery">
-        {images.map((item, index) => (
-          <button
-            type="button"
-            key={`index_${item.src}`}
-            onClick={() => changeImg(index)}
-            className="product-gallery__img-preview"
-          >
-            <img src={item.src} alt="product-img" />
-          </button>
-        ))}
-      </div>
-      <Modal
-        isOpen={isOpenLightbox}
-        toggle={closeLightbox}
-        className="modal-dialog--primary modal-dialog--carousel"
-      >
-        <div className="modal__body">
-          <div className="modal__header">
-            <button
-              className="lnr lnr-cross modal__close-btn"
-              type="button"
-              aria-label="close lightbox button"
-              onClick={closeLightbox}
-            />
-          </div>
-          <Carousel
-            value={currentImage}
-            onChange={onChange}
-            slides={
-              carouselImages.map(item => (
-                <img key={`index_${item.src}`} src={item.src} alt="" />
-              ))
-            }
-            addArrowClickHandler
-            arrowLeft={(
-              <div className="modal__btn">
-                <ChevronLeftIcon className="modal__btn_left" />
-              </div>
-            )}
-            arrowRight={(
-              <div className="modal__btn">
-                <ChevronRightIcon className="modal__btn_right" />
-              </div>
-            )}
-          />
-          <div className="modal__footer">
-            <p>{currentImage + 1} of {carouselImages.length}</p>
-          </div>
+  gotoNext = () => {
+    this.setState(prevState => ({ currentImage: prevState.currentImage + 1 }));
+  };
+
+  gotoImage = (index) => {
+    this.setState({
+      currentImage: index,
+    });
+  };
+
+  handleClickImage = () => {
+    const { images } = this.props;
+    const { currentImage } = this.state;
+    if (currentImage === images.length - 1) return;
+    this.gotoNext();
+  };
+
+  render() {
+    const { images } = this.props;
+    const { currentImage, currentImagePreview, lightboxIsOpen } = this.state;
+    return (
+      <div className="product-gallery">
+        <a
+          className="product-gallery__current-img"
+          onClick={e => this.openLightbox(currentImage, e)}
+          href={images[currentImage].src}
+        >
+          <img src={images[currentImagePreview].src} alt="product-img" />
+        </a>
+        <div className="product_gallery__gallery">
+          {images.map((img, i) => (
+            <button type="button" key={i} onClick={e => this.changeImg(i, e)} className="product-gallery__img-preview">
+              <img src={img.src} alt="product-img" />
+            </button>
+          ))}
         </div>
-      </Modal>
-    </div>
-  );
-};
-
-ProductGallery.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.shape({
-    src: PropTypes.string,
-  })).isRequired,
-};
-
-export default ProductGallery;
+        <Lightbox
+          currentImage={currentImage}
+          images={images}
+          isOpen={lightboxIsOpen}
+          onClickImage={this.handleClickImage}
+          onClickNext={this.gotoNext}
+          onClickPrev={this.gotoPrevious}
+          onClickThumbnail={this.gotoImage}
+          onClose={this.closeLightbox}
+        />
+      </div>
+    );
+  }
+}

@@ -13,7 +13,9 @@ export function hookAuth0(WrappedComponent) {
 }
 
 const Auth0Provider = ({
-  children, onRedirectCallback, domain, clientId, redirectUri, returnTo,
+  children,
+  onRedirectCallback,
+  ...initOptions
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState();
   const [user, setUser] = useState();
@@ -23,12 +25,7 @@ const Auth0Provider = ({
 
   useEffect(() => {
     const initAuth0 = async () => {
-      const auth0FromHook = await createAuth0Client({
-        domain,
-        client_id: clientId,
-        redirect_uri: redirectUri,
-        returnTo,
-      });
+      const auth0FromHook = await createAuth0Client(initOptions);
       setAuth0(auth0FromHook);
 
       if (window.location.search.includes('code=')) {
@@ -48,7 +45,8 @@ const Auth0Provider = ({
       setLoading(false);
     };
     initAuth0();
-  }, [clientId, domain, onRedirectCallback, redirectUri, returnTo]);
+    // eslint-disable-next-line
+  }, []);
 
   const loginWithPopup = async (params = {}) => {
     setPopupOpen(true);
@@ -97,18 +95,10 @@ const Auth0Provider = ({
 Auth0Provider.propTypes = {
   children: PropTypes.node.isRequired,
   onRedirectCallback: PropTypes.func,
-  domain: PropTypes.string,
-  clientId: PropTypes.string,
-  redirectUri: PropTypes.string,
-  returnTo: PropTypes.string,
 };
 
 Auth0Provider.defaultProps = {
   onRedirectCallback: () => window.history.replaceState({}, document.title, window.location.pathname),
-  domain: null,
-  clientId: null,
-  redirectUri: null,
-  returnTo: null,
 };
 
 export default Auth0Provider;

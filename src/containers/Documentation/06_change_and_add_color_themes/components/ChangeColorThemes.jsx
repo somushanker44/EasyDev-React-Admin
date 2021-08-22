@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const ChangeColorThemes = () => (
   <Card className="card--not-full-height">
@@ -9,7 +9,7 @@ const ChangeColorThemes = () => (
         <h5 className="bold-text">Change Color Theme</h5>
       </div>
       <p>We have created light and dark color theme for this template. All color variables are
-        in <b>template/src/scss/settings/variables.scss</b> file. Both themes look like the following:
+            in <b>template/src/scss/settings/variables.scss</b> file. Both themes look like the following:
       </p>
       <CodeHighlither scss>
         {`$themes: (
@@ -38,7 +38,7 @@ const ChangeColorThemes = () => (
 );`}
       </CodeHighlither>
       <p>You can change values of variables as you want and add new ones. {'Don\'t'} forget to add the same variable to
-        both themes!
+            both themes!
       </p>
       <p> If values of a variable are the same for all themes, you can write so outside of <b>$themes</b>:</p>
       <CodeHighlither scss>

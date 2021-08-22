@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const Material = () => (
   <Card className="card--not-full-height">

@@ -126,7 +126,7 @@ const ResourcesLinks = () => (
         </li>
         <li>
           <p>LightBox:
-            <a href="https://github.com/brainhubeu/react-carousel"> https://github.com/brainhubeu/react-carousel</a>
+            <a href="https://github.com/jossmac/react-images"> https://github.com/jossmac/react-images</a>
           </p>
         </li>
         <li>
@@ -138,7 +138,7 @@ const ResourcesLinks = () => (
         </li>
         <li>
           <p>Data Table:
-            <a href="https://github.com/tannerlinsley/react-table"> https://github.com/tannerlinsley/react-table</a>
+            <a href="https://github.com/adazzle/react-data-grid"> https://github.com/adazzle/react-data-grid</a>
           </p>
         </li>
         <li>
@@ -156,14 +156,14 @@ const ResourcesLinks = () => (
         <li>
           <p>Login Facebook: <span />
             <a href="https://www.npmjs.com/package/react-facebook-login#facebook-button-without-styling">
-              https://www.npmjs.com/package/react-facebook-login#facebook-button-without-styling
+            https://www.npmjs.com/package/react-facebook-login#facebook-button-without-styling
             </a>
           </p>
         </li>
         <li>
           <p>Login Google: <span />
             <a href="https://www.npmjs.com/package/react-google-login">
-              https://www.npmjs.com/package/react-google-login
+            https://www.npmjs.com/package/react-google-login
             </a>
           </p>
         </li>

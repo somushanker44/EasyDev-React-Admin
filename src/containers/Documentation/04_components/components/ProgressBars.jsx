@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const ProgressBars = () => (
   <Card className="card--not-full-height">
@@ -9,19 +9,21 @@ const ProgressBars = () => (
         <h5 className="bold-text">Progress Bars</h5>
       </div>
       <p>Progress is based on <a href="https://reactstrap.github.io/components/progress/">reactstrap</a>. Example of
-        using this component here:
+            using this component here:
       </p>
       <CodeHighlither>
-        {`import React from 'react';
-import { Progress } from 'reactstrap';
+        {`import React, {PureComponent} from 'react';
+import {Progress} from 'reactstrap';
 
-const Example = () => (
-  <div className='progress-wrap'>
-    <Progress value={70}>70%</Progress>
-  </div>
-);
-
-export default Example;`}
+export default class Example extends PureComponent {
+  render() {
+    return (
+      <div className='progress-wrap'>
+        <Progress value={70}>70%</Progress>
+      </div>
+    )
+  }
+}`}
       </CodeHighlither>
       <p>To change progress bar style you need to add className to <b>{'\'progress-wrap\''}</b>:</p>
       <ol>

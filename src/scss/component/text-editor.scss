@@ -1,12 +1,10 @@
 @import '~react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 .text-editor {
-  position: relative;
-
   @include directify($directions) {
     direction: directed('direction');
   }
-
+  position: relative;
   .rdw-editor-toolbar {
     margin: 0;
     background: transparent;
@@ -18,22 +16,16 @@
   }
 
   .rdw-emoji-modal, .rdw-link-modal, .rdw-image-modal {
-    position: initial;
-    left: -175px;
-
     @include themify($themes) {
       background: themed('colorBackground');
       color: themed('colorText');
     }
-
-    @media screen and (max-width: 361px) {
-      left: 5px;
+    @media screen and (max-width: 360px) {
+      left: 15px;
     }
-
     @media screen and (max-width: 460px) {
       left: 0;
     }
-
     @media screen and (max-width: 662px) {
       left: -140px;
     }
@@ -42,6 +34,7 @@
       left: -30px;
     }
 
+
     @media screen and (min-width: 850px) and (max-width: 942px) {
       left: 10px;
     }
@@ -49,14 +42,14 @@
     @media screen and (min-width: 943px) and (max-width: 1025px) {
       left: -175px;
     }
-
     @media screen and (min-width: 1026px) and (max-width: 1187px) {
       left: 10px;
     }
+
+    left: -175px;
   }
 
   .rdw-image-modal-url-input {
-
     @include directify($directions) {
       text-align: directed('left');
     }
@@ -64,7 +57,6 @@
 
   .rdw-link-modal-input {
     width: auto;
-
     @include directify($directions) {
       text-align: directed('left');
     }
@@ -98,7 +90,6 @@
       margin: 0;
 
       img {
-
         @include themify($themes) {
           fill: themed('colorText');
         }
@@ -117,11 +108,12 @@
   .DraftEditor-root {
     width: 100%;
     min-height: 180px;
-    border-top: none;
 
     @include themify($themes) {
       border: solid 1px themed('colorFieldsBorder');
     }
+
+    border-top: none;
   }
 
   .public-DraftEditor-content {
@@ -130,6 +122,7 @@
     @include themify($themes) {
       color: themed('colorText');
     }
+
   }
 
   .draftJsMentionPlugin__input__1Wxng {
@@ -176,7 +169,6 @@
     }
 
     .rdw-dropdown-carettoclose {
-
       @include directify($directions) {
        #{directed('right')}: 0px;
         #{directed('left')}: auto;
@@ -188,7 +180,6 @@
     }
 
     .rdw-dropdown-carettoopen {
-
       @include directify($directions) {
         #{directed('right')}: 0px;
         #{directed('left')}: auto;
@@ -248,7 +239,6 @@
 }
 
 .public-DraftStyleDefault-ltr {
-
   @include directify($directions) {
     direction: #{directed('direction')};
     text-align: #{directed('left')};

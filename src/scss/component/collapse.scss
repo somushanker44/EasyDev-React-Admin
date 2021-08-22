@@ -18,16 +18,16 @@
   }
 
   &.boxed {
-    border: solid 1px $color-dusty-white;
+    border: solid 1px #dddddd;
     margin-top: -1px;
 
     .collapse__title {
-      background-color: $color-background-body;
-      border-bottom: solid 1px $color-dusty-white;
+      background-color: #f2f4f7;
+      border-bottom: solid 1px #dddddd;
       padding: 8px 15px;
 
       p {
-        color: $color-gray;
+        color: #444444;
       }
 
       svg {
@@ -70,10 +70,7 @@
     }
 
     .collapse__title {
-      padding-top: 15px;
-      padding-bottom: 15px;
-      padding-left: 20px;
-      padding-right: 25px;
+      padding: 15px 25px;
       box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.05);
       transition: background-color 0.3s;
 
@@ -158,7 +155,7 @@
 
     svg {
       @include directify($directions) {
-        #{directed('right')}: -10px;
+        #{directed('right')}: 0px;
         #{directed('left')}: auto;
       }
       display: none;

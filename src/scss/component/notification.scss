@@ -2,8 +2,17 @@
   max-width: 400px;
   width: calc(100% - 50px);
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.07);
+  background: white;
   padding: 20px 40px 30px 25px;
-  background: $color-white;
+   @include directify($directions) {
+     text-align: #{directed('left')};
+   }
+  // @include directify($directions) {
+  //   #{directed('padding-right')}: 40px;
+  //   #{directed('padding-left')}: 25px;
+  // }
+  // padding-top: 20px;
+  // padding-bottom: 30px;
   position: relative;
   margin: 10px 25px;
 
@@ -17,28 +26,19 @@
     width: 100vw;
     margin: 0;
     padding: 20px 40px 20px 25px;
-
-    .notification__message {
-      text-align: center;
-      width: calc(100% - 30px);
-    }
-  }
-
-  &.notification--theme-light {
-    background: $color-white;
-  }
-
-  &.notification--theme-dark {
-    background: $color-black-background;
-    $color-black-background: 1px solid #33333a;
-    color: $color-dusty-white;
+    // @include directify($directions) {
+    //   #{directed('padding-right')}: 40px;
+    //   #{directed('padding-left')}: 25px;
+    // }
+    // padding-top: 20px;
+    // padding-bottom: 20px;
   }
 
   &.notification--primary {
     background: $color-blue;
 
     .notification__message, .notification__title {
-      color: $color-white;
+      color: white;
     }
   }
 
@@ -46,7 +46,7 @@
     background: $color-accent;
 
     .notification__message, .notification__title {
-      color: $color-white;
+      color: white;
     }
   }
 
@@ -54,7 +54,7 @@
     background: $color-yellow;
 
     .notification__message, .notification__title {
-      color: $color-white;
+      color: white;
     }
   }
 
@@ -62,22 +62,20 @@
     background: $color-red;
 
     .notification__message, .notification__title {
-      color: $color-white;
+      color: white;
     }
   }
-}
-
-.rc-notification-notice-close-x {
-  color: $color-additional;
 }
 
 .notification__message {
   margin-top: 0;
   font-size: 12px;
+  color: $color-additional;
 }
 
 .notification__title {
   margin-bottom: 8px;
+  color: #646777;
 }
 
 .notification__image {
@@ -85,7 +83,6 @@
   height: 106px;
   width: 106px;
   top: 0;
-
    @include directify($directions) {
      #{directed('left')}: 0;
    }
@@ -100,6 +97,9 @@
 .sidebar.sidebar--collapse + .container__wrap {
 
   .notifications-tl, .notifications-bl {
-    padding-left: 0 !important;
+    padding-left: 0px !important;
+    // @include directify($directions) {
+    //   #{directed('left')}: 0px !important;
+    // }
   }
 }

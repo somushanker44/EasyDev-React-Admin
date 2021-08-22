@@ -7,7 +7,7 @@ const initialState = {
   className: 'theme-light',
 };
 
-const themeReducer = (state = initialState, action) => {
+export default function (state = initialState, action) {
   switch (action.type) {
     case CHANGE_THEME_TO_DARK:
       return { className: 'theme-dark' };
@@ -16,6 +16,4 @@ const themeReducer = (state = initialState, action) => {
     default:
       return state;
   }
-};
-
-export default themeReducer;
+}

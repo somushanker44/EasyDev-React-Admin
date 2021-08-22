@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import React, { PureComponent } from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
 import {
   RadialBarChart, RadialBar, Legend, Tooltip, ResponsiveContainer,
 } from 'recharts';
+import { withTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
 const data = [
   {
@@ -34,51 +34,59 @@ const style = {
   lineHeight: '24px',
 };
 
-const tooltipColor = {
-  color: '#70bbfd',
-};
+class SimpleRadialBarChart extends PureComponent {
+  static propTypes = {
+    t: PropTypes.func.isRequired,
+    dir: PropTypes.string.isRequired,
+  };
 
-const SimpleRadialBarChart = ({ dir }) => {
-  const { t } = useTranslation('common');
-  const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
+  constructor(props) {
+    super(props);
+    this.state = {
+      x: 0,
+      y: 0,
+    };
+  }
 
-  const onMouseMove = (e) => {
+  onMouseMove = (e) => {
+    const { dir } = this.props;
     if (e.activeCoordinate) {
-      setCoordinates({ x: dir === 'ltr' ? e.activeCoordinate.x : e.activeCoordinate.x / 10, y: e.activeCoordinate.y });
+      this.setState({ x: dir === 'ltr' ? e.activeCoordinate.x : e.activeCoordinate.x / 10, y: e.activeCoordinate.y });
     }
   };
 
-  return (
-    <Col xs={12} md={12} lg={6} xl={4}>
-      <Card>
-        <CardBody>
-          <div className="card__title">
-            <h5 className="bold-text">{t('charts.recharts.simple_radial_bar_chart')}</h5>
-          </div>
-          <div dir={dir}>
-            <ResponsiveContainer height={320}>
-              <RadialBarChart
-                cy={130}
-                innerRadius={10}
-                outerRadius={120}
-                barSize={10}
-                data={data}
-                onMouseMove={onMouseMove}
-              >
-                <Tooltip itemStyle={tooltipColor} position={coordinates} />
-                <RadialBar minAngle={15} background clockWise dataKey="uv" />
-                <Legend iconSize={10} wrapperStyle={style} />
-              </RadialBarChart>
-            </ResponsiveContainer>
-          </div>
-        </CardBody>
-      </Card>
-    </Col>
-  );
-};
+  render() {
+    const { t, dir } = this.props;
+    const { x, y } = this.state;
 
-SimpleRadialBarChart.propTypes = {
-  dir: PropTypes.string.isRequired,
-};
+    return (
+      <Col xs={12} md={12} lg={6} xl={4}>
+        <Card>
+          <CardBody>
+            <div className="card__title">
+              <h5 className="bold-text">{t('charts.recharts.simple_radial_bar_chart')}</h5>
+            </div>
+            <div dir={dir}>
+              <ResponsiveContainer height={320}>
+                <RadialBarChart
+                  cy={130}
+                  innerRadius={10}
+                  outerRadius={120}
+                  barSize={10}
+                  data={data}
+                  onMouseMove={this.onMouseMove}
+                >
+                  <Tooltip position={{ x, y }} />
+                  <RadialBar minAngle={15} background clockWise dataKey="uv" />
+                  <Legend iconSize={10} wrapperStyle={style} />
+                </RadialBarChart>
+              </ResponsiveContainer>
+            </div>
+          </CardBody>
+        </Card>
+      </Col>
+    );
+  }
+}
 
-export default SimpleRadialBarChart;
+export default withTranslation('common')(SimpleRadialBarChart);

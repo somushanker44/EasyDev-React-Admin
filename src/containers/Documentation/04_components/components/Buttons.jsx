@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody, Table } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const Buttons = () => (
   <Card className="card--not-full-height">
@@ -13,22 +13,24 @@ const Buttons = () => (
         using this component here:
       </p>
       <CodeHighlither>
-        {`import React from 'react';
+        {`import React, {PureComponent} from 'react';
 import {Button, ButtonToolbar} from 'reactstrap';
 
-const Example = () => (
-  <ButtonToolbar>
-    <Button outline>Minimal</Button>
-    <Button disabled>Disabled</Button>
-    <Button color="primary">Primary</Button>
-    <Button color="success">Success</Button>
-    <Button color="warning">Warning</Button>
-    <Button className="icon" color="danger"><p><CloseCircleOutlineIcon/> Warning</p></Button>
-    <Button className="icon icon--right" color="primary" outline><p>Settings <SendIcon/></p></Button>
-  </ButtonToolbar>
-);
-
-export default Example;`}
+export default class Example extends PureComponent {
+  render() {
+    return (
+      <ButtonToolbar>
+        <Button outline>Minimal</Button>
+        <Button disabled>Disabled</Button>
+        <Button color='primary'>Primary</Button>
+        <Button color='success'>Success</Button>
+        <Button color='warning'>Warning</Button>
+        <Button className='icon' color='danger'><p><CloseCircleOutlineIcon/> Warning</p></Button>
+        <Button className='icon icon--right' color='primary' outline><p>Settings <SendIcon/></p></Button>
+      </ButtonToolbar>
+    )
+  }
+}`}
       </CodeHighlither>
       <p>All props of Button
         <a href="https://reactstrap.github.io/components/buttons/Buttons.jsx"> here</a>. There are some of them:
@@ -63,7 +65,7 @@ export default Example;`}
             <td>
               <span className="red-text"> {'\'sm\''}</span> for small buttons and
               <span className="red-text"> {'\'lg\' '}</span>
-              for large
+                for large
             </td>
           </tr>
           <tr>
@@ -72,7 +74,7 @@ export default Example;`}
             <td>
               <span className="red-text">{'\'icon\''}</span>,
               <span className="red-text"> {'\'icon icon--right\''}</span> for
-              buttons with icons,
+                buttons with icons,
               <span className="red-text"> {'\'rounded\''}</span> for buttons without corners,
               <span className="red-text"> {'\'square\''}</span> for rectangular buttons
             </td>
@@ -84,7 +86,7 @@ export default Example;`}
         <h5 className="bold-text">Expand</h5>
       </div>
       <p> Expand is based on Button above, but with loading effect. You have to write your own loading logic to use
-        it. The component replaced in <b>template/src/components/Expand.js</b>
+            it. The component replaced in <b>template/src/components/Expand.js</b>
       </p>
 
       <div className="card__title">
@@ -92,7 +94,7 @@ export default Example;`}
       </div>
       <p>
         More about ButtonGroup <a href="https://reactstrap.github.io/components/button-group/">here</a>. The
-        template has examples with next values of <b>className</b>:
+            template has examples with next values of <b>className</b>:
         <span className="red-text"> {'\'btn-group--icons\''}</span> and
         <span className="red-text"> {'\'btn-group--justified\''}</span>.
       </p>

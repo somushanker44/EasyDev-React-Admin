@@ -8,21 +8,7 @@
     color: $color-additional;
     text-decoration: line-through;
   }
-
   .todo__checkbox-label {
-
-    @include directify($directions) {
-      text-align: #{directed('left')};
-    }
-  }
-}
-
-.todo__checkbox-disabled{
-  cursor: default;
-  opacity: 0.7;
-
-  .todo__checkbox-label {
-
     @include directify($directions) {
       text-align: #{directed('left')};
     }
@@ -30,13 +16,6 @@
 }
 
 .todo-app {
-
-  .no-data {
-    height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 
   .card {
     padding-bottom: 20px;
@@ -65,96 +44,33 @@
 
   .todo__item {
     display: flex;
+    @media screen and (max-width: 450px){
+      padding-bottom: 50px;
+    }
 
     .todo__info {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      flex-flow: column;
+      flex-grow: 1;
 
-      @media screen and (min-width: 1280px){
-        flex-flow: row;
-      }
-
-      .todo__content {
-        margin-right: 10px;
+      .todo__header {
+        display: flex;
         margin-bottom: 10px;
-        width: 100%;
-        word-break: break-all;
-
-        @media screen and (min-width: 1280px) {
-          max-width: 500px;
-        }
-
-        @media screen and (min-width: 1440px) {
-          max-width: 850px;
-        }
 
         h3 {
-          width: 100%;
-          max-width: 100%;
           font-size: 16px;
           line-height: 18px;
           font-weight: 700;
-          margin-bottom: 10px;
-        }
-
-        .todo__description {
-          width: 100%;
-          word-break: break-all;
-        }
-      }
-
-      .todo__additional-wrapper {
-        display: flex;
-        flex-flow: column;
-        justify-content: space-between;
-        align-self: baseline;
-        width: 100%;
-        height: 100%;
-
-        @media screen and (min-width: 400px) {
-          flex-flow: row;
-        }
-
-        @media screen and (min-width: 576px) {
-          flex-flow: column;
-        }
-
-        @media screen and (min-width: 768px) {
-          flex-flow: row;
-        }
-
-        @media screen and (min-width: 1280px) {
-          flex-flow: column;
-          align-items: flex-end;
-          width: initial;
         }
 
         .todo__additional {
-          display: flex;
-          margin: 0 8px 10px 0;
-          white-space: nowrap;
-
           @include directify($directions) {
-            #{directed('margin-left')}: 0;
+            #{directed('margin-left')}: auto;
           }
-        }
-
-        .todo__priority {
           display: flex;
-          align-self: baseline;
-
-          :not(:last-child) {
-            margin-right: 10px;
-          }
-
-          @include directify($directions) {
-            #{directed('margin-right')}: 0;
-          }
-
-          @include themify($themes) {
-            color: themed('colorText');
+          @media screen and (max-width: 450px){
+            position: absolute;
+            bottom: 40px;
+            left: 50px;
+            right: auto;
           }
         }
 
@@ -182,6 +98,7 @@
         }
 
         .todo__due-date, .todo__priority {
+          padding: 0 5px;
 
           @include themify($themes) {
             background-color: themed('colorHover');
@@ -189,32 +106,50 @@
         }
 
         .todo__due-date {
-
           @include directify($directions) {
             #{directed('margin-right')}: 15px;
           }
         }
 
-        .todo__btn-wrapper {
-          display: flex;
-          justify-content: flex-end;
-          width: 100%;
-          min-width: 68px;
+        .todo__priority {
+          @include directify($directions) {
+            #{directed('margin-right')}: 5px;
+          }
+          @include themify($themes) {
+            color: themed('colorText');
+          }
+        }
+      }
 
-          :not(:last-child) {
-            margin-right: 10px;
+      .todo__content {
+        @include directify($directions) {
+          text-align: directed('left');
+        }
+        display: flex;
+        justify-content: space-between;
+
+        .todo__description {
+          @include themify($themes) {
+            color: themed('colorText');
+          }
+          max-width: 65%;
+          @media screen and (max-width: 450px){
+            max-width: 100%;
           }
         }
 
         .todo__delete-btn {
           border: none;
           position: relative;
-          color: $color-additional;
+          color: #999999;
           cursor: pointer;
           align-self: flex-end;
-
+          padding: 5px;
           @include themify($themes) {
             background-color: themed('colorHover');
+          }
+          @media screen and (max-width: 450px){
+            bottom: -30px;
           }
 
           svg {
@@ -222,17 +157,6 @@
             width: 16px;
             fill: $color-additional;
           }
-
-          &:hover {
-            color: $color-accent;
-
-            svg {
-              fill: $color-accent;
-            }
-          }
-        }
-
-        .todo__delete-btn--delete {
 
           &:hover {
             color: $color-red-hover;
@@ -243,29 +167,19 @@
           }
         }
       }
+
     }
+
   }
 
-  .todo__item-completed {
+  .todo__item-comleted {
 
     h3 {
       text-decoration: line-through;
     }
 
     h3, .todo__content {
-      color: $color-additional;
-    }
-  }
-
-  .todo__item-archived {
-    .todo__header,
-    .todo__description,
-    .todo__label-checkbox {
-      opacity: 0.4;
-    }
-
-    .checkbox-indicator {
-      cursor: default !important;
+      color: #999999;
     }
   }
 
@@ -290,11 +204,10 @@
     .todo__date-filter,
     .todo__priority-filter {
       align-self: flex-start;
-      margin-bottom: 20px;
-
       @include directify($directions) {
         text-align: directed('left');
       }
+      margin-bottom: 20px;
 
       .title {
         font-size: 12px;
@@ -327,43 +240,40 @@
 
     .todo__filter-radio + label {
       position: relative;
-      padding-top: 0;
-      padding-bottom: 0;
-      cursor: pointer;
-
       @include directify($directions) {
         #{directed('padding-right')}: 0px;
         #{directed('padding-left')}: 25px;
       }
+      padding-top: 0px;
+      padding-bottom: 0px;
+      cursor: pointer;
     }
 
     .todo__filter-radio + label:before {
       content: "";
       position: absolute;
+      @include directify($directions) {
+        #{directed('left')}: 0px;
+      }
       width: 15px;
       height: 15px;
       border: 1px solid #fafbfe;
       border-radius: 50%;
-
-      @include directify($directions) {
-        #{directed('left')}: 0px;
-      }
     }
 
     .todo__filter-radio + label:after {
       content: "";
       position: absolute;
       top: 3px;
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background-color: $color-hover;
-      opacity: 0;
-      transition: .2s;
-
       @include directify($directions) {
         #{directed('left')}: 3px;
       }
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background-color: #fafbfe;
+      opacity: 0;
+      transition: .2s;
     }
 
     .todo__filter-radio:checked + label:after {
@@ -377,9 +287,10 @@
     padding: 5px 10px;
     min-width: 130px;
     background-color: $color-blue;
-    margin: 0 0 20px 0;
+    margin: 0;
     border: 2px solid white;
     border-radius: 100px;
+    margin-bottom: 20px;
 
     &:before {
       background-color: lighten($color-blue, 10%);
@@ -399,12 +310,11 @@
 
   .todo__label-checkbox {
     position: relative;
-    width: 25px;
-    flex-shrink: 0;
-
     @include directify($directions) {
       #{directed('margin-right')}: 10px;
     }
+    width: 25px;
+    flex-shrink: 0;
 
     .todo__complete-toggle {
       display: none;
@@ -413,17 +323,18 @@
     .todo__complete-toggle + .checkbox-indicator {
       position: absolute;
       top: 0;
-      width: 19px;
-      height: 18px;
-      border: 1px solid;
-      border-color: $color-dusty-white;
-      border-radius: 3px;
-      display: block;
-      cursor: pointer;
-
       @include directify($directions) {
         #{directed('left')}: 0px;
       }
+
+      width: 19px;
+      height: 18px;
+
+      border: 1px solid;
+      border-color: #dddddd;
+      border-radius: 3px;
+      display: block;
+      cursor: pointer;
     }
 
     .todo__complete-toggle:checked + .checkbox-indicator {
@@ -441,81 +352,48 @@
     .todo__complete-toggle:checked + .checkbox-indicator::before,
     .todo__complete-toggle:checked + .checkbox-indicator::after {
       content: "";
+
       position: absolute;
       top: 8px;
-      width: 15px;
-      height: 2px;
-      background-color: white;
-      opacity: 1;
-      transition: 0.2s;
-
       @include directify($directions) {
         #{directed('left')}: 1px;
       }
+
+      width: 15px;
+      height: 2px;
+
+      background-color: white;
+      opacity: 1;
+      transition: 0.2s;
     }
 
     .todo__complete-toggle:checked + .checkbox-indicator::before {
       transform: rotate(45deg);
-      top: 9px;
-      height: 1px;
-      width: 6px;
-
       @include directify($directions) {
         #{directed('left')}: 2px;
       }
+      top: 9px;
+      height: 1px;
+      width: 6px;
     }
 
     .todo__complete-toggle:checked + .checkbox-indicator::after {
       transform: rotate(-45deg);
-      top: 7px;
-      height: 1px;
-      width: 10px;
-
       @include directify($directions) {
         #{directed('left')}: 6px;
       }
-    }
-  }
-}
-
-.todo__panel-refresh {
-  max-width: 100%;
-  height: 100%;
-  max-height: 80px;
-  text-align: center;
-
-  @include directify($directions) {
-    #{directed('left')}: 0px;
-  }
-
-  svg {
-    fill: $color-accent;
-    animation: refresh 1s infinite linear;
-    z-index: 10;
-    width: 48px;
-    height: 48px;
-
-    @include directify($directions) {
-      #{directed('left')}: calc(50% - 24px);
+      top: 7px;
+      height: 1px;
+      width: 10px;
     }
   }
 
-  @keyframes refresh {
-
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
 }
 
 .todo__add-modal {
   max-width: 500px;
 
   .modal-content {
-
     @include themify($themes) {
       background-color: themed('colorBackgroundBody');
     }
@@ -526,6 +404,9 @@
   }
 
   .form__form-group {
+    @include directify($directions) {
+      text-align: directed('left');
+    }
 
     .form__form-group-field input,
     .form__form-group-field textarea {
@@ -538,21 +419,7 @@
 
     .form__form-group-field.priority {
       display: block;
-
-      .css-yk16xz-control,
-      .css-g1d714-ValueContainer,
-      .css-1hb7zxy-IndicatorsContainer,
-      .css-4ljt47-MenuList{
-
-        @include themify($themes) {
-          background: themed('colorBackgroundBody');
-          color: themed('colorHeaderDataPicker');
-        }
-      }
     }
   }
-}
 
-@media screen and (max-width: 450px) {
-  max-width: 100%;
 }

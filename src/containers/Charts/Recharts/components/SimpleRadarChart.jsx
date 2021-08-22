@@ -1,9 +1,10 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { Card, CardBody, Col } from 'reactstrap';
 import {
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Tooltip, ResponsiveContainer,
 } from 'recharts';
+import { withTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
 const data = [
   {
@@ -26,31 +27,31 @@ const data = [
   },
 ];
 
-const SimpleRadarChart = () => {
-  const { t } = useTranslation('common');
+const SimpleRadarChart = ({ t }) => (
+  <Col xs={12} md={12} lg={6} xl={4}>
+    <Card>
+      <CardBody>
+        <div className="card__title">
+          <h5 className="bold-text">{t('charts.recharts.simple_radar_chart')}</h5>
+        </div>
+        <div dir="ltr">
+          <ResponsiveContainer height={320}>
+            <RadarChart data={data} outerRadius={80}>
+              <PolarGrid strokeDasharray="3 3" />
+              <PolarAngleAxis dataKey="subject" />
+              <PolarRadiusAxis />
+              <Tooltip />
+              <Radar name="Mike" dataKey="A" stroke="#3ea3fc" fill="#70bbfd" fillOpacity={0.6} />
+            </RadarChart>
+          </ResponsiveContainer>
+        </div>
+      </CardBody>
+    </Card>
+  </Col>
+);
 
-  return (
-    <Col xs={12} md={12} lg={6} xl={4}>
-      <Card>
-        <CardBody>
-          <div className="card__title">
-            <h5 className="bold-text">{t('charts.recharts.simple_radar_chart')}</h5>
-          </div>
-          <div dir="ltr">
-            <ResponsiveContainer height={320}>
-              <RadarChart data={data} outerRadius={80}>
-                <PolarGrid strokeDasharray="3 3" />
-                <PolarAngleAxis dataKey="subject" />
-                <PolarRadiusAxis />
-                <Tooltip />
-                <Radar name="Mike" dataKey="A" stroke="#3ea3fc" fill="#70bbfd" fillOpacity={0.6} />
-              </RadarChart>
-            </ResponsiveContainer>
-          </div>
-        </CardBody>
-      </Card>
-    </Col>
-  );
+SimpleRadarChart.propTypes = {
+  t: PropTypes.func.isRequired,
 };
 
-export default SimpleRadarChart;
+export default withTranslation('common')(SimpleRadarChart);

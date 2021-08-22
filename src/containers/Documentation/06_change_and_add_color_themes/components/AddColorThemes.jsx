@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const AddColorThemes = () => (
   <Card className="card--not-full-height">
@@ -9,7 +9,7 @@ const AddColorThemes = () => (
         <h5 className="bold-text">Add Color Theme</h5>
       </div>
       <p>To add new color theme you need to add its title and copy all variables from one of the predefined themes
-        and change their values as needed:
+            and change their values as needed:
       </p>
       <CodeHighlither scss>
         {`$themes: (
@@ -21,7 +21,7 @@ const AddColorThemes = () => (
 );`}
       </CodeHighlither>
       <p>To change color theme in template you need to add new action
-        in <b>template/src/redux/actions/themeActions.js:</b>
+            in <b>template/src/redux/actions/themeActions.js:</b>
       </p>
       <CodeHighlither>
         {`export const CHANGE_THEME_TO_DARK = 'CHANGE_THEME_TO_DARK';

@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TopbarNavCategory = ({
-  title, icon, isNew, children,
-}) => (
+const TopbarNavCategory = ({ title, icon, children }) => (
   <div className="topbar__category-wrap">
     <div className="topbar__link topbar__category">
       {icon ? <span className={`topbar__link-icon lnr lnr-${icon}`} /> : ''}
       <p className="topbar__link-title">
         {title}
-        {isNew && <span className="sidebar__category-new" />}
         <span className="topbar__category-icon lnr lnr-chevron-right" />
       </p>
     </div>
@@ -22,12 +19,7 @@ const TopbarNavCategory = ({
 TopbarNavCategory.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
-  isNew: PropTypes.bool,
   children: PropTypes.arrayOf(PropTypes.element).isRequired,
-};
-
-TopbarNavCategory.defaultProps = {
-  isNew: false,
 };
 
 export default TopbarNavCategory;

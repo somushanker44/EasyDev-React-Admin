@@ -7,7 +7,7 @@ const initialState = {
   direction: 'ltr',
 };
 
-const rtlReducer = (state = initialState, action) => {
+export default function (state = initialState, action) {
   switch (action.type) {
     case CHANGE_DIRECTION_TO_LTR:
       return { direction: 'ltr' };
@@ -16,6 +16,4 @@ const rtlReducer = (state = initialState, action) => {
     default:
       return state;
   }
-};
-
-export default rtlReducer;
+}

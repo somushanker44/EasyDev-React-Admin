@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { Card, CardBody, Table } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const Select = () => (
   <Card className="card--not-full-height">
@@ -10,7 +10,7 @@ const Select = () => (
         <h5 className="bold-text">Select and MultiSelect</h5>
       </div>
       <p>Select and MultiSelect are based on <a href="https://github.com/JedWatson/react-select">react-select</a>.
-        Example of using this component here:
+            Example of using this component here:
       </p>
       <CodeHighlither>
         {`import renderSelectField from '../../../../components/form/Select';

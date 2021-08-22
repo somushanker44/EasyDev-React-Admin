@@ -11,14 +11,11 @@
 
   .popover-header {
     border: none;
+    background-color: #f2f4f7;
     font-weight: 700;
     font-size: 11px;
     padding: 5px 10px;
     line-height: normal;
-
-    @include themify($themes) {
-      background-color: themed('colorBackground');
-    }
   }
 
   .popover-body {

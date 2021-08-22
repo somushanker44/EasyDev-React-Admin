@@ -9,17 +9,19 @@
 }
 
 .gallery__btns {
-  width: 100%;
-  margin-bottom: 20px;
-
   @include directify($directions) {
     text-align: directed('left');
   }
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .gallery__btn {
   background: transparent;
   padding: 0;
+  @include directify($directions) {
+    #{directed('margin-right')}: 20px;
+  }
   text-transform: uppercase;
   color: $color-additional;
   font-size: 12px;
@@ -27,10 +29,6 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s;
-
-  @include directify($directions) {
-    #{directed('margin-right')}: 20px;
-  }
 
   &:focus, &:active {
     outline: none;
@@ -49,8 +47,6 @@
   width: 100%;
   overflow: hidden;
   cursor: pointer;
-  border: none;
-  padding: 0;
 }
 
 @media screen and (min-width: 768px) {

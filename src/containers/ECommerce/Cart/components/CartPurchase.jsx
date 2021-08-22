@@ -3,7 +3,7 @@ import { ButtonToolbar } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import renderRadioButtonField from '@/shared/components/form/RadioButton';
+import renderRadioButtonField from '../../../../shared/components/form/RadioButton';
 
 const CartPurchase = ({ handleSubmit }) => (
   <form className="form cart__deliveries" onSubmit={handleSubmit}>

@@ -7,13 +7,12 @@
 }
 
 .container__wrap {
-  padding-top: 90px;
-  min-height: 100vh;
-  transition: padding-left 0.3s;
-
   @include directify($directions) {
     #{directed('padding-left')}: 0px;
   }
+  padding-top: 90px;
+  min-height: 100vh;
+  transition: padding-left 0.3s;
 
   @include themify($themes) {
     background: themed('colorBackgroundBody');
@@ -24,10 +23,6 @@
       #{directed('padding-left')}: 250px;
     }
   }
-
-  @media screen and (max-width: 576px) {
-    padding-top: 150px;
-  }
 }
 
 .layout {
@@ -35,7 +30,6 @@
   &.layout--collapse {
 
     & + .container__wrap {
-
       @include directify($directions) {
         #{directed('padding-left')}: 0px;
       }
@@ -48,9 +42,9 @@
     }
   }
 
-  &.layout--top-navigation {
+  &.layout--top-navigation{
 
-    & + .container__wrap {
+    & + .container__wrap{
 
       @media screen and (min-width: 576px) {
         @include directify($directions) {

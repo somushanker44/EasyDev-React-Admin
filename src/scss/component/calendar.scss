@@ -4,11 +4,11 @@
   height: 600px;
   margin-bottom: 70px;
   
-  .rbc-month-row {
-    min-height: 60px;
+  .rbc-row-segment {
+    margin-top: 15px;
+    margin-bottom: -5px;
   }
   .rbc-date-cell {
-
     @include directify($directions) {
       text-align: directed('left');
       #{directed('padding-right')}: 0px;
@@ -17,7 +17,6 @@
     a {
       display: block;
       width: 100%;
-
       @include directify($directions) {
         #{directed('padding-left')}: 10px;
       }
@@ -85,14 +84,6 @@
     @include themify($themes) {
       color: themed('colorText');
     }
-
-    @media (max-width: 325px) {
-      font-size: 14px;
-    }
-
-    @media (max-width: 280px) {
-      font-size: 10px;
-    }
   }
 
   .rbc-label {
@@ -122,6 +113,7 @@
 
     &.rbc-active {
       box-shadow: none;
+      background-color: #ededed;
       pointer-events: none;
 
       @include themify($themes) {
@@ -155,7 +147,6 @@
   .rbc-btn-group:first-child {
 
     button {
-
       @include directify($directions) {
         #{directed('margin-right')}: 5px;
       }
@@ -168,37 +159,22 @@
     }
   }
 
-  .rbc-btn-group:last-child {
-
-    @media (max-width: 500px) {
-      margin-top: 10px;
-    }
-  }
-
   .rbc-btn-group {
     min-width: 156px;
-
-    @media (max-width: 325px) {
-      min-width: 105px !important;
-    }
   }
 
-  .rbc-header + .rbc-today {
+  .rbc-today {
+    background-color: transparent;
+    position: relative;
+
     &:before {
       content: "";
       height: 3px;
       width: 100%;
       background-color: $color-accent;
       top: 0;
-      left: 0;
-      right: 0;
       position: absolute;
     }
-  }
-
-  .rbc-today {
-    background-color: transparent;
-    position: relative;
   }
 
   .rbc-current-time-indicator {
@@ -241,7 +217,6 @@
 
   .rbc-time-content > * + * > * {
     border: none;
-
     @include directify($directions) {
       #{directed('border-left')}: 1px solid #DDD;  
     }
@@ -257,7 +232,6 @@
   .rbc-header + .rbc-header {
     border: none;
     border-bottom: 1px solid #DDD;
-
     @include directify($directions) {
       #{directed('border-left')}: 1px solid #DDD;
     }
@@ -265,14 +239,13 @@
 
   .rbc-day-bg + .rbc-day-bg {
     border: none;
-
     @include directify($directions) {
       #{directed('border-left')}: 1px solid #DDD;
     }
   }
 
-  .rbc-day-slot .rbc-events-container {
 
+  .rbc-day-slot .rbc-events-container {
     @include directify($directions) {
       #{directed('margin-right')}: 14px !important;
       #{directed('margin-left')}: 0 !important;
@@ -292,7 +265,6 @@
   width: 12px;
   border-radius: 50%;
   display: inline-block;
-
   @include directify($directions) {
     #{directed('margin-right')}: 5px;
   }
@@ -308,4 +280,5 @@
   &.calendar-label--blue {
     background-color: $color-blue;
   }
+
 }

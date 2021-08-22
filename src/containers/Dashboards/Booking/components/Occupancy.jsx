@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 import {
   Bar, CartesianGrid, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from 'recharts';
+import { withTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 import { Table } from 'reactstrap';
-import Panel from '@/shared/components/Panel';
+import Panel from '../../../../shared/components/Panel';
 import OccupancyTooltipContent from './OccupancyTooltipContent';
 
 const data = [
@@ -54,71 +54,89 @@ const data = [
   },
 ];
 
-const data01 = [
-  {
-    id: 0, color: 'blue', head: 'Arrivals', data: [24, 74, 54, 57, 32, 68, 53],
-  },
-  {
-    id: 1, color: 'green', head: 'Departures', data: [75, 65, 46, 35, 65, 21, 34],
-  },
-  {
-    id: 2, color: 'gray', head: 'Stay overs', data: [3113, 2424, 4545, 4543, 3432, 3211, 2112],
-  },
-  {
-    id: 3, color: 'gray', head: 'Customers', data: [131, 133, 343, 342, 351, 234, 242],
-  },
-];
+class Occupancy extends PureComponent {
+  static propTypes = {
+    t: PropTypes.func.isRequired,
+    dir: PropTypes.string.isRequired,
+    themeName: PropTypes.string.isRequired,
+  };
 
-const toPercent = (decimal, fixed = 0) => `${decimal.toFixed(fixed)}%`;
+  toPercent = (decimal, fixed = 0) => `${decimal.toFixed(fixed)}%`;
 
-const Occupancy = ({ dir, themeName }) => {
-  const { t } = useTranslation('common');
+  render() {
+    const { t, dir, themeName } = this.props;
 
-  return (
-    <Panel
-      xl={6}
-      lg={12}
-      md={12}
-      title={t('booking_dashboard.occupancy')}
-      subhead="See how effective your business is"
-    >
-      <div dir="ltr">
-        <ResponsiveContainer height={260}>
-          <ComposedChart data={data} margin={{ top: 20, left: -15 }}>
-            <XAxis dataKey="name" tickLine={false} padding={{ left: 20 }} reversed={dir === 'rtl'} />
-            <YAxis tickLine={false} tickFormatter={toPercent} orientation={dir === 'rtl' ? 'right' : 'left'} />
-            <Tooltip content={<OccupancyTooltipContent colorForKey={{ uv: '#555555' }} theme={themeName} />} />
-            <CartesianGrid vertical={false} />
-            <Bar dataKey="uv" name="Stay overs" fill="#f2f4f7" barSize={20} />
-            <Line type="linear" name="Departures" dataKey="departure" stroke="#b8e986" />
-            <Line type="linear" name="Arrivals" dataKey="arrival" stroke="#48b5ff" />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
-      <hr />
-      <div>
-        <Table responsive className="table dashboard__occupancy-table">
-          <tbody>
-            {data01.map(items => (
+    return (
+      <Panel
+        xl={6}
+        lg={12}
+        md={12}
+        title={t('dashboard_booking.occupancy')}
+        subhead="See how effective your business is"
+      >
+        <div dir="ltr">
+          <ResponsiveContainer height={260}>
+            <ComposedChart data={data} margin={{ top: 20, left: -15 }}>
+              <XAxis dataKey="name" tickLine={false} padding={{ left: 20 }} reversed={dir === 'rtl'} />
+              <YAxis tickLine={false} tickFormatter={this.toPercent} orientation={dir === 'rtl' ? 'right' : 'left'} />
+              <Tooltip content={<OccupancyTooltipContent colorForKey={{ uv: '#555555' }} theme={themeName} />} />
+              <CartesianGrid vertical={false} />
+              <Bar dataKey="uv" name="Stay overs" fill="#f2f4f7" barSize={20} />
+              <Line type="linear" name="Departures" dataKey="departure" stroke="#b8e986" />
+              <Line type="linear" name="Arrivals" dataKey="arrival" stroke="#48b5ff" />
+            </ComposedChart>
+          </ResponsiveContainer>
+        </div>
+        <hr />
+        <div>
+          <Table responsive className="table dashboard__occupancy-table">
+            <tbody>
               <tr>
-                <td className="td-head">{items.head}</td>
-                <Fragment>
-                  {items.data.map(item => (
-                    <td className={`td-${items.color}`}>{item}</td>
-                  ))}
-                </Fragment>
+                <td className="td-head">Arrivals</td>
+                <td className="td-blue">24</td>
+                <td className="td-blue">74</td>
+                <td className="td-blue">54</td>
+                <td className="td-blue">57</td>
+                <td className="td-blue">32</td>
+                <td className="td-blue">68</td>
+                <td className="td-blue">53</td>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      </div>
-    </Panel>
-  );
-};
+              <tr>
+                <td className="td-head">Departures</td>
+                <td className="td-green">75</td>
+                <td className="td-green">65</td>
+                <td className="td-green">46</td>
+                <td className="td-green">35</td>
+                <td className="td-green">65</td>
+                <td className="td-green">21</td>
+                <td className="td-green">34</td>
+              </tr>
+              <tr>
+                <td className="td-head">Stay overs</td>
+                <td className="td-gray">3113</td>
+                <td className="td-gray">2424</td>
+                <td className="td-gray">4545</td>
+                <td className="td-gray">4543</td>
+                <td className="td-gray">3432</td>
+                <td className="td-gray">3211</td>
+                <td className="td-gray">2112</td>
+              </tr>
+              <tr>
+                <td className="td-head">Customers</td>
+                <td className="td-gray">131</td>
+                <td className="td-gray">133</td>
+                <td className="td-gray">343</td>
+                <td className="td-gray">342</td>
+                <td className="td-gray">351</td>
+                <td className="td-gray">234</td>
+                <td className="td-gray">242</td>
+              </tr>
+            </tbody>
+          </Table>
+        </div>
+      </Panel>
+    );
+  }
+}
 
-Occupancy.propTypes = {
-  dir: PropTypes.string.isRequired,
-  themeName: PropTypes.string.isRequired,
-};
-
-export default connect(state => ({ themeName: state.theme.className }))(Occupancy);
+export default connect(state => ({ themeName: state.theme.className }))(withTranslation('common')(Occupancy));

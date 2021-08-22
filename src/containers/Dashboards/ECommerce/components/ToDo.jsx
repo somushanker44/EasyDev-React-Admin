@@ -1,15 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import CheckIcon from 'mdi-react/CheckIcon';
+import PropTypes from 'prop-types';
 
 const ToDo = ({
-  id, label, onChange, checked, disabled,
+  id, label, checked, onChange,
 }) => (
   <div className="todo">
-    <label
-      className={!disabled ? 'checkbox-btn todo__checkbox' : 'todo__checkbox-disabled'}
-      htmlFor={id}
-    >
+    <label className="checkbox-btn todo__checkbox" htmlFor={id}>
       <input
         className="checkbox-btn__checkbox"
         type="checkbox"
@@ -27,18 +24,15 @@ const ToDo = ({
 );
 
 ToDo.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   label: PropTypes.string,
-  onChange: PropTypes.func,
   checked: PropTypes.bool,
-  disabled: PropTypes.bool,
+  onChange: PropTypes.func.isRequired,
 };
 
 ToDo.defaultProps = {
   label: '',
-  onChange: () => {},
   checked: false,
-  disabled: false,
 };
 
 export default ToDo;

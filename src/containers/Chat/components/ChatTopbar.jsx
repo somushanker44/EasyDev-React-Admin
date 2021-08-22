@@ -5,7 +5,7 @@ import MoreVertIcon from 'mdi-react/MoreVertIcon';
 import VideoIcon from 'mdi-react/VideoIcon';
 import PhoneIcon from 'mdi-react/PhoneIcon';
 import StarIcon from 'mdi-react/StarIcon';
-import { ContactProps } from '@/shared/prop-types/ChatProps';
+import { ContactProps } from '../../../shared/prop-types/ChatProps';
 
 const ChatTopbar = ({ onClick, contact }) => (
   <div className="chat__topbar">
@@ -33,7 +33,8 @@ const ChatTopbar = ({ onClick, contact }) => (
             <StarIcon className="chat__topbar-button-icon" />
           </button>
         </div>
-        )}
+        )
+      }
       <button className="chat__topbar-button" type="button">
         <MoreVertIcon className="chat__topbar-button-icon" />
       </button>

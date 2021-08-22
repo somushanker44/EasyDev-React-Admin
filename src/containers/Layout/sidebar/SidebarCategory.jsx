@@ -1,53 +1,61 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { Collapse } from 'reactstrap';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const SidebarCategory = ({
-  title, icon, isNew, children, sidebarCollapse,
-}) => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const categoryClass = classNames({
-    'sidebar__category-wrap': true,
-    'sidebar__category-wrap--open': isCollapsed,
-    'sidebar__link sidebar__category': true,
-  });
-
-  const collapseSidebar = () => {
-    setIsCollapsed(!isCollapsed);
+export default class SidebarCategory extends Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    icon: PropTypes.string,
+    isNew: PropTypes.bool,
+    children: PropTypes.arrayOf(PropTypes.element).isRequired,
   };
 
-  return (
-    <div className={sidebarCollapse ? 'sidebar-collapse-wrapper' : ''}>
-      <button className={categoryClass} type="button" onClick={collapseSidebar}>
-        {icon ? <span className={`sidebar__link-icon lnr lnr-${icon}`} /> : ''}
-        <p className="sidebar__link-title">{title}
-          {isNew && <span className="sidebar__category-new" />}
-        </p>
-        <span className="sidebar__category-icon lnr lnr-chevron-right" />
-      </button>
-      <Collapse isOpen={sidebarCollapse || isCollapsed} className="sidebar__submenu-wrap">
-        <ul className="sidebar__submenu">
-          <div>
-            {children}
-          </div>
-        </ul>
-      </Collapse>
-    </div>
-  );
-};
+  static defaultProps = {
+    icon: '',
+    isNew: false,
+  };
 
-SidebarCategory.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.string,
-  isNew: PropTypes.bool,
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
-  sidebarCollapse: PropTypes.bool.isRequired,
-};
+  constructor() {
+    super();
+    this.state = {
+      collapse: false,
+    };
+  }
 
-SidebarCategory.defaultProps = {
-  icon: '',
-  isNew: false,
-};
+  toggle = () => {
+    const { collapse } = this.state;
+    this.setState({ collapse: !collapse });
+  };
 
-export default SidebarCategory;
+  render() {
+    const {
+      title, icon, isNew, children,
+    } = this.props;
+    const { collapse } = this.state;
+    const categoryClass = classNames({
+      'sidebar__category-wrap': true,
+      'sidebar__category-wrap--open': collapse,
+      'sidebar__link sidebar__category': true,
+    });
+
+    return (
+      <div>
+        <button className={categoryClass} type="button" onClick={this.toggle}>
+          {icon ? <span className={`sidebar__link-icon lnr lnr-${icon}`} /> : ''}
+          <p className="sidebar__link-title">{title}
+            {isNew && <span className="sidebar__category-new" />}
+          </p>
+          <span className="sidebar__category-icon lnr lnr-chevron-right" />
+        </button>
+        <Collapse isOpen={collapse} className="sidebar__submenu-wrap">
+          <ul className="sidebar__submenu">
+            <div>
+              {children}
+            </div>
+          </ul>
+        </Collapse>
+      </div>
+    );
+  }
+}

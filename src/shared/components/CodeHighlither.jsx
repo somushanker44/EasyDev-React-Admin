@@ -1,21 +1,25 @@
-import React from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { darcula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import React, { PureComponent } from 'react';
+import SyntaxHighlighter from 'react-syntax-highlighter/prism';
+import { darcula } from 'react-syntax-highlighter/styles/prism';
 import PropTypes from 'prop-types';
 
-const CodeHighlither = ({ scss, children }) => (
-  <SyntaxHighlighter showLineNumbers language={scss ? 'scss' : 'jsx'} style={darcula}>
-    {children}
-  </SyntaxHighlighter>
-);
+export default class CodeHighlither extends PureComponent {
+  static propTypes = {
+    scss: PropTypes.bool,
+    children: PropTypes.string.isRequired,
+  };
 
-export default CodeHighlither;
+  static defaultProps = {
+    scss: false,
+  };
 
-CodeHighlither.propTypes = {
-  scss: PropTypes.bool,
-  children: PropTypes.string.isRequired,
-};
+  render() {
+    const { scss, children } = this.props;
 
-CodeHighlither.defaultProps = {
-  scss: false,
-};
+    return (
+      <SyntaxHighlighter showLineNumbers language={scss ? 'scss' : 'jsx'} style={darcula}>
+        {children}
+      </SyntaxHighlighter>
+    );
+  }
+}

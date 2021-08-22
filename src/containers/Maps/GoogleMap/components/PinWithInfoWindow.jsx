@@ -1,67 +1,72 @@
-import React, { Fragment, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+/* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
+import React from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
+import { compose, withProps, withStateHandlers } from 'recompose';
 import {
-  GoogleMap, useJsApiLoader, Marker, InfoWindow,
-} from '@react-google-maps/api';
+  GoogleMap, Marker, withGoogleMap, withScriptjs,
+} from 'react-google-maps';
+import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
+import CloseIcon from 'mdi-react/CloseIcon';
+import { withTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
-const containerStyle = {
-  height: '360px',
-};
-
-const center = {
-  lat: 56.009483,
-  lng: 92.8121694,
-};
-
-const PinWithInfoWindow = () => {
-  const { t } = useTranslation('common');
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-  });
-
-  const [isOpened, setIsOpened] = useState(true);
-
-  const onToggleIsOpen = () => {
-    setIsOpened(!isOpened);
-  };
-
-  const onLoad = (infoWindow) => {
-    console.log('infoWindow: ', infoWindow);
-  };
-
-  return (
-    <Col xs={12} md={12} lg={12}>
-      <Card>
-        <CardBody>
-          <div className="card__title">
-            <h5 className="bold-text">{t('maps.google_map.pin_with_info_window')}</h5>
+const MapWithAMarker = compose(
+  withProps({
+    // generate your API key
+    googleMapURL: 'https://maps.googleapis.com/maps/api/js?key=&v=3.'
+    + 'exp&libraries=geometry,drawing,places',
+    loadingElement: <div style={{ height: '100%' }} />,
+    containerElement: <div className="map" style={{ height: '360px' }} />,
+    mapElement: <div style={{ height: '100%' }} />,
+  }),
+  withStateHandlers(() => ({
+    isOpen: true,
+  }), {
+    onToggleOpen: ({ isOpen }) => () => ({
+      isOpen: !isOpen,
+    }),
+  }),
+  withScriptjs,
+  withGoogleMap,
+)(props => (
+  <GoogleMap
+    defaultZoom={13}
+    defaultCenter={{ lat: 56.009483, lng: 92.8121694 }}
+  >
+    {props.isMarkerShown
+      && (
+      <Marker position={{ lat: 56.009483, lng: 92.8121694 }} onClick={props.onToggleOpen}>
+        {props.isOpen
+        && (
+        <InfoBox options={{ closeBoxURL: '', enableEventPropagation: true }}>
+          <div className="map__marker-label">
+            <div className="map__marker-label-content">
+              <div className="map__maker-label-close" onClick={props.onToggleOpen}><CloseIcon /></div>
+              DRAKARYS!!!
+            </div>
           </div>
-          {isLoaded ? (
-            <GoogleMap
-              id="infoWindowMap"
-              mapContainerStyle={containerStyle}
-              center={center}
-              zoom={13}
-            >
-              <Marker position={center} onClick={onToggleIsOpen}>
-                {!isOpened && (
-                  <InfoWindow
-                    onLoad={onLoad}
-                    options={{ closeBoxURL: '', enableEventPropagation: true }}
-                  >
-                    <div className="map__marker-label-content">
-                      DRAKARYS!!!
-                    </div>
-                  </InfoWindow>
-                )}
-              </Marker>
-            </GoogleMap>
-          ) : <Fragment />}
-        </CardBody>
-      </Card>
-    </Col>
-  );
+        </InfoBox>
+        )}
+      </Marker>
+      )}
+  </GoogleMap>
+));
+
+const BasicMap = ({ t }) => (
+  <Col xs={12} md={12} lg={12}>
+    <Card>
+      <CardBody>
+        <div className="card__title">
+          <h5 className="bold-text">{t('maps.google_map.pin_with_info_window')}</h5>
+        </div>
+        <MapWithAMarker isMarkerShown />
+      </CardBody>
+    </Card>
+  </Col>
+);
+
+BasicMap.propTypes = {
+  t: PropTypes.func.isRequired,
 };
 
-export default PinWithInfoWindow;
+export default withTranslation('common')(BasicMap);

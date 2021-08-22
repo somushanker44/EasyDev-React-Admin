@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import {
   Card, Col, Button, ButtonToolbar, Table, CardBody,
@@ -43,13 +44,13 @@ const InvoiceTemplate = () => (
             </tr>
           </thead>
           <tbody>
-            {invoiceData.map((item, index) => (
-              <tr key={`index_${item.title}`}>
+            {invoiceData.map((i, index) => (
+              <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{item.title}</td>
-                <td>{item.quantity}</td>
-                <td>${item.cost}</td>
-                <td>${item.quantity * item.cost}</td>
+                <td>{i.title}</td>
+                <td>{i.quantity}</td>
+                <td>${i.cost}</td>
+                <td>${i.quantity * i.cost}</td>
               </tr>
             ))}
           </tbody>

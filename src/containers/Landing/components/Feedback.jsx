@@ -13,13 +13,13 @@ const Feedback = () => (
           <h2 className="landing__feedback-title"><b>Hey guys!</b></h2>
           <p className="landing__feedback-subhead">
             We are glad to offer you the EasyDev customization from light modernization to a super-custom
-            development according to your project. Please, contact us via <b>biz@aspirity.com</b> to discuss our
+            development according to your project.  Please, contact us via <b>biz@aspirity.com</b> to discuss our
             work or just press the button below.
           </p>
           <div className="landing__feedback-form">
             <a
               className="landing__btn landing__btn--feedback"
-              href="https://bit.ly/3tk0rr1"
+              href="https://www.aspirity.com/contact-us"
               rel="noopener noreferrer"
               target="_blank"
             >

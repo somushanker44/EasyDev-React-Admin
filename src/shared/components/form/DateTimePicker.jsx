@@ -1,36 +1,50 @@
-import React, { useState } from 'react';
+import React, { PureComponent } from 'react';
 import DatePicker from 'react-datepicker';
-import { isMobileOnly } from 'react-device-detect';
 import PropTypes from 'prop-types';
 
-const DateTimePickerField = ({ onChange }) => {
-  const [startDate, setStartDate] = useState(null);
-  const handleChange = (date) => {
-    setStartDate(date);
+class DateTimePickerField extends PureComponent {
+  static propTypes = {
+    onChange: PropTypes.func.isRequired,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      startDate: null,
+    };
+  }
+
+  handleChange = (date) => {
+    const { onChange } = this.props;
+    this.setState({
+      startDate: date,
+    });
     onChange(date);
   };
 
-  return (
-    <div className="date-picker">
-      <DatePicker
-        timeFormat="HH:mm"
-        className="form__form-group-datepicker"
-        selected={startDate}
-        onChange={handleChange}
-        showTimeSelect
-        dateFormat="MMMM d, yyyy h:mm aa"
-        dropDownMode="select"
-        withPortal={isMobileOnly}
-      />
-    </div>
-  );
-};
+  render() {
+    const { startDate } = this.state;
 
-DateTimePickerField.propTypes = {
-  onChange: PropTypes.func.isRequired,
-};
+    return (
+      <div className="date-picker">
+        <DatePicker
+          timeFormat="HH:mm"
+          className="form__form-group-datepicker"
+          selected={startDate}
+          onChange={this.handleChange}
+          showTimeSelect
+          dateFormat="MMMM d, yyyy h:mm aa"
+          dropDownMode="select"
+        />
+      </div>
+    );
+  }
+}
 
-const renderDateTimePickerField = ({ input }) => <DateTimePickerField {...input} />;
+const renderDateTimePickerField = (props) => {
+  const { input } = props;
+  return <DateTimePickerField {...input} />;
+};
 
 renderDateTimePickerField.propTypes = {
   input: PropTypes.shape({

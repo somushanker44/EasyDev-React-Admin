@@ -1,10 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
 import { Card, CardBody, Col } from 'reactstrap';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
+import { withTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
 const data = [
   {
@@ -30,43 +30,40 @@ const data = [
   },
 ];
 
-const SimpleLineChart = ({ dir }) => {
-  const { t } = useTranslation('common');
-
-  return (
-    <Col xs={12} md={12} lg={12} xl={6}>
-      <Card>
-        <CardBody>
-          <div className="card__title">
-            <h5 className="bold-text">{t('charts.recharts.simple_line_chart')}</h5>
-          </div>
-          <div dir="ltr">
-            <ResponsiveContainer height={300}>
-              <LineChart
-                data={data}
-                margin={{
-                  top: 0, right: 0, left: -15, bottom: 0,
-                }}
-              >
-                <XAxis dataKey="name" reversed={dir === 'rtl'} />
-                <YAxis orientation={dir === 'rtl' ? 'right' : 'left'} />
-                <CartesianGrid strokeDasharray="3 3" />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="pv" stroke="#4ce1b6" activeDot={{ r: 8 }} />
-                <Line type="monotone" dataKey="uv" stroke="#70bbfd" />
-                <Line type="monotone" dataKey="amt" stroke="#f6da6e" activeDot={{ r: 6 }} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </CardBody>
-      </Card>
-    </Col>
-  );
-};
+const SimpleLineChart = ({ t, dir }) => (
+  <Col xs={12} md={12} lg={12} xl={6}>
+    <Card>
+      <CardBody>
+        <div className="card__title">
+          <h5 className="bold-text">{t('charts.recharts.simple_line_chart')}</h5>
+        </div>
+        <div dir="ltr">
+          <ResponsiveContainer height={300}>
+            <LineChart
+              data={data}
+              margin={{
+                top: 0, right: 0, left: -15, bottom: 0,
+              }}
+            >
+              <XAxis dataKey="name" reversed={dir === 'rtl'} />
+              <YAxis orientation={dir === 'rtl' ? 'right' : 'left'} />
+              <CartesianGrid strokeDasharray="3 3" />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="pv" stroke="#4ce1b6" activeDot={{ r: 8 }} />
+              <Line type="monotone" dataKey="uv" stroke="#70bbfd" />
+              <Line type="monotone" dataKey="amt" stroke="#f6da6e" activeDot={{ r: 6 }} />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </CardBody>
+    </Card>
+  </Col>
+);
 
 SimpleLineChart.propTypes = {
+  t: PropTypes.func.isRequired,
   dir: PropTypes.string.isRequired,
 };
 
-export default SimpleLineChart;
+export default withTranslation('common')(SimpleLineChart);

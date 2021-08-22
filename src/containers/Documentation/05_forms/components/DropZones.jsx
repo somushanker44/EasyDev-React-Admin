@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody, Table } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const DropZones = () => (
   <Card className="card--not-full-height">
@@ -9,7 +9,7 @@ const DropZones = () => (
         <h5 className="bold-text">DropZones</h5>
       </div>
       <p>DropZones are based on <a href="https://github.com/react-dropzone/react-dropzone/">react-dropzone</a>.
-        There are two types of this component in the template. The first is dropzone with multiple files upload:
+            There are two types of this component in the template. The first is dropzone with multiple files upload:
       </p>
       <CodeHighlither>
         {'import renderDropZoneMultipleField from \'../../../../components/form/DropZoneMultiple\';'}

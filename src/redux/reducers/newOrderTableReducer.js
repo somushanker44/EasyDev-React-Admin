@@ -7,7 +7,6 @@ import {
 const initialState = {
   items: [
     {
-      id: 0,
       title: 'Nike Air Max',
       quantity: 142,
       sold: 124,
@@ -15,7 +14,6 @@ const initialState = {
       img: `${process.env.PUBLIC_URL}/img/shoes/01.png`,
     },
     {
-      id: 1,
       title: 'Reebok ZigTech',
       quantity: 98,
       sold: 53,
@@ -23,7 +21,6 @@ const initialState = {
       img: `${process.env.PUBLIC_URL}/img/shoes/02.png`,
     },
     {
-      id: 2,
       title: 'Puma Suede',
       quantity: 23,
       sold: 21,
@@ -31,7 +28,6 @@ const initialState = {
       img: `${process.env.PUBLIC_URL}/img/shoes/03.png`,
     },
     {
-      id: 3,
       title: 'Puma Basket Platform',
       quantity: 2,
       sold: 456,
@@ -39,7 +35,6 @@ const initialState = {
       img: `${process.env.PUBLIC_URL}/img/shoes/04.png`,
     },
     {
-      id: 4,
       title: 'Nike Jordan',
       quantity: 189,
       sold: 42,
@@ -50,7 +45,7 @@ const initialState = {
   data: {},
 };
 
-const newOrderTableReducer = (state = initialState, action) => {
+export default function (state = initialState, action) {
   switch (action.type) {
     case LOAD_NEW_ORDER_TABLE_DATA: {
       const loadData = state.items[action.index];
@@ -66,6 +61,4 @@ const newOrderTableReducer = (state = initialState, action) => {
     default:
       return state;
   }
-};
-
-export default newOrderTableReducer;
+}

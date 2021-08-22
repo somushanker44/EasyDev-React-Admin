@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import * as PropTypes from 'prop-types';
 import MaskedInput from 'react-text-mask';
 import CreditCardIcon from 'mdi-react/CreditCardIcon';
-import renderRadioButtonField from '@/shared/components/form/RadioButton';
+import renderRadioButtonField from '../../../../shared/components/form/RadioButton';
 
 const MasterCard = `${process.env.PUBLIC_URL}/img/for_store/cards/mc.svg`;
 const VisaCard = `${process.env.PUBLIC_URL}/img/for_store/cards/visa.svg`;

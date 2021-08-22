@@ -24,9 +24,6 @@ const TopbarNavUIElements = () => (
         <TopbarNavLink title="Collapse" route="/ui/collapse" />
       </DropdownItem>
       <DropdownItem>
-        <TopbarNavLink title="Datepicker" route="/ui/datepicker" />
-      </DropdownItem>
-      <DropdownItem>
         <TopbarNavLink title="Grids" route="/ui/grids" />
       </DropdownItem>
       <DropdownItem>

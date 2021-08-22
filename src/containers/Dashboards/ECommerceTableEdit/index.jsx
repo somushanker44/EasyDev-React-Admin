@@ -1,40 +1,51 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+/* eslint-disable react/prop-types */
+import React, { PureComponent } from 'react';
+import { Container, Row } from 'reactstrap';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Container, Row } from 'reactstrap';
-import { changeNewOrderTableData, loadNewOrderTableData } from '@/redux/actions/newOrderTableActions';
+import PropTypes from 'prop-types';
 import NewOrderEditForm from './components/NewOrderEditForm';
+import { changeNewOrderTableData, loadNewOrderTableData } from '../../../redux/actions/newOrderTableActions';
 
-const ECommerceDashboardEdit = ({ dispatch, match }) => {
-  const [isRedirect, setIsRedirect] = useState(false);
-
-  useEffect(() => {
-    dispatch(loadNewOrderTableData(match.params.index));
-  }, [dispatch, match.params.index]);
-
-  const handleSubmit = (formValues) => {
-    dispatch(changeNewOrderTableData(formValues, match.params.index));
-    setIsRedirect(true);
+class ECommerceDashboardEdit extends PureComponent {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
   };
 
-  if (isRedirect) {
-    return <Redirect to="e_commerce_dashboard" />;
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirect: false,
+    };
   }
 
-  return (
-    <Container className="dashboard">
-      <Row>
-        <NewOrderEditForm onSubmit={handleSubmit} />
-      </Row>
-    </Container>
-  );
-};
+  componentDidMount() {
+    const { dispatch, match } = this.props;
+    dispatch(loadNewOrderTableData(match.params.index));
+  }
 
-ECommerceDashboardEdit.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  match: PropTypes.shape().isRequired,
-};
+  handleSubmit = (formValues) => {
+    const { dispatch, match } = this.props;
+    dispatch(changeNewOrderTableData(formValues, match.params.index));
+    this.setState({ redirect: true });
+  };
+
+  render() {
+    const { redirect } = this.state;
+
+    if (redirect) {
+      return <Redirect to="/dashboard_e_commerce" />;
+    }
+
+    return (
+      <Container className="dashboard">
+        <Row>
+          <NewOrderEditForm onSubmit={this.handleSubmit} />
+        </Row>
+      </Container>
+    );
+  }
+}
 
 const mapStateToProps = state => ({
   newOrder: state.newOrder,

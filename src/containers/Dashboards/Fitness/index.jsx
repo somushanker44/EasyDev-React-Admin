@@ -1,50 +1,48 @@
 import React from 'react';
+import { Col, Container, Row } from 'reactstrap';
+import PropTypes from 'prop-types';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { useTranslation } from 'react-i18next';
-import { Col, Container, Row } from 'reactstrap';
-import { RTLProps } from '@/shared/prop-types/ReducerProps';
+import ActivityChart from './components/ActivityChart';
+import ActivityRating from './components/ActivityRating';
+import FatBurning from './components/FatBurning';
 import HeartRate from './components/HeartRate';
 import CaloriesBurn from './components/CaloriesBurn';
 import Steps from './components/Steps';
 import Distance from './components/Distance';
-import ActivityChart from './components/ActivityChart';
 import TodayRunningMap from './components/TodayRunningMap';
 import MyCompetitors from './components/MyCompetitors';
-import FatBurning from './components/FatBurning';
-import ActivityRating from './components/ActivityRating';
+import { RTLProps } from '../../../shared/prop-types/ReducerProps';
 
-const FitnessDashboard = ({ rtl }) => {
-  const { t } = useTranslation('common');
-
-  return (
-    <Container className="dashboard">
-      <Row>
-        <Col md={12}>
-          <h3 className="page-title">{t('fitness_dashboard.page_title')}</h3>
-        </Col>
-      </Row>
-      <Row>
-        <HeartRate />
-        <CaloriesBurn />
-        <Steps />
-        <Distance />
-      </Row>
-      <Row>
-        <ActivityChart dir={rtl.direction} />
-        <TodayRunningMap />
-        <MyCompetitors />
-        <FatBurning dir={rtl.direction} />
-        <ActivityRating dir={rtl.direction} />
-      </Row>
-    </Container>
-  );
-};
+const FitnessDashboard = ({ t, rtl }) => (
+  <Container className="dashboard">
+    <Row>
+      <Col md={12}>
+        <h3 className="page-title">{t('dashboard_fitness.page_title')}</h3>
+      </Col>
+    </Row>
+    <Row>
+      <HeartRate />
+      <CaloriesBurn />
+      <Steps />
+      <Distance />
+    </Row>
+    <Row>
+      <ActivityChart dir={rtl.direction} />
+      <TodayRunningMap />
+      <MyCompetitors />
+      <FatBurning dir={rtl.direction} />
+      <ActivityRating dir={rtl.direction} />
+    </Row>
+  </Container>
+);
 
 FitnessDashboard.propTypes = {
+  t: PropTypes.func.isRequired,
   rtl: RTLProps.isRequired,
 };
 
-export default compose(connect(state => ({
+export default compose(withTranslation('common'), connect(state => ({
   rtl: state.rtl,
 })))(FitnessDashboard);

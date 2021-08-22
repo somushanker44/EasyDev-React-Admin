@@ -1,42 +1,43 @@
-import React, { Fragment } from 'react';
-import { useTranslation } from 'react-i18next';
+import React from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { compose, withProps } from 'recompose';
+import { GoogleMap, withGoogleMap, withScriptjs } from 'react-google-maps';
+import { withTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
-const containerStyle = {
-  height: '360px',
+const Map = compose(
+  withProps({
+    // generate your API key
+    googleMapURL: 'https://maps.googleapis.com/maps/api/js?key=&v=3.'
+    + 'exp&libraries=geometry,drawing,places',
+    loadingElement: <div style={{ height: '100%' }} />,
+    containerElement: <div className="map" style={{ height: '360px' }} />,
+    mapElement: <div style={{ height: '100%' }} />,
+  }),
+  withScriptjs,
+  withGoogleMap,
+)(() => (
+  <GoogleMap
+    defaultZoom={13}
+    defaultCenter={{ lat: 56.009483, lng: 92.8121694 }}
+  />
+));
+
+const BasicMap = ({ t }) => (
+  <Col xs={12} md={12} lg={12}>
+    <Card>
+      <CardBody>
+        <div className="card__title">
+          <h5 className="bold-text">{t('maps.google_map.basic_map')}</h5>
+        </div>
+        <Map />
+      </CardBody>
+    </Card>
+  </Col>
+);
+
+BasicMap.propTypes = {
+  t: PropTypes.func.isRequired,
 };
 
-const center = {
-  lat: 56.009483,
-  lng: 92.8121694,
-};
-
-const BasicMap = () => {
-  const { t } = useTranslation('common');
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-  });
-
-  return (
-    <Col xs={12} md={12} lg={12}>
-      <Card>
-        <CardBody>
-          <div className="card__title">
-            <h5 className="bold-text">{t('maps.google_map.basic_map')}</h5>
-          </div>
-          {isLoaded ? (
-            <GoogleMap
-              id="basicMap"
-              mapContainerStyle={containerStyle}
-              center={center}
-              zoom={13}
-            />
-          ) : <Fragment />}
-        </CardBody>
-      </Card>
-    </Col>
-  );
-};
-
-export default BasicMap;
+export default withTranslation('common')(BasicMap);

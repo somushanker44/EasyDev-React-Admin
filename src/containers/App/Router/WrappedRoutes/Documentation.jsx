@@ -1,5 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+
+
 import Introduction from '../../../Documentation/01_introduction/index';
 import Installation from '../../../Documentation/02_installation/index';
 import FileStructure from '../../../Documentation/03_files_structure/index';
@@ -10,7 +12,6 @@ import NavigationItem from '../../../Documentation/07_new_navigation_item/index'
 import Authentication from '../../../Documentation/08_authentication/index';
 import Resources from '../../../Documentation/09_resources/index';
 import Changelog from '../../../Documentation/10_changelog/index';
-import FAQ from '../../../Documentation/11_faq/index';
 
 export default () => (
   <Switch>
@@ -24,6 +25,5 @@ export default () => (
     <Route path="/documentation/authentication" component={Authentication} />
     <Route path="/documentation/resources" component={Resources} />
     <Route path="/documentation/changelog" component={Changelog} />
-    <Route path="/documentation/faq" component={FAQ} />
   </Switch>
 );

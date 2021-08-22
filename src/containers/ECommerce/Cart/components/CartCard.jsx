@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import {
   Card, CardBody, Col, Table,
@@ -23,12 +24,12 @@ const CartCard = () => (
               <th>Price</th>
               <th>Tax</th>
               <th>Total</th>
-              <th aria-label="cart table" />
+              <th />
             </tr>
           </thead>
           <tbody>
             {cartList.map((ct, i) => (
-              <tr key={`index_${ct.title}`}>
+              <tr key={i}>
                 <td>{i + 1}</td>
                 <td>
                   <span className="cart__preview-img">

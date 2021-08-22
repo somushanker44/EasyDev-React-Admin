@@ -1,10 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+/* eslint-disable max-len */
+import React, { PureComponent } from 'react';
 import { Col, Row, Container } from 'reactstrap';
-import { Link, Element } from 'react-scroll';
-import { changeThemeToDark, changeThemeToLight } from '@/redux/actions/themeActions';
-import { ThemeProps } from '@/shared/prop-types/ReducerProps';
+import scrollToComponent from 'react-scroll-to-component';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Header from './components/Header';
 import Technologies from './components/Technologies';
 import Demos from './components/Demos';
@@ -16,99 +15,117 @@ import FeatureRequest from './components/FeatureRequest';
 import Feedback from './components/Feedback';
 import Code from './components/Code';
 import Applications from './components/Applications';
+import { changeThemeToDark, changeThemeToLight } from '../../redux/actions/themeActions';
+import { ThemeProps } from '../../shared/prop-types/ReducerProps';
 
 const logo = `${process.env.PUBLIC_URL}/img/landing/logo.svg`;
 
-const Landing = ({ dispatch, theme }) => {
-  const changeToDark = () => {
+class Landing extends PureComponent {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    theme: ThemeProps.isRequired,
+  };
+
+  changeToDark = () => {
+    const { dispatch } = this.props;
     dispatch(changeThemeToDark());
   };
 
-  const changeToLight = () => {
+  changeToLight = () => {
+    const { dispatch } = this.props;
     dispatch(changeThemeToLight());
   };
 
-  return (
-    <div className="landing">
-      <div className="landing__menu">
-        <Container>
-          <Row>
-            <Col>
-              <div className="landing__menu-wrap">
-                <div className="landing__menu-logo">
-                  <img src={logo} alt="" />
-                </div>
-                <nav className="landing__menu-nav">
-                  <div className="landing__menu-nav--button">
-                    <Link activeClass="active" to="about" spy smooth duration={500}>
-                      <button type="button">
-                        About EasyDEV
-                      </button>
-                    </Link>
-                    <Link activeClass="active" to="features" spy smooth duration={1000}>
-                      <button type="button">
-                        Features
-                      </button>
-                    </Link>
-                    <Link activeClass="active" to="demos" spy smooth duration={1500}>
-                      <button type="button">
-                        Demos
-                      </button>
-                    </Link>
-                    <Link activeClass="active" to="feature_request" spy smooth duration={2000}>
-                      <button type="button">
-                        Feature request
-                        <span className="landing__menu-nav-new" />
-                      </button>
-                    </Link>
-                  </div>
-                  <div>
-                    <a
-                      className="landing__btn landing__btn--nav landing__btn--gradient"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href="https://1.envato.market/Buy-now-React"
-                    >
-                      Buy now
-                    </a>
-                    <a
-                      className="landing__btn landing__btn--nav landing__btn--hire-us"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      // eslint-disable-next-line max-len
-                      href="https://aspirity.com/easydev?utm_source=easydev_landing&utm_medium=referral&utm_campaign=templates#hireus"
-                    >
-                      Hire Us
-                    </a>
-                  </div>
-                </nav>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-      <Header />
-      <Element name="about" />
-      <Technologies />
-      <Feedback />
-      <Code />
-      <Element name="features" />
-      <Features />
-      <Element name="demos" />
-      <Demos theme={theme} changeToDark={changeToDark} changeToLight={changeToLight} />
-      <Applications />
-      <Element name="feature_request" />
-      <FeatureRequest />
-      <Testimonials />
-      <Purchase />
-      <Footer />
-    </div>
-  );
-};
+  render() {
+    const { theme } = this.props;
 
-Landing.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  theme: ThemeProps.isRequired,
-};
+    return (
+      <div className="landing">
+        <div className="landing__menu">
+          <Container>
+            <Row>
+              <Col md={12}>
+                <div className="landing__menu-wrap">
+                  <p className="landing__menu-logo">
+                    <img src={logo} alt="" />
+                  </p>
+                  <nav className="landing__menu-nav">
+                    <button
+                      onClick={() => scrollToComponent(this.About, { offset: -50, align: 'top', duration: 1000 })}
+                      type="button"
+                    >
+                      About EasyDEV
+                    </button>
+                    <button
+                      onClick={() => scrollToComponent(this.Features, {
+                        offset: -50,
+                        align: 'top',
+                        duration: 1500,
+                      })}
+                      type="button"
+                    >
+                      Features
+                    </button>
+                    <button
+                      onClick={() => scrollToComponent(this.Demos, { offset: -50, align: 'top', duration: 2000 })}
+                      type="button"
+                    >
+                      Demos
+                    </button>
+                    <button
+                      onClick={() => scrollToComponent(this.FeatureRequest, {
+                        offset: -50,
+                        align: 'top',
+                        duration: 2500,
+                      })}
+                      type="button"
+                    >
+                      Feature request <span className="landing__menu-nav-new" />
+                    </button>
+                    <a
+                      className="landing__btn"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://themeforest.net/item/easypro-developer-friendly-react-bootstrap-4-admin-template/21798550"
+                    >
+                      Buy now for $28
+                    </a>
+                  </nav>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </div>
+        <Header onClick={() => scrollToComponent(this.Demos, { offset: -50, align: 'top', duration: 2000 })} />
+        <span ref={(section) => {
+          this.About = section;
+        }}
+        />
+        <Technologies />
+        <Feedback />
+        <Code />
+        <span ref={(section) => {
+          this.Features = section;
+        }}
+        />
+        <Features />
+        <span ref={(section) => {
+          this.Demos = section;
+        }}
+        />
+        <Demos theme={theme} changeToDark={this.changeToDark} changeToLight={this.changeToLight} />
+        <Applications />
+        <span ref={(section) => {
+          this.FeatureRequest = section;
+        }}
+        />
+        <FeatureRequest />
+        <Testimonials />
+        <Purchase />
+        <Footer />
+      </div>
+    );
+  }
+}
 
 export default connect(state => ({ theme: state.theme }))(Landing);

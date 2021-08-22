@@ -1,7 +1,8 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { Card, CardBody, Col } from 'reactstrap';
 import { Polar } from 'react-chartjs-2';
+import { withTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
 const data = {
   datasets: [{
@@ -28,21 +29,21 @@ const options = {
   },
 };
 
-const PolarArea = () => {
-  const { t } = useTranslation('common');
+const PolarArea = ({ t }) => (
+  <Col md={12} lg={12} xl={6}>
+    <Card>
+      <CardBody>
+        <div className="card__title">
+          <h5 className="bold-text">{t('charts.react_chartjs.polar_area')}</h5>
+        </div>
+        <Polar data={data} options={options} />
+      </CardBody>
+    </Card>
+  </Col>
+);
 
-  return (
-    <Col md={12} lg={12} xl={6}>
-      <Card>
-        <CardBody>
-          <div className="card__title">
-            <h5 className="bold-text">{t('charts.react_chartjs.polar_area')}</h5>
-          </div>
-          <Polar data={data} options={options} />
-        </CardBody>
-      </Card>
-    </Col>
-  );
+PolarArea.propTypes = {
+  t: PropTypes.func.isRequired,
 };
 
-export default PolarArea;
+export default withTranslation('common')(PolarArea);

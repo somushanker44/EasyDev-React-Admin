@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import Select from 'react-select';
+import PropTypes from 'prop-types';
 
 const SelectOption = ({
   innerProps, isDisabled, data,
@@ -17,6 +17,7 @@ const SelectOption = ({
   </div>
 ) : null);
 
+
 SelectOption.propTypes = {
   isDisabled: PropTypes.bool,
   innerProps: PropTypes.shape().isRequired,
@@ -31,39 +32,47 @@ SelectOption.defaultProps = {
   isDisabled: false,
 };
 
-const ColorSelect = ({ options, placeholder }) => {
-  const [value, setValue] = useState('');
-
-  const handleChange = (selectedOption) => {
-    setValue(selectedOption);
+export default class ColorSelect extends PureComponent {
+  static propTypes = {
+    options: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.string,
+      label: PropTypes.string,
+      color: PropTypes.string,
+    })),
+    placeholder: PropTypes.string,
   };
 
-  return (
-    <Select
-      value={value}
-      onChange={handleChange}
-      options={options}
-      clearable={false}
-      className="react-select"
-      classNamePrefix="react-select"
-      placeholder={placeholder}
-      components={{ Option: SelectOption }}
-    />
-  );
-};
+  static defaultProps = {
+    options: null,
+    placeholder: 'Select...',
+  };
 
-ColorSelect.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.string,
-    label: PropTypes.string,
-    color: PropTypes.string,
-  })),
-  placeholder: PropTypes.string,
-};
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: '',
+    };
+  }
 
-ColorSelect.defaultProps = {
-  options: null,
-  placeholder: 'Select...',
-};
+  handleChange = (selectedOption) => {
+    this.setState({ value: selectedOption });
+  };
 
-export default ColorSelect;
+  render() {
+    const { options, placeholder } = this.props;
+    const { value } = this.state;
+
+    return (
+      <Select
+        value={value}
+        onChange={this.handleChange}
+        options={options}
+        clearable={false}
+        className="react-select"
+        classNamePrefix="react-select"
+        placeholder={placeholder}
+        components={{ Option: SelectOption }}
+      />
+    );
+  }
+}

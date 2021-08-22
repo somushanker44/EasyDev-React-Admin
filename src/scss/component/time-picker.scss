@@ -47,7 +47,7 @@
 
 li.rc-time-picker-panel-select-option-selected {
   background: $color-blue;
-  color: $color-white;
+  color: white;
 
   &:hover {
     background: $color-blue-hover;
@@ -58,23 +58,5 @@ li.rc-time-picker-panel-select-option-selected {
   @include directify($directions) {
     #{directed('right')}: 6px;
     #{directed('left')}: auto;
-  }
-}
-
-.rc-time-picker-panel.theme-dark {
-
-  .rc-time-picker-panel-inner {
-     background: $color-black-background;
-     color: $color-dusty-white;
-
-    .rc-time-picker-panel-select li:hover {
-      background: $color-dark-fields-border;
-      color: $color-white;
-    }
-
-    li.rc-time-picker-panel-select-option-selected {
-      background: $color-dark-fields-border;
-      color: $color-white;
-    }
   }
 }

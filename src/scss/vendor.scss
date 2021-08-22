@@ -85,7 +85,7 @@ path.recharts-sector {
 // rc-notification
 .rc-notification {
   position: fixed;
-  z-index: 101;
+  z-index: 100;
 }
 
 .rc-notification-notice {
@@ -208,13 +208,13 @@ path.recharts-sector {
   font-size: 26px;
   line-height: 1;
   font-weight: 300;
-  color: $color-text;
+  color: #646777;
   text-shadow: none;
   opacity: 0.2;
 
   &:hover {
     opacity: 0.5;
-    color: $color-text;
+    color: #646777;
   }
 }
 .project-summary__statistic {

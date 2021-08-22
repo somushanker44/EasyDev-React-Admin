@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody, Table } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const Alerts = () => (
   <Card className="card--not-full-height">
@@ -12,17 +12,19 @@ const Alerts = () => (
         <a href="https://reactstrap.github.io/components/alerts/Alerts.jsx"> reactstrap</a>. Example:
       </p>
       <CodeHighlither>
-        {`import React from 'react';
+        {`import React, {PureComponent} from 'react';
 import Alert from 'template/src/components/Alert';
 
-const Example = () => (
-  <Alert color='info'>
-    <p><span className='bold-text'>Information:</span> Learning day desirous informed expenses
-      returned six the. She enabled invited exposed him another.</p>
-  </Alert>
-);
-
-export default Example;`}
+export default class Example extends PureComponent {
+  render() {
+    return (
+      <Alert color='info'>
+        <p><span className='bold-text'>Information:</span> Learning day desirous informed expenses
+          returned six the. She enabled invited exposed him another.</p>
+      </Alert>
+    )
+  }
+}`}
       </CodeHighlither>
       <p>Props of Alerts:</p>
       <Table responsive className="table--bordered table--head-accent">

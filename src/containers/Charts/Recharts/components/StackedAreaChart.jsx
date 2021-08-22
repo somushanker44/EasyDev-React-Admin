@@ -1,10 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
 import { Card, CardBody, Col } from 'reactstrap';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
 } from 'recharts';
+import { withTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
 const data = [
   {
@@ -30,42 +30,39 @@ const data = [
   },
 ];
 
-const StackedAreaChart = ({ dir }) => {
-  const { t } = useTranslation('common');
-
-  return (
-    <Col xs={12} md={12} lg={6} xl={4}>
-      <Card>
-        <CardBody>
-          <div className="card__title">
-            <h5 className="bold-text">{t('charts.recharts.stacked_area_chart')}</h5>
-          </div>
-          <div dir="ltr">
-            <ResponsiveContainer height={300}>
-              <AreaChart
-                data={data}
-                margin={{
-                  top: 0, right: 0, left: -15, bottom: 0,
-                }}
-              >
-                <XAxis dataKey="name" reversed={dir === 'rtl'} />
-                <YAxis orientation={dir === 'rtl' ? 'right' : 'left'} />
-                <CartesianGrid strokeDasharray="3 3" />
-                <Tooltip />
-                <Area type="monotone" dataKey="uv" stackId="1" stroke="#24d6a3" fill="#4ce1b6" />
-                <Area type="monotone" dataKey="pv" stackId="1" stroke="#f3ce3e" fill="#f6da6e" />
-                <Area type="monotone" dataKey="amt" stackId="1" stroke="#3ea3fc" fill="#70bbfd" />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-        </CardBody>
-      </Card>
-    </Col>
-  );
-};
+const StackedAreaChart = ({ t, dir }) => (
+  <Col xs={12} md={12} lg={6} xl={4}>
+    <Card>
+      <CardBody>
+        <div className="card__title">
+          <h5 className="bold-text">{t('charts.recharts.stacked_area_chart')}</h5>
+        </div>
+        <div dir="ltr">
+          <ResponsiveContainer height={300}>
+            <AreaChart
+              data={data}
+              margin={{
+                top: 0, right: 0, left: -15, bottom: 0,
+              }}
+            >
+              <XAxis dataKey="name" reversed={dir === 'rtl'} />
+              <YAxis orientation={dir === 'rtl' ? 'right' : 'left'} />
+              <CartesianGrid strokeDasharray="3 3" />
+              <Tooltip />
+              <Area type="monotone" dataKey="uv" stackId="1" stroke="#24d6a3" fill="#4ce1b6" />
+              <Area type="monotone" dataKey="pv" stackId="1" stroke="#f3ce3e" fill="#f6da6e" />
+              <Area type="monotone" dataKey="amt" stackId="1" stroke="#3ea3fc" fill="#70bbfd" />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </CardBody>
+    </Card>
+  </Col>
+);
 
 StackedAreaChart.propTypes = {
+  t: PropTypes.func.isRequired,
   dir: PropTypes.string.isRequired,
 };
 
-export default StackedAreaChart;
+export default withTranslation('common')(StackedAreaChart);

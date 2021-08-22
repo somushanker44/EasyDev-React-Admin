@@ -52,11 +52,10 @@
   transition: transform 0.3s;
 
   @include themify($themes) {
-    background-color: themed('colorBackground');
-
     @include directify($directions) {
       #{directed('border-right')}: 1px solid themed('colorFieldsBorder');
     }
+    background-color: themed('colorBackground');
   }
 
   @media screen and (max-width: 1023px) {
@@ -83,11 +82,10 @@
     width: 100%;
     padding: 0;
     border: none;
-    background: transparent;
-
     @include directify($directions) {
       text-align: directed('left');
     }
+    background: transparent;
   }
 }
 
@@ -124,19 +122,17 @@
 }
 
 .chat__contact-avatar {
-  display: flex;
-  flex-flow: column;
-  align-self: center;
   height: 40px;
   width: 40px;
   border-radius: 50%;
   overflow: hidden;
-  min-width: 40px;
-
   @include directify($directions) {
     #{directed('margin-right')}: 10px;
     #{directed('margin-left')}: 15px;
   }
+  margin-top: auto;
+  margin-bottom: auto;
+  min-width: 40px;
 
   img {
     height: 100%;
@@ -144,15 +140,13 @@
 }
 
 .chat__contact-preview {
-  display: flex;
-  flex-flow: column;
-  align-self: center;
-  width: calc(100% - 80px);
-
   @include directify($directions) {
     #{directed('margin-right')}: 20px;
-    #{directed('margin-left')}: 0;
+    #{directed('margin-left')}: 0px;
   }
+  margin-top: auto;
+  margin-bottom: auto;
+  width: calc(100% - 80px);
 }
 
 .chat__contact-name {
@@ -203,7 +197,6 @@
 
     &.scrollbar-track-y {
       width: 2px;
-
       @include directify($directions) {
         #{directed('margin-right')}: 3px;
       }
@@ -218,7 +211,6 @@
 
 .chat__scroll {
   height: calc(100% - 114px);
-
   @include directify($directions) {
     text-align: directed('left');
   }
@@ -254,20 +246,20 @@
 
 .chat__dialog-messages {
   padding: 20px;
+  margin-top: auto;
   width: 100%;
 }
 
 .chat__bubble-message-wrap {
   max-width: 570px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-radius: 0 40px 40px 20px;
-  position: relative;
-
   @include directify($directions) {
     #{directed('padding-right')}: 40px;
     #{directed('padding-left')}: 20px;
   }
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 0 40px 40px 20px;
+  position: relative;
 
   @include themify($themes) {
     background-color: themed('colorBubble');
@@ -294,14 +286,12 @@
   @media screen and (min-width: 1366px) {
     position: absolute;
     top: 0;
-    max-width: calc(100% - 375px);
-    width: 300px;
-    margin-top: 0;
-
-
     @include directify($directions) {
       #{directed('left')}: 315px;
     }
+    max-width: calc(100% - 375px);
+    width: 300px;
+    margin-top: 0;
   }
 }
 
@@ -318,7 +308,6 @@
 
   span:last-child {
     color: $color-additional;
-
     @include directify($directions) {
       #{directed('margin-left')}: 5px;
     }
@@ -340,11 +329,10 @@
   min-width: 40px;
   overflow: hidden;
   border-radius: 50%;
-  display: none;
-
   @include directify($directions) {
     #{directed('margin-right')}: 10px;
   }
+  display: none;
 
   img {
     height: 100%;
@@ -362,33 +350,32 @@
   font-size: 13px;
   font-weight: 500;
   color: $color-accent;
-
-  @include directify($directions) {
-    #{directed('padding-right')}: 50px;
-  }
+    @include directify($directions) {
+      #{directed('padding-right')}: 50px;
+    }
 }
 
 .chat__bubble-message {
-  margin: 0 0 10px 0;
+  margin: 0;
   font-size: 12px;
 
   @include themify($themes) {
     color: themed('colorText');
   }
+
 }
 
 .chat__bubble-date {
-  color: $color-additional;
-  font-size: 10px;
-  margin: 0;
-  text-align: end;
-
+  position: absolute;
   @include directify($directions) {
     #{directed('right')}: 36px;
   }
+  color: $color-additional;
+  font-size: 10px;
+  margin: 0;
+  top: 10px;
 
   @media screen and (min-width: 1366px) {
-
     @include directify($directions) {
       #{directed('right')}: 0px;
     }
@@ -446,26 +433,20 @@
   svg {
     fill: $color-additional;
     position: absolute;
+    @include directify($directions) {
+      #{directed('left')}: 15px;
+    }
     top: 50%;
     transform: translateY(-50%);
     height: 18px;
     width: 18px;
     pointer-events: none;
-
-    @include directify($directions) {
-      #{directed('left')}: 15px;
-    }
   }
 }
 
 .chat__search-input {
   width: 100%;
   height: 100%;
-  font-size: 12px;
-  transition: all 0.3s;
-  background: transparent;
-  border: none;
-
   @include directify($directions) {
     #{directed('padding-left')}: 38px;
     #{directed('padding-right')}: 10px;
@@ -475,6 +456,10 @@
     border: 1px solid themed('colorBackgroundBody');
     color: themed('colorText');
   }
+  font-size: 12px;
+  transition: all 0.3s;
+  background: transparent;
+  border: none;
 
   &:focus, &:active {
     outline: none;
@@ -518,7 +503,6 @@
   font-size: 12px;
   line-height: 1.33;
   transition: 0.3s;
-
   @include directify($directions) {
     #{directed('padding-left')}: 15px;
     #{directed('padding-right')}: 65px;
@@ -546,13 +530,12 @@
 
 .chat__field-controls {
   position: absolute;
-  top: 12px;
-  height: 36px;
-  display: flex;
-
   @include directify($directions) {
     #{directed('right')}: 35px;
   }
+  top: 12px;
+  height: 36px;
+  display: flex;
 }
 
 .chat__icon-button {
@@ -561,7 +544,6 @@
   height: 36px;
   cursor: pointer;
   padding: 0 5px;
-
   @include directify($directions) {
     #{directed('margin-left')}: 5px;
   }

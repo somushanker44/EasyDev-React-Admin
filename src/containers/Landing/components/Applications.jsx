@@ -57,7 +57,6 @@ const Slider = ({ item }) => {
     </div>
   );
 };
-
 Slider.propTypes = {
   item: PropTypes.string.isRequired,
 };

@@ -69,7 +69,7 @@
         #{directed('padding-right')}: 40px;
         #{directed('padding-left')}: 30px;
       }
-      padding-top: 15px;
+      padding-top: 20px;
       padding-bottom: 15px;
       margin-bottom: 15px;
 
@@ -79,10 +79,10 @@
     }
 
     .panel__btns {
-      top: 13px;
+      top: 20px;
 
       svg {
-        fill: $color-white;
+        fill: #ffffff;
       }
     }
 

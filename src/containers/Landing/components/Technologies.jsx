@@ -15,7 +15,7 @@ const Technologies = () => (
       <Row>
         <Col md={12}>
           <h3 className="landing__section-title">The EasyDev based on popular and powerful technological stack.
-            That’s why it allows you to create massive and serious projects easily.
+                That’s why it allows you to create massive and serious projects easily.
           </h3>
         </Col>
       </Row>

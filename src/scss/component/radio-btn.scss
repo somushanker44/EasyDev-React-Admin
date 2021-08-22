@@ -1,34 +1,12 @@
 .radio-btn {
   display: inline-block;
   cursor: pointer;
-  flex-direction: inherit;
-  padding: 0;
-
-  @media screen and (max-width: 370px) {
-    display: flex;
-    align-items: center;
-  }
-
-  @media screen and (max-width: 575px) {
-    display: inline-block;
-  }
-
-  @media screen and (max-width: 515px) {
-    display: flex;
-    align-items: center;
-  }
-
-  @media screen and (max-width: 500px) {
-    display: inline-block;
-  }
-
-  @media screen and (max-width: 356px) {
-    display: flex;
-    align-items: center;
-  }
-
   @include directify($directions) {
     #{directed('padding-right')}: 20px;
+  }
+
+  &:last-child {
+    padding: 0 10px;
   }
 
   &:hover {
@@ -49,8 +27,6 @@
   }
 
   &.radio-btn--colored {
-    flex-direction: inherit;
-    padding: 0;
 
     .radio-btn__radio-custom {
       border: 2px solid $color-accent;
@@ -58,14 +34,12 @@
   }
 
   &.radio-btn--colored-click {
-    flex-direction: inherit;
-    padding: 0;
 
     .radio-btn__radio:checked + .radio-btn__radio-custom {
       background: $color-accent;
 
       &::before {
-        background: $color-white;
+        background: #ffffff;
       }
     }
 
@@ -84,12 +58,11 @@
   &.radio-btn--button {
     background: $color-accent;
     min-width: 150px;
-    color: $color-white;
+    color: #ffffff;
     height: 24px;
     border-radius: 4px;
     transition: all 0.3s;
     display: flex;
-    flex-direction: inherit;
     padding: 0 10px;
     width: 100%;
 
@@ -98,18 +71,17 @@
     }
 
     .radio-btn__label-svg {
+      @include directify($directions) {
+        #{directed('margin-right')}: 4px;
+        #{directed('margin-left')}: auto;
+      }
       margin-top: auto;
       margin-bottom: auto;
       height: 16px;
       line-height: 1;
 
-      @include directify($directions) {
-        #{directed('margin-right')}: 4px;
-        #{directed('margin-left')}: auto;
-      }
-
       svg {
-        fill: $color-white;
+        fill: #ffffff;
         width: 14px;
         height: 14px;
       }
@@ -131,22 +103,21 @@
     }
 
     .radio-btn__label {
-      margin-top: auto;
-      margin-bottom: auto;
-      padding: 0;
-      color: $color-white;
-
       @include directify($directions) {
         #{directed('margin-right')}: auto;
         #{directed('margin-left')}: 0px;
       }
+      margin-top: auto;
+      margin-bottom: auto;
+      padding: 0;
+      color: #ffffff;
     }
 
     &:hover {
       background: $color-accent-hover;
 
       .radio-btn__label {
-        color: $color-white;
+        color: #ffffff;
       }
     }
   }
@@ -174,12 +145,10 @@
 
 .radio-btn__label {
   line-height: 18px;
-  transition: all 0.3s;
-  margin-top: 5px;
-
   @include directify($directions) {
     #{directed('padding-left')}: 9px;
   }
+  transition: all 0.3s;
 
   @include themify($themes) {
     color: themed('colorText');
@@ -199,10 +168,9 @@
   width: 6px;
   height: 6px;
   top: calc(50% - 3px);
-  background: $color-accent;
-  border-radius: 50%;
-
   @include directify($directions) {
     #{directed('left')}: calc(50% - 3px);
   }
+  background: $color-accent;
+  border-radius: 50%;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const googleAuthBtn = () => (
   <Card className="card--not-full-height">
@@ -41,7 +41,7 @@ const googleAuthBtn = () => (
         </CodeHighlither>
         <li>Then, if you did everything right, just plug the component
           <b> googleAuthBtn </b> or <b>fbAuthBtn </b>
-          into your application
+           into your application
           <CodeHighlither>
             {`import React from 'react';
 import GoogleAuthBtn from '../../../containers/Account/AuthBtn/googleAuthBtn';

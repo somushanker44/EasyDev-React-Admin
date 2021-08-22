@@ -5,13 +5,11 @@ $landing-button-color: #2C86A2;
 $landing-saffron-color: #ffde2c;
 $landing-gradient: linear-gradient(228deg, rgba(127, 244, 222, 0.95), rgba(56, 199, 225, 1));
 $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95), 5%), darken(rgba(56, 199, 225, 1), 5%));
-$landing-gradient-btn: linear-gradient(228deg, rgb(127, 244, 222), rgb(62, 59, 224));
-$landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 5%), darken(rgb(62, 59, 224), 5%));
 
 .landing {
   font-family: 'Poppins', sans-serif;
   width: 100%;
-  background: $color-white;
+  background: #ffffff;
   position: absolute;
   z-index: 0;
   overflow-x: hidden;
@@ -50,7 +48,7 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
 }
 
 .landing__btn {
-  background-color: $color-white;
+  background-color: #ffffff;
   box-shadow: 0 20px 30px 0 rgba(89, 181, 210, 0.31);
   color: $landing-button-color;
   font-size: 14px;
@@ -69,92 +67,22 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
     box-shadow: 0 5px 15px 0 rgba(89, 181, 210, 0.5);
   }
 
-  &.landing__btn--nav {
-    width: 145px;
-    margin-right: 20px;
-    padding: 14px 45px;
-
-    @media screen and (max-width: 500px) {
-      margin-right: 40px;
-    }
-  }
-
   &.landing__btn--header {
     display: inline-block;
     margin: 0 15px 20px;
     align-items: center;
-    width: 100%;
-    max-width: 225px;
+    width: auto;
     padding: 16px 30px;
     font-family: 'Poppins', sans-serif;
-  }
-
-  &.landing__btn--header-language {
-    width: 100%;
-    max-width: 155px;
-
-    a {
-      color: $landing-button-color;
-      align-items: center;
-    }
   }
 
   &.landing__btn--feedback {
     display: inline-block;
-    width: 100%;
-    max-width: 174px;
+    width: 174px;
     height: 50px;
     padding: 16px 30px;
     font-family: 'Poppins', sans-serif;
     line-height: 20px;
-    background: linear-gradient(139.48deg, #FEA63E 6.99%, #F03131 53.88%, #ED05AC 99.96%);
-    color: #fff;
-    box-shadow: none;
-
-    &:hover {
-      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12), 0 10px 15px rgba(0, 0, 0, 0.2);
-    }
-  }
-
-  &.landing__btn--hire-us {
-    width: 100px;
-    margin-right: 0 !important;
-    padding: 14px 25px;
-    background-color: $color-white;
-    box-shadow: 0 20px 30px 0 rgba(89, 181, 210, 0.31);
-    color: $landing-button-color;
-
-    &:hover {
-      color: $landing-button-color;
-      background: darken(#ffffff, 5%);
-      box-shadow: 0 5px 15px 0 rgba(89, 181, 210, 0.5);
-    }
-  }
-}
-
-.landing__header-language-wrap {
-  display: flex;
-  justify-content: center;
-}
-
-.landing__header-language {
-
-  &:not(:last-child){
-    margin-right: 60px;
-  }
-
-  img {
-    width: inherit;
-    height: 80px;
-    margin-bottom: 20px;
-  }
-
-  p {
-    margin: 0;
-    font-size: 18px;
-    color: $landing-accent-color;
-    text-decoration: underline;
-    font-weight: 700;
   }
 }
 
@@ -172,7 +100,7 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
   line-height: 49px;
   font-family: inherit;
 
-  background: $color-white;
+  background: #FFFFFF;
   opacity: 0.6;
   outline: none;
 }
@@ -180,24 +108,21 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
 .landing__label {
   font-size: 18px;
   line-height: 30px;
+  @include directify($directions) {
+    text-align: directed('left');
+  }
   width: 100%;
   color: #577687;
   margin-bottom: 40px;
 
-  @include directify($directions) {
-    text-align: directed('left');
-  }
-
   &.landing__label--feedback-name {
     max-width: 380px;
-
     @include directify($directions) {
       #{directed('margin-right')}: 29px;
     }
 
     @media screen and (max-width: 992px) {
       max-width: 300px;
-
       @include directify($directions) {
         #{directed('margin-right')}: 20px;
       }
@@ -213,14 +138,12 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
 
   &.landing__label--feedback-email {
     max-width: 420px;
-
     @include directify($directions) {
       #{directed('margin-right')}: 44px;
     }
 
     @media screen and (max-width: 992px) {
       max-width: 300px;
-
       @include directify($directions) {
         #{directed('margin-right')}: 20px;
       }
@@ -236,12 +159,12 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
 }
 
 .landing__btn--gradient {
-  background: $landing-gradient-btn;
-  color: $color-white;
+  background: $landing-gradient;
+  color: #ffffff;
 
   &:hover {
-    background: $landing-gradient-btn-hover;
-    color: $color-white;
+    background: $landing-gradient-hover;
+    color: #ffffff;
   }
 }
 
@@ -255,75 +178,17 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
 .landing__menu-wrap {
   width: 100%;
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   padding-top: 29px;
 }
 
 .landing__menu-logo {
-  display: none;
   height: 53px;
-  margin-right: 20px !important;
-
-  @media screen and (min-width: 992px) {
-    display: initial;
-  }
 }
 
 .landing__menu-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: baseline;
-  min-height: 150px;
-
   @include directify($directions) {
     #{directed('margin-left')}: auto;
-  }
-
-  .landing__menu-nav--button {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    min-height: 100px;
-
-    @media screen and (min-width: 399px) {
-      min-height: initial;
-    }
-
-    a {
-
-      @include directify($directions) {
-        #{directed('margin-right')}: 15px;
-      }
-
-      &:last-child {
-
-        @include directify($directions) {
-          #{directed('margin-right')}: 0;
-        }
-      }
-
-      @media screen and (min-width: 768px) {
-
-        @include directify($directions) {
-          #{directed('margin-right')}: 60px;
-        }
-      }
-
-      @media screen and (min-width: 1100px) {
-        display: inline-block;
-      }
-
-      @media screen and (min-width: 1200px) {
-
-        &:last-child {
-
-          @include directify($directions) {
-            #{directed('margin-right')}: 60px;
-          }
-        }
-      }
-    }
   }
 
   button {
@@ -332,14 +197,21 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
     border: none;
     color: $landing-accent-color;
     padding: 0;
+    @include directify($directions) {
+      #{directed('margin-right')}: 60px;
+    }
     font-size: 14px;
     transition: 0.3s;
     cursor: pointer;
+    display: none;
     font-family: 'Poppins', sans-serif;
-    white-space: nowrap;
 
     &:hover {
       color: darken($landing-accent-color, 15%);
+    }
+
+    @media screen and (min-width: 992px) {
+      display: inline-block;
     }
   }
 }
@@ -350,12 +222,11 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
   height: 6px;
   width: 6px;
   border-radius: 50%;
-  display: block;
-  top: -3px;
-
   @include directify($directions) {
     #{directed('right')}: -6px;
   }
+  display: block;
+  top: -3px;
 }
 
 //Header
@@ -480,94 +351,75 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
 
   &--point {
     top: -13px;
-
     @include directify($directions) {
       #{directed('right')}: 699px;
     }
   }
   &--points {
     &-lg {
-      top: 444px;
-
       @include directify($directions) {
         #{directed('left')}: 105px;
       }
-
+      top: 444px;
       @media screen and (max-width: 1440px) {
         display: none;
       }
     }
-
     &-md {
-      top: 970px;
-
       @include directify($directions) {
         #{directed('left')}: 194px;
       }
-
+      top: 970px;
       @media screen and (max-width: 1440px) {
         display: none;
       }
     }
-
     &-sm {
-      top: 1245px;
-
       @include directify($directions) {
         #{directed('left')}: 272px;
       }
-
+      top: 1245px;
       @media screen and (max-width: 1440px) {
         display: none;
       }
     }
   }
-
   &--sin {
-
     &-lg {
-      top: 1150px;
-
       @include directify($directions) {
         #{directed('left')}: 237px;
       }
+      top: 1150px;
     }
-
     &-md {
       top: 1054px;
-
       @include directify($directions) {
         #{directed('left')}: 300px;
       }
     }
   }
-
   &--plus {
-
     &-lg {
       top: -65px;
-
       @include directify($directions) {
         #{directed('right')}: 232px;
       }
     }
-
     &-md {
-      top: 33px;
-
       @include directify($directions) {
         #{directed('left')}: 37px;
       }
+      top: 33px;
     }
     &-sm {
-      bottom: 246px;
-
       @include directify($directions) {
         #{directed('left')}: -9px;
       }
+      bottom: 246px;
     }
   }
 }
+
 
 .applications__slider {
   display: flex;
@@ -627,7 +479,7 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
     text-align: center;
     letter-spacing: 7.78px;
     text-transform: uppercase;
-    color: $color-white;
+    color: #FFFFFF;
 
     @media screen and (max-width: 768px) {
       margin-top: 0;
@@ -649,14 +501,13 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
 .landing__section-background {
   position: absolute;
   bottom: -50px;
+  @include directify($directions) {
+    #{directed('right')}: 0px;
+  }
   z-index: -1;
   width: 95%;
   height: 1830px;
   transition: height 0.3s;
-
-  @include directify($directions) {
-    #{directed('right')}: 0px;
-  }
 
   @media screen and (min-width: 576px) {
     width: 85%;
@@ -678,15 +529,14 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
   }
 
   &.landing__section-background--technologies {
-    top: -55px;
-    bottom: auto;
-    width: 95%;
-    height: 1550px;
-
     @include directify($directions) {
       #{directed('left')}: auto;
       #{directed('right')}: 0px;
     }
+    top: -55px;
+    bottom: auto;
+    width: 95%;
+    height: 1550px;
 
     @media screen and (min-width: 480px) {
       width: 85%;
@@ -706,15 +556,14 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
   }
 
   &.landing__section-background--demos {
-    height: 2760px;
-    top: -455px;
-    bottom: auto;
-    width: 95%;
-
     @include directify($directions) {
       #{directed('left')}: 0px;
       #{directed('right')}: auto;
     }
+    height: 2760px;
+    top: -455px;
+    bottom: auto;
+    width: 95%;
 
     @media screen and (min-width: 480px) {
       width: 85%;
@@ -760,22 +609,19 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
 .landing__section-title-img {
   position: absolute;
   height: 7px;
-  width: 100%;
-  max-width: 85px;
-  transform: translateX(-50%);
-  top: -10px;
-
+  width: 85px;
   @include directify($directions) {
     #{directed('left')}: 50%;
   }
+  transform: translateX(-50%);
+  top: -10px;
 
   @media screen and (min-width: 425px) {
-    top: auto;
-    transform: none;
-
     @include directify($directions) {
       #{directed('left')}: auto;
     }
+    top: auto;
+    transform: none;
   }
 }
 
@@ -894,19 +740,16 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
 
     .landing__code-text {
       text-align: center;
-
       @include directify($directions) {
         #{directed('margin-left')}: 30px;
       }
 
       @media screen and (min-width: 768px) {
-
         @include directify($directions) {
           text-align: directed('left');
         }
 
         .landing__section-title {
-
           @include directify($directions) {
             text-align: directed('left');
           }
@@ -954,7 +797,6 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
 .landing__code-text {
   margin-bottom: 30px;
   text-align: center;
-
   @include directify($directions) {
     #{directed('margin-left')}: auto;
     #{directed('margin-right')}: 30px;
@@ -975,18 +817,15 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
 
   @media screen and (min-width: 768px) {
     max-width: 360px;
-    margin-bottom: 0;
-
     @include directify($directions) {
       text-align: directed('left');
     }
-
+    margin-bottom: 0;
     @include directify($directions) {
       #{directed('margin-right')}: 30px;
     }
 
     .landing__section-title {
-
       @include directify($directions) {
         text-align: directed('left');
       }
@@ -1049,7 +888,6 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
 
     .landing__demo-theme-toggle, .landing__demo-toggle-wrap {
       justify-content: flex-end;
-
       @include directify($directions) {
         text-align: directed('right');
       }
@@ -1061,14 +899,12 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
     }
 
     .landing__demo-theme-toggle {
-
       @include directify($directions) {
         #{directed('padding-left')}: 0px;
         #{directed('padding-right')}: 130px;
       }
 
       &:before {
-
         @include directify($directions) {
           #{directed('left')}: auto;
           #{directed('right')}: 0px;
@@ -1079,18 +915,17 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
     .landing__demo-title--new:before {
       content: "NEW";
       font-size: 12px;
-      color: $color-white;
+      color: #ffffff;
       text-align: center;
       background-color: $landing-saffron-color;
       width: 50px;
       height: 24px;
       border-radius: 20px;
       display: inline-block;
-      padding-top: 4px;
-
       @include directify($directions) {
         #{directed('margin-right')}: 10px;
       }
+      padding-top: 4px;
     }
 
     .landing__demo-title--new:after {
@@ -1104,11 +939,10 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
   align-items: center;
   flex-wrap: wrap;
   justify-content: left;
-  position: relative;
-
   @include directify($directions) {
     #{directed('padding-left')}: 130px;
   }
+  position: relative;
 
   &:before {
     content: "";
@@ -1116,11 +950,10 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
     width: 100px;
     background: $landing-accent-color;
     position: absolute;
-    transform: translateY(-15px);
-
     @include directify($directions) {
       #{directed('left')}: 0px;
     }
+    transform: translateY(-15px);
   }
 
   .landing__demo-title {
@@ -1136,18 +969,17 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
     content: "NEW";
     position: absolute;
     font-size: 12px;
-    color: $color-white;
+    color: #ffffff;
     background-color: $landing-saffron-color;
     width: 50px;
     height: 24px;
+    @include directify($directions) {
+      #{directed('margin-left')}: 10px;
+    }
     background-position: left 0 top 0;
     text-align: center;
     border-radius: 20px;
     padding-top: 4px;
-
-    @include directify($directions) {
-      #{directed('margin-left')}: 10px;
-    }
   }
 }
 
@@ -1190,12 +1022,11 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
     height: 100%;
     background: $landing-gradient;
     top: 0;
-    opacity: 0;
-    transition: opacity 0.3s;
-
     @include directify($directions) {
       #{directed('left')}: 0px;
     }
+    opacity: 0;
+    transition: opacity 0.3s;
   }
 
   &:after {
@@ -1204,14 +1035,13 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
     transition: opacity 0.3s;
     opacity: 0;
     font-size: 14px;
-    color: $color-white;
+    color: #ffffff;
     line-height: 14px;
     text-transform: uppercase;
     width: 100%;
     text-align: center;
     top: calc(50% - 7px);
     font-weight: 500;
-
     @include directify($directions) {
       #{directed('left')}: 0px;
     }
@@ -1253,7 +1083,6 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
 @media screen and (max-width: 1200px) {
 
   .landing__demo-theme-toggle {
-
     @include directify($directions) {
       #{directed('padding-left')}: 80px;
     }
@@ -1264,7 +1093,6 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
   }
 
   .landing__demo-wrap:nth-child(odd) .landing__demo-theme-toggle {
-
     @include directify($directions) {
       #{directed('padding-left')}: 0px;
       #{directed('padding-right')}: 80px;
@@ -1272,12 +1100,26 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
   }
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 992px) {
+
+  .landing__demo-wrap {
+
+    &, &:nth-child(odd) {
+
+      .landing__demo-theme-toggle, .landing__demo-toggle-wrap {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+  }
+
+  .landing__demo-theme-toggle .landing__demo-title {
+    margin-top: 25px;
+  }
 
   .landing__demo-theme-toggle {
-
     @include directify($directions) {
-      #{directed('padding-left')}: 30px;
+      #{directed('padding-left')}: 0px;
     }
 
     &:before {
@@ -1286,39 +1128,8 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
   }
 
   .landing__demo-wrap:nth-child(odd) .landing__demo-theme-toggle {
-
     @include directify($directions) {
-      #{directed('padding-right')}: 30px;
-    }
-  }
-}
-
-@media screen and (max-width: 991px) {
-
-  .landing__demo-theme-toggle .landing__demo-title  {
-    margin-top: 25px;
-    justify-content: center;
-    text-align: center;
-
-    @include directify($directions) {
-      #{directed('padding-right')}: 0;
-      #{directed('padding-left')}: 0;
-    }
-  }
-
-  .landing__demo-wrap {
-
-    @include directify($directions) {
-      #{directed('padding-right')}: 0;
-      #{directed('padding-left')}: 0;
-    }
-
-    &, &:nth-child(odd) {
-
-      .landing__demo-toggle-wrap {
-        justify-content: center;
-        text-align: center;
-      }
+      #{directed('padding-right')}: 0px;
     }
   }
 }
@@ -1367,7 +1178,6 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
     width: 16px;
     height: 16px;
     fill: $color-accent;
-
     @include directify($directions) {
       #{directed('margin-right')}: 20px;
     }
@@ -1376,13 +1186,12 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
 
 .landing__feature {
   width: 50%;
-  position: relative;
-  margin-bottom: 50px;
-
   @include directify($directions) {
     #{directed('padding-left')}: 75px;
     #{directed('padding-right')}: 16px;
   }
+  position: relative;
+  margin-bottom: 50px;
 
   .landing__feature-title {
     color: $landing-accent-color;
@@ -1410,7 +1219,6 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
 
   .landing__feature {
     width: 100%;
-
     @include directify($directions) {
       #{directed('padding-right')}: 0px;
     }
@@ -1438,6 +1246,9 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
 
 .landing__feature-img-wrap {
   position: absolute;
+  @include directify($directions) {
+    #{directed('left')}: 0px;
+  }
   width: 60px;
   height: 60px;
   overflow: hidden;
@@ -1448,10 +1259,6 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  @include directify($directions) {
-    #{directed('left')}: 0px;
-  }
 
   img {
     height: 24px;
@@ -1497,14 +1304,13 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
 .landing__footer-background {
   position: absolute;
   bottom: 0;
+  @include directify($directions) {
+    #{directed('left')}: 0px;
+  }
   z-index: -1;
   width: 100%;
   height: 830px;
   transition: 0.3s;
-
-  @include directify($directions) {
-    #{directed('left')}: 0px;
-  }
 }
 
 // Testimonials
@@ -1535,7 +1341,6 @@ $landing-gradient-btn-hover: linear-gradient(228deg, darken(rgb(127, 244, 222), 
     fill: $color-yellow;
     height: 16px;
     width: 16px;
-
     @include directify($directions) {
       #{directed('margin-right')}: 5px;
     }

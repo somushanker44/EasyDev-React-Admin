@@ -12,25 +12,26 @@ const TopbarNavDashboards = () => (
     </DropdownToggle>
     <DropdownMenu className="topbar__nav-dropdown-menu dropdown__menu">
       <DropdownItem>
-        <TopbarNavLink title="Online Marketing Dashboard" icon="home" route="/online_marketing_dashboard" />
+        <TopbarNavLink title="Dashboard Default" icon="home" route="/dashboard_default" />
       </DropdownItem>
       <DropdownItem>
-        <TopbarNavLink title="E-commerce Dashboard" icon="store" route="/e_commerce_dashboard" />
+        <TopbarNavLink title="Dashboard E-commerce" icon="store" route="/dashboard_e_commerce" />
       </DropdownItem>
       <DropdownItem>
-        <TopbarNavLink title="App Dashboard" icon="smartphone" route="/app_dashboard" />
+        <TopbarNavLink title="Dashboard Fitness" icon="heart-pulse" route="/dashboard_fitness" />
       </DropdownItem>
       <DropdownItem>
-        <TopbarNavLink title="Booking Dashboard" icon="apartment" route="/booking_dashboard" />
+        <TopbarNavLink title="Dashboard Crypto" icon="rocket" route="/dashboard_crypto" />
       </DropdownItem>
       <DropdownItem>
-        <TopbarNavLink title="Finance Dashboard" icon="rocket" route="/finance_dashboard" />
+        <TopbarNavLink title="Dashboard Booking" icon="apartment" newLink route="/dashboard_booking" />
       </DropdownItem>
       <DropdownItem>
-        <TopbarNavLink title="Fitness Dashboard" icon="heart-pulse" route="/fitness_dashboard" />
+        <TopbarNavLink title="Dashboard MobileApp" icon="smartphone" newLink route="/dashboard_mobile_app" />
       </DropdownItem>
     </DropdownMenu>
   </UncontrolledDropdown>
 );
+
 
 export default TopbarNavDashboards;

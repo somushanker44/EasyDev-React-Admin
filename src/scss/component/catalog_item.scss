@@ -12,7 +12,6 @@
 .catalog-item {
   width: calc(25% - 30px);
   margin-bottom: 30px;
-  height: 440px;
   @include directify($directions) {
     #{directed('margin-right')}: 30px;
   }
@@ -32,7 +31,6 @@
 
   @media screen and (max-width: 992px) {
     width: calc(100% - 30px);
-    height: auto;
   }
 }
 

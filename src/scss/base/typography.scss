@@ -130,7 +130,7 @@ blockquote {
 
 .highlight {
   background-color: $color-accent;
-  color: $color-white;
+  color: #ffffff;
 }
 
 .typography-message{
@@ -140,7 +140,7 @@ blockquote {
 }
 
 .red-text {
-  color: $color-red;
+  color: #ad4444;
 }
 
 .page-title {
@@ -174,10 +174,7 @@ blockquote {
 }
 
 ::selection {
-  color: $color-white;
+  color: #ffffff;
   background: $color-accent;
 }
 
-.firs-letter-uppercase:first-letter {
-  text-transform: uppercase;
-}

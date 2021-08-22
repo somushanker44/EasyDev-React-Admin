@@ -1,53 +1,59 @@
-import React, { useState, useEffect } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import LoadingIcon from 'mdi-react/LoadingIcon';
 import classNames from 'classnames';
 
-const Expand = ({ color, outline, title }) => {
-  const [load, setLoad] = useState(false);
-
-  const onLoad = () => {
-    setLoad(true);
+export default class Expand extends PureComponent {
+  static propTypes = {
+    title: PropTypes.string,
+    outline: PropTypes.bool,
+    color: PropTypes.string,
   };
-  const request = () => {
+
+  static defaultProps = {
+    title: '',
+    outline: false,
+    color: 'secondary',
+  };
+
+  constructor() {
+    super();
+    this.state = {
+      load: false,
+    };
+  }
+
+  onLoad = () => {
+    this.setState({
+      load: true,
+    });
+    this.request();
+  };
+
+  request = () => {
     // your async logic here
-    setTimeout(() => setLoad(false), 5000);
+    setTimeout(() => this.setState({ load: false }), 5000);
   };
-  useEffect(() => {
-    if (load) {
-      request();
-    }
-  }, [load]);
 
-  const expandClass = classNames({
-    icon: true,
-    expand: true,
-    'expand--load': load,
-  });
+  render() {
+    const { load } = this.state;
+    const { color, outline, title } = this.props;
+    const expandClass = classNames({
+      icon: true,
+      expand: true,
+      'expand--load': load,
+    });
 
-  return (
-    <Button
-      onClick={onLoad}
-      className={expandClass}
-      color={color}
-      outline={outline}
-    >
-      <p><LoadingIcon /> {title}</p>
-    </Button>
-  );
-};
-
-Expand.propTypes = {
-  title: PropTypes.string,
-  outline: PropTypes.bool,
-  color: PropTypes.string,
-};
-
-Expand.defaultProps = {
-  title: '',
-  outline: false,
-  color: 'secondary',
-};
-
-export default Expand;
+    return (
+      <Button
+        onClick={this.onLoad}
+        className={expandClass}
+        color={color}
+        outline={outline}
+      >
+        <p><LoadingIcon /> {title}</p>
+      </Button>
+    );
+  }
+}

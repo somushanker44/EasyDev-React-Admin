@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+
 import Alerts from '../../../UI/Alerts/index';
 import Buttons from '../../../UI/Buttons/index';
 import Carousel from '../../../UI/Carousel/index';
@@ -14,7 +15,6 @@ import Tabs from '../../../UI/Tabs/index';
 import Timeline from '../../../UI/Timeline/index';
 import Tooltips from '../../../UI/Tooltips/index';
 import Typography from '../../../UI/Typography/index';
-import Datepicker from '../../../UI/Datepickers';
 
 export default () => (
   <Switch>
@@ -22,7 +22,6 @@ export default () => (
     <Route path="/ui/buttons" component={Buttons} />
     <Route path="/ui/carousel" component={Carousel} />
     <Route path="/ui/collapse" component={Collapse} />
-    <Route path="/ui/datepicker" component={Datepicker} />
     <Route path="/ui/grids" component={Grids} />
     <Route path="/ui/modals" component={Modals} />
     <Route path="/ui/notifications" component={Notifications} />

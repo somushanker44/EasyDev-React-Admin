@@ -5,18 +5,16 @@ import {
 } from 'reactstrap';
 import GooglePlusIcon from 'mdi-react/GooglePlusIcon';
 import FacebookIcon from 'mdi-react/FacebookIcon';
-import MicrosoftOfficeIcon from 'mdi-react/MicrosoftOfficeIcon';
-import LogInForm from './loginForm/LogInForm';
-import { providers } from './auth/AbstractProvider';
+import LogInForm from './login/LogInForm';
 
 const ModalLoginForm = ({
-  title, isOpen, error, closeModal, onLogin,
+  title, isOpen, onSubmit, error, closeModal, onGoogleClick, onFacebookClick,
 }) => (
   <Modal toggle={closeModal} className="theme-light ltr-support login-modal-form" isOpen={isOpen}>
     <ModalHeader>{title}</ModalHeader>
     <ModalBody>
       <LogInForm
-        onSubmit={onLogin(providers.LOCAL)}
+        onSubmit={onSubmit}
         errorMessage={error}
         form="modal_login"
         fieldUser="E-mail"
@@ -29,24 +27,16 @@ const ModalLoginForm = ({
         <Button
           className="account__social-btn account__social-btn--facebook"
           type="button"
-          onClick={onLogin(providers.FACEBOOK)}
+          onClick={onFacebookClick}
         >
           <FacebookIcon />
         </Button>
         <Button
           className="account__social-btn account__social-btn--google"
           type="button"
-          onClick={onLogin(providers.GOOGLE)}
+          onClick={onGoogleClick}
         >
           <GooglePlusIcon />
-        </Button>
-
-        <Button
-          className="account__social-btn account__social-btn--office"
-          type="button"
-          onClick={onLogin(providers.MICROSOFT)}
-        >
-          <MicrosoftOfficeIcon />
         </Button>
       </div>
     </ModalBody>
@@ -57,15 +47,19 @@ ModalLoginForm.propTypes = {
   title: PropTypes.string,
   error: PropTypes.string,
   isOpen: PropTypes.bool,
+  onSubmit: PropTypes.func,
   closeModal: PropTypes.func.isRequired,
-  onLogin: PropTypes.func,
+  onGoogleClick: PropTypes.func,
+  onFacebookClick: PropTypes.func,
 };
 
 ModalLoginForm.defaultProps = {
   title: '',
   error: '',
   isOpen: false,
-  onLogin: () => () => {},
+  onSubmit: () => {},
+  onGoogleClick: () => {},
+  onFacebookClick: () => {},
 };
 
 export default ModalLoginForm;

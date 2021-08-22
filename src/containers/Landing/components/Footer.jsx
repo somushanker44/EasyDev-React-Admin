@@ -9,17 +9,8 @@ const Footer = () => (
     <Container>
       <Row>
         <Col md={12}>
-          <p className="landing__footer-text">
-            Made with love and tons of coffee in
-            <b>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://aspirity.com/?utm_source=easydev_landing&utm_medium=referral&utm_campaign=templates"
-              >
-                {' '}Aspirity Studio
-              </a>
-            </b>
+          <p className="landing__footer-text">Made with love and tons of coffee in
+            <b><a target="_blank" rel="noopener noreferrer" href="http://themes.aspirity.com/"> Aspirity Studio</a></b>
           </p>
         </Col>
       </Row>

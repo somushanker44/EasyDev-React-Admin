@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col } from 'reactstrap';
-import ProductItems from '@/shared/components/catalog/ProductItems';
+import ProductItems from '../../../../shared/components/catalog/ProductItems';
 
 import catalogList from '../../Catalog/components/catalog_list';
 

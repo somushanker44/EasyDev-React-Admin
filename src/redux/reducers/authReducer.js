@@ -8,7 +8,7 @@ const initialState = {
   avatar: '',
 };
 
-const authReducer = (state = initialState, action) => {
+export default function (state = initialState, action) {
   switch (action.type) {
     case AUTHENTICATE:
       return { fullName: action.user.name, avatar: action.user.avatar };
@@ -17,6 +17,4 @@ const authReducer = (state = initialState, action) => {
     default:
       return state;
   }
-};
-
-export default authReducer;
+}

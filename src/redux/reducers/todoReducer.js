@@ -43,35 +43,36 @@ const initialState = {
 };
 
 function getId(state) {
-  return state.todo.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1;
+  return state.todos.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1;
 }
 const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_TODO':
-      return {
- ...state,
-todos: [{
+      return Object.assign({}, state, {
+        todos: [{
           title: action.title,
           description: action.description,
           priority: action.priority,
           completed: false,
           id: getId(state),
-        }, ...state.todo],
-};
+        }, ...state.todos],
+      });
     case 'COMPLETE_TODO':
-      return {
-        ...state,
-        todos: state.todo.map(todo => (todo.id === action.id
-        ? ({
-          ...todo,
-          updated: false,
-          completed: !todo.completed,
-        }) : todo)),
-      };
+      return Object.assign({}, state, {
+        todos: state.todos.map(todo => (todo.id === action.id
+          ? Object.assign({}, todo, {
+            updated: false,
+            completed: !todo.completed,
+          }) : todo)),
+      });
     case 'DELETE_TODO':
-      return { ...state, todos: state.todo.filter(todo => todo.id !== action.id) };
+      return Object.assign({}, state, {
+        todos: state.todos.filter(todo => todo.id !== action.id),
+      });
     case 'PRIORITY_FILTER':
-      return { ...state, priorityFilter: action.priorityFilter };
+      return Object.assign({}, state, {
+        priorityFilter: action.priorityFilter,
+      });
     default:
       return state;
   }

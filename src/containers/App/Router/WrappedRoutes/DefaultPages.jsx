@@ -1,13 +1,14 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+
 import Calendar from '../../../DefaultPage/Calendar/index';
 import FAQ from '../../../DefaultPage/Faq/index';
 import Gallery from '../../../DefaultPage/Gallery/index';
-import InvoiceTemplate from '../../../DefaultPage/InvoiceTemplate/index';
 import PricingCards from '../../../DefaultPage/PricingCards/index';
-import ProjectSummary from '../../../DefaultPage/ProjectSummary/index';
-import SearchResults from '../../../DefaultPage/SearchResults/index';
 import TextEditor from '../../../DefaultPage/TextEditor/index';
+import InvoiceTemplate from '../../../DefaultPage/InvoiceTemplate/index';
+import SearchResults from '../../../DefaultPage/SearchResults/index';
+import ProjectSummary from '../../../DefaultPage/ProjectSummary/index';
 
 export default () => (
   <Switch>

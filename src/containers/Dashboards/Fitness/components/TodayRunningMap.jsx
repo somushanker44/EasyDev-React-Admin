@@ -1,32 +1,44 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { GoogleMap, KmlLayer } from '@react-google-maps/api';
-import Panel from '@/shared/components/Panel';
+import { compose, withProps } from 'recompose';
+import {
+  GoogleMap, KmlLayer, withGoogleMap, withScriptjs,
+} from 'react-google-maps';
+import { withTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
+import Panel from '../../../../shared/components/Panel';
+import silverMapStyle from './silverMapStyle.json';
 
-const mapContainerStyle = {
-  height: '360px',
+const MapWithAKmlLayer = compose(
+  withProps({
+    googleMapURL: 'https://maps.googleapis.com/maps/api/js?key=&v=3.'
+    + 'exp&libraries=geometry,drawing,places',
+    loadingElement: <div style={{ height: '100%' }} />,
+    containerElement: <div className="map" style={{ height: '380px' }} />,
+    mapElement: <div style={{ height: '100%' }} />,
+  }),
+  withScriptjs,
+  withGoogleMap,
+)(() => (
+  <GoogleMap
+    defaultZoom={10}
+    defaultCenter={{ lat: 41.878197, lng: -87.651229 }}
+    defaultOptions={{ styles: silverMapStyle }}
+  >
+    <KmlLayer
+      url="http://previews.aspirity.com/test/cta3.kml"
+      options={{ preserveViewport: true }}
+    />
+  </GoogleMap>
+));
+
+const TodayRunningMap = ({ t }) => (
+  <Panel xs={12} lg={12} xl={9} md={12} title={t('dashboard_fitness.today_running_map')}>
+    <MapWithAKmlLayer />
+  </Panel>
+);
+
+TodayRunningMap.propTypes = {
+  t: PropTypes.func.isRequired,
 };
 
-const center = {
-  lat: 41.876,
-  lng: -87.624,
-};
-
-const TodayRunningMap = () => {
-  const { t } = useTranslation('common');
-
-  return (
-    <Panel xs={12} lg={12} xl={9} md={12} title={t('fitness_dashboard.today_running_map')}>
-      <GoogleMap
-        id="todayRunningMap"
-        mapContainerStyle={mapContainerStyle}
-        zoom={11}
-        center={center}
-      >
-        <KmlLayer url="http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml" />
-      </GoogleMap>
-    </Panel>
-  );
-};
-
-export default TodayRunningMap;
+export default withTranslation('common')(TodayRunningMap);

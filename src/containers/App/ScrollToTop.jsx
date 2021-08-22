@@ -1,21 +1,26 @@
-import { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const ScrollToTop = ({ children, location }) => {
-  useEffect(() => {
-    if (location && location.pathname) {
+class ScrollToTop extends PureComponent {
+  static propTypes = {
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }).isRequired,
+    children: PropTypes.element.isRequired,
+  };
+
+  componentDidUpdate(prevProps) {
+    const { location } = this.props;
+    if (location.pathname !== prevProps.location.pathname) {
       window.scrollTo(0, 0);
     }
-  }, [location]);
-  return children;
-};
+  }
 
-ScrollToTop.propTypes = {
-  location: PropTypes.shape({
-    pathname: PropTypes.string,
-  }).isRequired,
-  children: PropTypes.element.isRequired,
-};
+  render() {
+    const { children } = this.props;
+    return children;
+  }
+}
 
 export default withRouter(ScrollToTop);

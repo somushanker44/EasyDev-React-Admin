@@ -9,8 +9,8 @@ const Intro = () => (
         <h5 className="bold-text">Components</h5>
       </div>
       <p>These are the examples of using template components. All
-        components have a basic structure and configuration. Just copy a component with its styles to your
-        project.
+            components have a basic structure and configuration. Just copy a component with its styles to your
+            project.
       </p>
       <p>Most of components are based on <a href="https://reactstrap.github.io/">reactstrap</a> and some of them on
         <a href="https://material-ui-next.com/"> Material-UI</a>. You can read about all used packages in a

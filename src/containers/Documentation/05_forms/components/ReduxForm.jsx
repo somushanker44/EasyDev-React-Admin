@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const ReduxForm = () => (
   <Card className="card--not-full-height">
@@ -14,37 +14,37 @@ const ReduxForm = () => (
       <p>Stylesheet: <b>template/src/scss/components/form.scss</b></p>
       <p>The code of a basic form is below:</p>
       <CodeHighlither>
-        {`import React from 'react';
-import PropTypes from 'prop-types';
-import { Button, ButtonToolbar } from 'reactstrap';
-import { Field, reduxForm } from 'redux-form';
+        {`import React, {PureComponent} from 'react';
+import {Button, ButtonToolbar} from 'reactstrap';
+import {Field, reduxForm} from 'redux-form';
 
-const Example = ({ handleSubmit, reset }) => (
-  <form className="form" onSubmit={handleSubmit}>
-    <div className="form__form-group">
-      <label className="form__form-group-label">Input Label</label>
-      <div className="form__form-group-field">
-        <Field
-          name="input"
-          component="input"
-          type="text"
-          placeholder="..."
-        />
-      </div>
-    </div>
-    <ButtonToolbar className="form__button-toolbar">
-      <Button color="primary" type="submit">Submit</Button>
-      <Button type="button" onClick={reset}>
-        Cancel
-      </Button>
-    </ButtonToolbar>
-  </form>
-);
-
-Example.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  reset: PropTypes.func.isRequired,
-};
+class Example extends PureComponent {
+  render() {
+    const {handleSubmit, reset} = this.props;
+    
+    return (
+      <form className='form' onSubmit={handleSubmit}>
+        <div className='form__form-group'>
+          <label className='form__form-group-label'>Input Label</label>
+          <div className='form__form-group-field'>
+            <Field
+              name='input'
+              component='input'
+              type='text'
+              placeholder='...'
+            />
+          </div>
+        </div>
+        <ButtonToolbar className='form__button-toolbar'>
+          <Button color='primary' type='submit'>Submit</Button>
+          <Button type='button' onClick={reset}>
+            Cancel
+          </Button>
+        </ButtonToolbar>
+      </form>
+    )
+  }
+}
 
 export default reduxForm({
   form: 'example_form', // a unique identifier for this form

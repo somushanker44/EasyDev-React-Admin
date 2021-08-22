@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import React, { PureComponent } from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
 import {
   PieChart, Pie, Tooltip, ResponsiveContainer,
 } from 'recharts';
+import { withTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
 const data01 = [
   { name: 'Group A', value: 400 },
@@ -26,58 +26,60 @@ const data02 = [{ name: 'A1', value: 100 },
   { name: 'D2', value: 50 },
 ];
 
-const tooltipColor = {
-  color: '#70bbfd',
-};
+class TwoLevelPieChart extends PureComponent {
+  static propTypes = {
+    t: PropTypes.func.isRequired,
+    dir: PropTypes.string.isRequired,
+  };
 
-const TwoLevelPieChart = ({ dir }) => {
-  const { t } = useTranslation('common');
-  const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
+  constructor(props) {
+    super(props);
+    this.state = {
+      x: 0,
+      y: 0,
+    };
+  }
 
-  const onMouseMove = (e) => {
+  onMouseMove = (e) => {
+    const { dir } = this.props;
     if (e.tooltipPosition) {
-      setCoordinates({ x: dir === 'ltr' ? e.tooltipPosition.x : e.tooltipPosition.x / 10, y: e.tooltipPosition.y });
+      this.setState({ x: dir === 'ltr' ? e.tooltipPosition.x : e.tooltipPosition.x / 10, y: e.tooltipPosition.y });
     }
   };
 
-  return (
-    <Col xs={12} md={12} lg={6} xl={4}>
-      <Card>
-        <CardBody>
-          <div className="card__title">
-            <h5 className="bold-text">{t('charts.recharts.two_level_pie_chart')}</h5>
-          </div>
-          <div dir={dir}>
-            <ResponsiveContainer height={320}>
-              <PieChart>
-                <Tooltip itemStyle={tooltipColor} position={coordinates} />
-                <Pie
-                  data={data01}
-                  dataKey="value"
-                  outerRadius={80}
-                  fill="#70bbfd"
-                  onMouseMove={onMouseMove}
-                />
-                <Pie
-                  data={data02}
-                  dataKey="value"
-                  innerRadius={70}
-                  outerRadius={80}
-                  fill="#4ce1b6"
-                  label
-                  onMouseMove={onMouseMove}
-                />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-        </CardBody>
-      </Card>
-    </Col>
-  );
-};
+  render() {
+    const { t, dir } = this.props;
+    const { x, y } = this.state;
 
-TwoLevelPieChart.propTypes = {
-  dir: PropTypes.string.isRequired,
-};
+    return (
+      <Col xs={12} md={12} lg={6} xl={4}>
+        <Card>
+          <CardBody>
+            <div className="card__title">
+              <h5 className="bold-text">{t('charts.recharts.two_level_pie_chart')}</h5>
+            </div>
+            <div dir={dir}>
+              <ResponsiveContainer height={320}>
+                <PieChart>
+                  <Tooltip position={{ x, y }} />
+                  <Pie data={data01} dataKey="value" outerRadius={80} fill="#70bbfd" onMouseMove={this.onMouseMove} />
+                  <Pie
+                    data={data02}
+                    dataKey="value"
+                    innerRadius={70}
+                    outerRadius={80}
+                    fill="#4ce1b6"
+                    label
+                    onMouseMove={this.onMouseMove}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </CardBody>
+        </Card>
+      </Col>
+    );
+  }
+}
 
-export default TwoLevelPieChart;
+export default withTranslation('common')(TwoLevelPieChart);

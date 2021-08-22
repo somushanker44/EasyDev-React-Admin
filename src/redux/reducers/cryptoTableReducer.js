@@ -7,7 +7,6 @@ import {
 const initialState = {
   items: [
     {
-      id: 0,
       name: 'Bitcoin',
       market_cap: '$ 131 131 454 444',
       price: '$ 6 432,23',
@@ -17,7 +16,6 @@ const initialState = {
       chart: 'btc',
     },
     {
-      id: 1,
       name: 'Ethereum',
       market_cap: '$ 131 131 454 444',
       price: '$ 6 432,23',
@@ -27,7 +25,6 @@ const initialState = {
       chart: 'eth',
     },
     {
-      id: 2,
       name: 'Ripple',
       market_cap: '$ 131 131 454 444',
       price: '$ 6 432,23',
@@ -37,7 +34,6 @@ const initialState = {
       chart: 'xrp',
     },
     {
-      id: 3,
       name: 'Bitcoin Cash',
       market_cap: '$ 131 131 454 444',
       price: '$ 6 432,23',
@@ -47,7 +43,6 @@ const initialState = {
       chart: 'bch',
     },
     {
-      id: 4,
       name: 'Eos',
       market_cap: '$ 131 131 454 444',
       price: '$ 6 432,23',
@@ -57,7 +52,6 @@ const initialState = {
       chart: 'eos',
     },
     {
-      id: 5,
       name: 'Litecoin',
       market_cap: '$ 131 131 454 444',
       price: '$ 6 432,23',
@@ -67,7 +61,6 @@ const initialState = {
       chart: 'ltc',
     },
     {
-      id: 6,
       name: 'Cardano',
       market_cap: '$ 131 131 454 444',
       price: '$ 6 432,23',
@@ -77,7 +70,6 @@ const initialState = {
       chart: 'ada',
     },
     {
-      id: 7,
       name: 'Stellar',
       market_cap: '$ 131 131 454 444',
       price: '$ 6 432,23',
@@ -87,7 +79,6 @@ const initialState = {
       chart: 'xlm',
     },
     {
-      id: 8,
       name: 'IOTA',
       market_cap: '$ 131 131 454 444',
       price: '$ 6 432,23',
@@ -97,7 +88,6 @@ const initialState = {
       chart: 'iota',
     },
     {
-      id: 9,
       name: 'NEO',
       market_cap: '$ 131 131 454 444',
       price: '$ 6 432,23',
@@ -110,7 +100,7 @@ const initialState = {
   data: {},
 };
 
-const cryptoTableReducer = (state = initialState, action) => {
+export default function (state = initialState, action) {
   switch (action.type) {
     case LOAD_CRYPTO_TABLE_DATA: {
       const loadData = state.items[action.index];
@@ -126,6 +116,4 @@ const cryptoTableReducer = (state = initialState, action) => {
     default:
       return state;
   }
-};
-
-export default cryptoTableReducer;
+}

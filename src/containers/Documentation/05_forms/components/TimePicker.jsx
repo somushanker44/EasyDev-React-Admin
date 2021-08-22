@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody, Table } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const TimePicker = () => (
   <Card className="card--not-full-height">
@@ -9,7 +9,7 @@ const TimePicker = () => (
         <h5 className="bold-text">TimePicker</h5>
       </div>
       <p>TimePicker is based on <a href="https://github.com/react-component/time-picker">rc-time-picker</a>.
-        Example of using this component here:
+            Example of using this component here:
       </p>
       <CodeHighlither>
         {'import renderTimePickerField from \'../../../../components/form/TimePicker\';'}

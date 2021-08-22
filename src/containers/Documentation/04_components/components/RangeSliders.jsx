@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody, Table } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const RangeSliders = () => (
   <Card className="card--not-full-height">
@@ -12,19 +12,17 @@ const RangeSliders = () => (
         types of Sliders: one-value slider and range slider.
       </p>
       <CodeHighlither>
-        {`import React from 'react';
+        {`import React, {PureComponent} from 'react';
 import Slider from 'template/src/components/range_slider/Slider'; // or Range
 
-const Example = () => (
-  <Slider
-    min={0}
-    max={100}
-    value={34}
-    marks={{0: '0', 20: '20', 40: '40', 60: '60', 80: '80', 100: '100'}}
-  />
-);
-
-export default Example;`}
+export default class Example extends PureComponent {
+  render() {
+    return (
+      <Slider min={0} max={100} value={34}
+              marks={{0: '0', 20: '20', 40: '40', 60: '60', 80: '80', 100: '100'}}/>
+    )
+  }
+}`}
       </CodeHighlither>
       <p>Props of Slider and Range:</p>
       <Table responsive className="table--bordered table--head-accent">

@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 
 const {
-  func, shape, string, bool,
+  string, bool, shape, func,
 } = PropTypes;
 
 export const CustomizerProps = shape({
+  squaredCorners: bool,
+  withBoxShadow: bool,
   topNavigation: bool,
 });
 
@@ -19,14 +21,6 @@ export const ThemeProps = shape({
 
 export const RTLProps = shape({
   direction: string,
-});
-
-export const RoundBordersProps = shape({
-  roundBorders: string,
-});
-
-export const BlocksShadowsProps = shape({
-  blocksShadows: string,
 });
 
 export const UserProps = shape({

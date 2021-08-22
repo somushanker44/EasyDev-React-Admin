@@ -1,11 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { Button, ButtonToolbar } from 'reactstrap';
-import TextEditor from '@/shared/components/text-editor/TextEditor';
+import PropTypes from 'prop-types';
+import TextEditor from '../../../shared/components/text-editor/TextEditor';
 
 const renderTextEditor = ({ input }) => (
-  <TextEditor {...input} />
+  <TextEditor
+    {...input}
+  />
 );
 
 renderTextEditor.propTypes = {

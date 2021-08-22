@@ -1,168 +1,94 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { useTranslation } from 'react-i18next';
+import React, { Component } from 'react';
 import { Col, Container, Row } from 'reactstrap';
-import { ThemeProps } from '@/shared/prop-types/ReducerProps';
-import {
-  fetchTodoListData,
-  editTodoElement,
-  deleteTodoElement, addTodoElement,
-} from './redux/actions';
-import ItemEditModal from './components/form/ItemEditModal';
-import TodoListWrapper from './components/TodoList';
-import TodoSidebar from './components/TodoSidebar';
+import { withTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import TodoInput from './components/TodoInput';
+import TodoList from './components/TodoList';
+import todoActions from '../../redux/actions/todoActions';
 import todoCard from './types';
+import { RTLProps, ThemeProps } from '../../shared/prop-types/ReducerProps';
 
-const DividerLine = ({ title }) => (
-  <Col md={12}>
-    <div className="todo-app__divider">
-      <div className="todo-app__divider-line" />
-      <p className="todo-app__divider-title">{title}</p>
-      <div className="todo-app__divider-line" />
-    </div>
-  </Col>
-);
-
-DividerLine.propTypes = {
-  title: PropTypes.string.isRequired,
-};
-
-const Todo = ({
-  theme, rtl,
-  todoElements,
-  addTodoElementAction, editTodoElementAction, fetchTodoListDataAction, deleteTodoElementAction,
-  isFetching,
-}) => {
-  const { t } = useTranslation('common');
-  const [incompleteTodoElements, setIncompleteTodoElements] = useState(null);
-  const [completedTodoElements, setCompletedTodoElements] = useState(null);
-  const [archivedTodoElements, setArchivedTodoElements] = useState(null);
-  const [currentEditItem, setCurrentEditItem] = useState(null);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [filterByPriority, setFilterByPriority] = useState('');
-  const [prevTodoElements, setPrevTodoElements] = useState(null);
-
-  useEffect(() => {
-    if (JSON.stringify(todoElements) !== JSON.stringify(prevTodoElements)) {
-      if (todoElements.length === 0 && prevTodoElements === null) { // You can delete it if you need
-        fetchTodoListDataAction();
-      }
-      const filteredData = [...todoElements];
-      let activeTodoElements = filteredData.filter(item => !item.data.isArchived);
-
-      if (filterByPriority !== '') {
-        activeTodoElements = activeTodoElements.filter(item => item.data.priority === filterByPriority);
-      }
-      setIncompleteTodoElements(activeTodoElements.filter(item => !item.data.isCompleted));
-      setCompletedTodoElements(activeTodoElements.filter(item => item.data.isCompleted));
-      setArchivedTodoElements(filteredData.filter(item => item.data.isArchived));
-      setPrevTodoElements([...todoElements]);
-    }
-  }, [prevTodoElements, fetchTodoListDataAction, todoElements, filterByPriority]);
-
-  const changeShowEditModal = (data) => {
-    setShowEditModal(!showEditModal);
-    setCurrentEditItem(data);
+class Todo extends Component {
+  static propTypes = {
+    actions: PropTypes.shape({
+      editTodo: PropTypes.func,
+      completeTodo: PropTypes.func,
+      deleteTodo: PropTypes.func,
+      addTodo: PropTypes.func,
+      togglePriorityFilter: PropTypes.func,
+    }).isRequired,
+    todos: PropTypes.arrayOf(todoCard).isRequired,
+    theme: ThemeProps.isRequired,
+    t: PropTypes.func.isRequired,
+    rtl: RTLProps.isRequired,
   };
 
-  const filteringByPriority = (priority) => {
-    let filteredByPriorityTodoElements = [];
-    if (priority === '') {
-      filteredByPriorityTodoElements = [...todoElements];
-    } else {
-      filteredByPriorityTodoElements = todoElements.filter(item => item.data.priority === priority);
-    }
-    setFilterByPriority(priority);
-    setIncompleteTodoElements(filteredByPriorityTodoElements.filter(item => !item.data.isCompleted));
-    setCompletedTodoElements(filteredByPriorityTodoElements.filter(item => item.data.isCompleted));
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      incompleteTodos: props.todos.filter(todo => !todo.completed),
+      completedTodos: props.todos.filter(todo => todo.completed),
+    };
+  }
 
-  return (
-    <Container className="todo-app">
-      <Row>
-        <Col md={12}>
-          <h3 className="page-title">{t('todo_application.page_title')}</h3>
-        </Col>
-      </Row>
-      <Row>
-        <Col md={9} xl={10}>
-          <Fragment>
-            <DividerLine title="Active" />
-            <TodoListWrapper
-              todoElements={incompleteTodoElements}
-              changeShowEditModal={changeShowEditModal}
-              editTodoElementAction={editTodoElementAction}
-              isFetching={isFetching}
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      incompleteTodos: nextProps.todos.filter(todo => !todo.completed),
+      completedTodos: nextProps.todos.filter(todo => todo.completed),
+    });
+  }
+
+  render() {
+    const {
+      actions, t, theme, rtl,
+    } = this.props;
+
+    const { incompleteTodos, completedTodos } = this.state;
+
+    return (
+      <Container className="todo-app">
+        <Row>
+          <Col md={12}>
+            <h3 className="page-title">{t('todo_application.page_title')}</h3>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={9} xl={10}>
+            <TodoList actions={actions} todos={incompleteTodos} />
+            <Col md={12}>
+              <div className="todo-app__divider">
+                <div className="todo-app__divider-line" />
+                <p className="todo-app__divider-title">Done</p>
+                <div className="todo-app__divider-line" />
+              </div>
+            </Col>
+            <TodoList completed actions={actions} todos={completedTodos} />
+          </Col>
+          <Col md={3} xl={2}>
+            <TodoInput
+              addTodo={actions.addTodo}
+              togglePriorityFilter={actions.togglePriorityFilter}
+              theme={theme}
+              rtl={rtl.direction}
             />
-            <DividerLine title="Done" />
-            <TodoListWrapper
-              isCompleted
-              todoElements={completedTodoElements}
-              changeShowEditModal={changeShowEditModal}
-              editTodoElementAction={editTodoElementAction}
-              isFetching={isFetching}
-            />
-            <div>
-              <DividerLine title="Archived" />
-              <TodoListWrapper
-                isArchived
-                todoElements={archivedTodoElements}
-                editTodoElementAction={editTodoElementAction}
-                deleteTodoElementAction={deleteTodoElementAction}
-                isFetching={isFetching}
-              />
-            </div>
-          </Fragment>
-        </Col>
-        <Col md={3} xl={2}>
-          <TodoSidebar
-            changeShowEditModal={changeShowEditModal}
-            filterByPriority={filteringByPriority}
-          />
-        </Col>
-        <ItemEditModal
-          theme={theme}
-          rtl={rtl}
-          showEditModal={showEditModal}
-          currentEditItem={currentEditItem && currentEditItem.data}
-          changeShowEditModal={changeShowEditModal}
-          todoElements={todoElements}
-          addTodoElementAction={addTodoElementAction}
-          editTodoElementAction={editTodoElementAction}
-        />
-      </Row>
-    </Container>
-  );
-};
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+}
 
-Todo.propTypes = {
-  theme: ThemeProps.isRequired,
-  rtl: PropTypes.string.isRequired,
-  todoElements: PropTypes.arrayOf(todoCard).isRequired,
-  fetchTodoListDataAction: PropTypes.func.isRequired,
-  editTodoElementAction: PropTypes.func.isRequired,
-  addTodoElementAction: PropTypes.func.isRequired,
-  deleteTodoElementAction: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-};
+function mapStateToProps(state) {
+  const todos = state.todos.priorityFilter
+    ? state.todos.todos.filter(todo => todo.priority === state.todos.priorityFilter)
+    : state.todos.todos;
+  return { todos, theme: state.theme, rtl: state.rtl };
+}
 
-const mapStateToProps = (state) => {
-  const todoElements = state.todo && state.todo.data && state.todo.data.elements
-    && state.todo.data.elements.length > 0 ? [...state.todo.data.elements] : [];
-  return ({
-    todoElements,
-    isFetching: state.todo && state.todo.isFetching,
-    theme: state.theme,
-    rtl: state.rtl && state.rtl.direction,
-  });
-};
+function mapDispatchToProps(dispatch) {
+  return { actions: bindActionCreators(todoActions, dispatch) };
+}
 
-const mapDispatchToProps = {
-  fetchTodoListDataAction: fetchTodoListData,
-  editTodoElementAction: editTodoElement,
-  addTodoElementAction: addTodoElement,
-  deleteTodoElementAction: deleteTodoElement,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Todo);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation('common')(Todo));

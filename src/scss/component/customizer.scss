@@ -1,16 +1,14 @@
 .customizer {
   position: fixed;
   top: 0;
-  z-index: 102;
-
   @include directify($directions) {
     #{directed('right')}: 0px;
   }
+  z-index: 102;
 
   .customizer__toggle {
 
     span {
-
       @include directify($directions) {
         #{directed('margin-right')}: 10px;
         #{directed('margin-left')}: 0px;
@@ -27,16 +25,15 @@
   width: 50px;
   height: 50px;
   position: fixed;
-  top: 350px;
+  bottom: 80px;
+  @include directify($directions) {
+    #{directed('right')}: 0px;
+  }
   border: none;
   border-radius: 3px 0 0 3px;
   box-shadow: 0 1px 30px 1px rgba(0, 0, 0, 0.11);
   cursor: pointer;
   z-index: 102;
-
-  @include directify($directions) {
-    #{directed('right')}: 0px;
-  }
 
   @include themify($themes) {
     background-color: themed('colorBackground');
@@ -50,7 +47,6 @@
 }
 
 @keyframes iconOpacity {
-
   from {
     opacity: 1
   }
@@ -71,26 +67,24 @@
   transition: transform 0.3s;
   position: fixed;
   top: 0;
+  @include directify($directions) {
+    #{directed('right')}: 0px;
+  }
   z-index: 102;
+
+  @include themify($themes) {
+    background-color: themed('colorBackground');
+  }
 
   &.customizer__wrap--open {
     transform: translateX(0);
     box-shadow: 0 1px 30px 1px rgba(0, 0, 0, 0.11);
-  }
-
-  @include directify($directions) {
-    #{directed('right')}: 0px;
-  }
-
-  @include themify($themes) {
-    background-color: themed('colorBackground');
   }
 }
 
 .customizer__title-wrap {
   padding-bottom: 20px;
   position: relative;
-
   @include directify($directions) {
     text-align: directed('left');
   }
@@ -105,7 +99,6 @@
   font-size: 12px;
   line-height: 1.5;
   margin-bottom: 20px;
-
   @include directify($directions) {
     text-align: directed('left');
   }
@@ -113,14 +106,13 @@
 
 .customizer__close-btn {
   position: absolute;
+  @include directify($directions) {
+    #{directed('right')}: 0px;
+  }
   top: 0;
   background: transparent;
   border: none;
   cursor: pointer;
-
-  @include directify($directions) {
-    #{directed('right')}: 0px;
-  }
 
   svg {
     fill: $color-additional;

@@ -15,6 +15,7 @@
   }
 
   .nav-tabs {
+    flex-wrap: nowrap;
 
     li {
 
@@ -36,7 +37,7 @@
           @include themify($themes) {
             background-color: themed('colorHover');
             border-color: themed('colorHover');
-            border-bottom-color: $color-dusty-white;
+            border-bottom-color: #dddddd;
           }
         }
       }
@@ -46,7 +47,7 @@
         background-color: transparent;
 
         @include themify($themes) {
-          border-color: $color-dusty-white;
+          border-color: #dddddd;
           border-bottom-color: themed('colorBackground');
           color: themed('colorText');
         }
@@ -119,7 +120,7 @@
   }
 
   &.tabs--vertical {
-    overflow-y: auto;
+    overflow-y: visible;
 
     .tabs__wrap {
       display: flex;
@@ -130,10 +131,6 @@
       width: 90px;
       height: 100%;
       flex-wrap: wrap;
-
-      .nav-item {
-        margin-bottom: 0;
-      }
 
       li {
         margin-top: 0;
@@ -208,7 +205,7 @@
             @include directify($directions) {
                 #{directed('border-right-color')}: #eeeeee;
             }
-            color: $color-text;
+            color: #646777;
           }
         }
       }

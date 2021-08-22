@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Scrollbar from 'react-smooth-scrollbar';
 import classNames from 'classnames';
-import { SidebarProps } from '@/shared/prop-types/ReducerProps';
+import PropTypes from 'prop-types';
 import SidebarContent from './SidebarContent';
+import { SidebarProps } from '../../../../shared/prop-types/ReducerProps';
 
 const Sidebar = ({
   changeToDark, changeToLight, changeMobileSidebarVisibility, sidebar,
@@ -15,12 +15,7 @@ const Sidebar = ({
 
   return (
     <div className={sidebarClass}>
-      <button
-        className="sidebar__back"
-        type="button"
-        aria-label="change mobile visibility button"
-        onClick={changeMobileSidebarVisibility}
-      />
+      <button className="sidebar__back" type="button" onClick={changeMobileSidebarVisibility} />
       <Scrollbar className="sidebar__scroll scroll">
         <div className="sidebar__wrapper sidebar__wrapper--mobile">
           <SidebarContent
@@ -40,5 +35,6 @@ Sidebar.propTypes = {
   changeToLight: PropTypes.func.isRequired,
   changeMobileSidebarVisibility: PropTypes.func.isRequired,
 };
+
 
 export default Sidebar;

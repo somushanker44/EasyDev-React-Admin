@@ -16,7 +16,7 @@
   }
 
   pre {
-    background-color: $color-black-background !important;
+    background-color: #2a2a31 !important;
     margin: 10px 0 30px 0 !important;
     font-size: 14px;
 
@@ -50,8 +50,6 @@
 
 .documentation__nav-wrap {
   width: 100%;
-  position: sticky;
-  top: 70px;
 }
 
 .documentation__main {
@@ -130,11 +128,11 @@
       background-color: $color-blue;
 
       p {
-        color: $color-white;
+        color: #ffffff;
       }
 
       svg {
-        fill: $color-white;
+        fill: #ffffff;
       }
     }
   }
@@ -176,6 +174,10 @@
 
 @media screen and (max-width: 991px) {
 
+  .documentation__nav > div > div:first-child {
+    display: none;
+  }
+
   .documentation__nav-wrap {
     position: relative !important;
     top: 0 !important;
@@ -195,6 +197,7 @@
   }
 
   .documentation__nav-bottom {
+    flex-wrap: wrap;
     position: relative;
     width: 100%;
     bottom: 0;
@@ -202,16 +205,6 @@
 
   .documentation__nav-bottom-left, .documentation__nav-bottom-right {
     width: 100%;
-  }
-}
-
-@media screen and (max-width: 350px) {
-  .documentation__nav-bottom {
-    font-size: 10px;
-
-    a {
-      padding: 20px 0;
-    }
   }
 }
 

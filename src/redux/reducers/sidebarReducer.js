@@ -8,7 +8,7 @@ const initialState = {
   collapse: false,
 };
 
-const sidebarReducer = (state = initialState, action) => {
+export default function (state = initialState, action) {
   switch (action.type) {
     case CHANGE_SIDEBAR_VISIBILITY:
       return { ...state, collapse: !state.collapse };
@@ -17,6 +17,4 @@ const sidebarReducer = (state = initialState, action) => {
     default:
       return state;
   }
-};
-
-export default sidebarReducer;
+}

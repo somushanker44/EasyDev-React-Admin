@@ -1,10 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import ChevronLeftIcon from 'mdi-react/ChevronLeftIcon';
-import { RTLProps } from '@/shared/prop-types/ReducerProps';
+import { RTLProps } from '../../../shared/prop-types/ReducerProps';
 
 const NavigationBottom = ({
   prevLink, prevTitle, nextLink, nextTitle, rtl,

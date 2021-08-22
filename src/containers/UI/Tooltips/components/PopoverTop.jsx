@@ -1,51 +1,61 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import React, { PureComponent } from 'react';
 import {
   ButtonToolbar, Card, CardBody, Col, Button, Popover, PopoverBody, PopoverHeader,
 } from 'reactstrap';
+import { withTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
-const PopoverTop = ({ dir }) => {
-  const { t } = useTranslation('common');
-  const [IsOpenedPopover, setIsOpenedPopover] = useState(false);
-
-  const handleOpenPopover = () => {
-    setIsOpenedPopover(!IsOpenedPopover);
+class PopoverTop extends PureComponent {
+  static propTypes = {
+    t: PropTypes.func.isRequired,
+    dir: PropTypes.string.isRequired,
   };
 
-  return (
-    <Col sm={12} md={6} lg={6} xl={3} className="card-tooltip">
-      <Card>
-        <CardBody>
-          <div className="card__title">
-            <h5 className="bold-text">{t('ui_elements.tooltips_popovers.popover_on_top')}</h5>
-            <h5 className="subhead">Use popover with placement <span className="red-text">top</span></h5>
-          </div>
-          <ButtonToolbar className="btn-toolbar--center">
-            <Button id="PopoverTop" onClick={handleOpenPopover} outline className="button-tooltip">
-              Popover on Top
-            </Button>
-            <Popover
-              placement="top"
-              isOpen={IsOpenedPopover}
-              target="PopoverTop"
-              toggle={handleOpenPopover}
-              dir={dir}
-            >
-              <PopoverHeader>Popover on Top</PopoverHeader>
-              <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem
-                lacinia quam venenatis vestibulum.
-              </PopoverBody>
-            </Popover>
-          </ButtonToolbar>
-        </CardBody>
-      </Card>
-    </Col>
-  );
-};
+  constructor() {
+    super();
+    this.state = {
+      popoverOpen: false,
+    };
+  }
 
-PopoverTop.propTypes = {
-  dir: PropTypes.string.isRequired,
-};
+  toggle = () => {
+    this.setState(prevState => ({ popoverOpen: !prevState.popoverOpen }));
+  };
 
-export default PopoverTop;
+  render() {
+    const { t, dir } = this.props;
+    const { popoverOpen } = this.state;
+
+    return (
+      <Col sm={12} md={6} lg={6} xl={3} className="card-tooltip">
+        <Card>
+          <CardBody>
+            <div className="card__title">
+              <h5 className="bold-text">{t('ui_elements.tooltips_popovers.popover_on_top')}</h5>
+              <h5 className="subhead">Use popover with placement <span className="red-text">top</span></h5>
+            </div>
+            <ButtonToolbar className="btn-toolbar--center">
+              <Button id="PopoverTop" onClick={this.toggle} outline className="button-tooltip">
+                Popover on Top
+              </Button>
+              <Popover
+                placement="top"
+                isOpen={popoverOpen}
+                target="PopoverTop"
+                toggle={this.toggle}
+                dir={dir}
+              >
+                <PopoverHeader>Popover on Top</PopoverHeader>
+                <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem
+                  lacinia quam venenatis vestibulum.
+                </PopoverBody>
+              </Popover>
+            </ButtonToolbar>
+          </CardBody>
+        </Card>
+      </Col>
+    );
+  }
+}
+
+export default withTranslation('common')(PopoverTop);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const Tooltips = () => (
   <Card className="card--not-full-height">
@@ -13,19 +13,21 @@ const Tooltips = () => (
         using this component here:
       </p>
       <CodeHighlither>
-        {`import React from 'react';
+        {`import React, {PureComponent} from 'react';
 import {Button, ButtonToolbar UncontrolledTooltip} from 'reactstrap';
 
-const Example = () => (
-  <ButtonToolbar className="btn-toolbar--center">
-    <Button id="TooltipTop" outline>Tooltip on Top</Button>
-    <UncontrolledTooltip placement="top" target="TooltipTop">
-      Do you like dragons?
-    </UncontrolledTooltip>
-  </ButtonToolbar>
-);
-
-export default Example;`}
+export default class Example extends PureComponent {
+  render() {
+    return (
+      <ButtonToolbar className='btn-toolbar--center'>
+        <Button id='TooltipTop' outline>Tooltip on Top</Button>
+        <UncontrolledTooltip placement='top' target='TooltipTop'>
+          Do you like dragons?
+        </UncontrolledTooltip>
+      </ButtonToolbar>
+    )
+  }
+}`}
       </CodeHighlither>
       <p>All props <a href="https://reactstrap.github.io/components/tooltips/Tooltips.jsx">here</a>.</p>
       <p>Stylesheet: <b>template/src/scss/components/tooltip.scss</b></p>

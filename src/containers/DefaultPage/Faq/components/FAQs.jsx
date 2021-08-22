@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
-import Collapse from '@/shared/components/Collapse';
+import Collapse from '../../../../shared/components/Collapse';
 
 const FAQs = () => (
   <Col md={12} lg={12}>

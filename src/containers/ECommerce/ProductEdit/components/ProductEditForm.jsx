@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Button, ButtonToolbar } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
+import PropTypes from 'prop-types';
 import CurrencyUsdIcon from 'mdi-react/CurrencyUsdIcon';
 import TagIcon from 'mdi-react/TagIcon';
-import renderDropZoneMultipleField from '@/shared/components/form/DropZoneMultiple';
-import renderSelectField from '@/shared/components/form/Select';
+import renderDropZoneMultipleField from '../../../../shared/components/form/DropZoneMultiple';
+import renderSelectField from '../../../../shared/components/form/Select';
 
 const ProductEditForm = ({ handleSubmit, reset }) => (
   <form className="form product-edit" onSubmit={handleSubmit}>

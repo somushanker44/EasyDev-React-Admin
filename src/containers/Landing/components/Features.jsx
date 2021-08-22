@@ -12,7 +12,6 @@ const feat07 = `${process.env.PUBLIC_URL}/img/landing/features/07_new.png`;
 const feat08 = `${process.env.PUBLIC_URL}/img/landing/features/08_new.png`;
 const feat09 = `${process.env.PUBLIC_URL}/img/landing/features/autorization.png`;
 const feat10 = `${process.env.PUBLIC_URL}/img/landing/features/video.png`;
-
 const Features = () => (
   <section className="landing__section">
     <Container>

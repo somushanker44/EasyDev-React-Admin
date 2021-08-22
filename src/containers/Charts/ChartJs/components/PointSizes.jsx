@@ -1,7 +1,8 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { Card, CardBody, Col } from 'reactstrap';
 import { Line } from 'react-chartjs-2';
+import { withTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
 const data = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -97,21 +98,21 @@ const options = {
   },
 };
 
-const PointSizes = () => {
-  const { t } = useTranslation('common');
+const PointSizes = ({ t }) => (
+  <Col md={12} lg={12} xl={6}>
+    <Card>
+      <CardBody>
+        <div className="card__title">
+          <h5 className="bold-text">{t('charts.react_chartjs.point_sizes')}</h5>
+        </div>
+        <Line data={data} options={options} />
+      </CardBody>
+    </Card>
+  </Col>
+);
 
-  return (
-    <Col md={12} lg={12} xl={6}>
-      <Card>
-        <CardBody>
-          <div className="card__title">
-            <h5 className="bold-text">{t('charts.react_chartjs.point_sizes')}</h5>
-          </div>
-          <Line data={data} options={options} />
-        </CardBody>
-      </Card>
-    </Col>
-  );
+PointSizes.propTypes = {
+  t: PropTypes.func.isRequired,
 };
 
-export default PointSizes;
+export default withTranslation('common')(PointSizes);

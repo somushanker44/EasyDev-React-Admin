@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const Firebase = () => (
   <Card className="card--not-full-height">
@@ -28,7 +28,7 @@ const Firebase = () => (
         <li>
           To enable auth0 authorization, you must connect AuthProvider to the App.jsx component
           <CodeHighlither>
-            {`import Auth0Provider from '@/shared/components/auth/withAuth0';
+            {`import Auth0Provider from '../../shared/components/auth/withAuth0';
 import auth0Config from '../../config/auth0';
 
 const onRedirectCallbackAuth0 = (appState) => {
@@ -45,8 +45,8 @@ export default const app = () => (
   <div>
    <Auth0Provider
      domain={auth0Config.domain}
-     clientId={auth0Config.clientId}
-     redirectUri={\`${window.location.origin}/easydev/online_marketing_dashboard\`}
+     client_id={auth0Config.clientId}
+     redirect_uri={\`${window.location.origin}/easydev/dashboard_default\`}
      onRedirectCallback={onRedirectCallbackAuth0}
    >
    <div>
@@ -54,20 +54,24 @@ export default const app = () => (
   </div>
    </Auth0Provider>
   </div>
-`}
+`
+            }
           </CodeHighlither>
         </li>
         <li>
           Import hooks auth in component login.
           <CodeHighlither>
             {`import { useAuth0 } from '../auth/withAuth0';
-              const {
-                  loginWithRedirect, loading,
-              } = useAuth0();
-              <Button className="account__social-btn account__social-btn--auth0" onClick={() => loginWithRedirect({})}>
-                 <img className="customizer__btn-icon" src={auth0Icon} alt="icon" />
-              </Button>
-            `}
+
+const {
+    loginWithRedirect, loading,
+} = useAuth0();
+
+<Button className="account__social-btn account__social-btn--auth0" onClick={() => loginWithRedirect({})}>
+   <img className="customizer__btn-icon" src={auth0Icon} alt="icon" />
+</Button>
+            `
+            }
           </CodeHighlither>
         </li>
       </ol>

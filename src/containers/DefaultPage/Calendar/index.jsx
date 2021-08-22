@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Col, Container, Row } from 'reactstrap';
-import { RTLProps } from '@/shared/prop-types/ReducerProps';
 import BigCalendar from './components/BigCalendar';
 import EventLabels from './components/EventLabels';
+import { RTLProps } from '../../../shared/prop-types/ReducerProps';
 
 const Calendar = ({ rtl }) => (
   <Container>
@@ -11,7 +11,7 @@ const Calendar = ({ rtl }) => (
       <Col md={12}>
         <h3 className="page-title">Calendar</h3>
         <h3 className="page-subhead subhead">Use this elements, if you want to show some hints or additional
-          information
+              information
         </h3>
       </Col>
     </Row>

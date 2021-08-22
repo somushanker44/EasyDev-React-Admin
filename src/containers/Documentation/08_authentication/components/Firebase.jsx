@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const Firebase = () => (
   <Card className="card--not-full-height">
@@ -32,7 +32,8 @@ const Firebase = () => (
           of src/shared/auth/withAuthFirebase.jsx  in Login Page into your application
           <CodeHighlither>
             {`import withAuthFirebase from '../auth/withAuthFirebase';
-export default withAuthFirebase(LoginCard);`}
+export default withAuthFirebase(LoginCard);`
+            }
           </CodeHighlither>
         </li>
         <li>
@@ -42,7 +43,8 @@ export default withAuthFirebase(LoginCard);`}
   className="account__social-btn account__social-btn--firebase"
   onClick={changeIsOpenModalFireBase}
 ><FirebaseIcon />
-</Button>`}
+</Button>`
+            }
           </CodeHighlither>
         </li>
       </ol>

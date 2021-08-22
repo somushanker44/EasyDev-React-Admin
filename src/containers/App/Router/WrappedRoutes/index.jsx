@@ -2,34 +2,37 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import Layout from '../../../Layout/index';
 import Commerce from './Commerce';
-import Finance from './Finance';
-import OnLineMarketingDashboard from '../../../Dashboards/OnLineMarketing/index';
-import AppDashboard from '../../../Dashboards/App/index';
-import BookingDashboard from '../../../Dashboards/Booking/index';
-import FitnessDashboard from '../../../Dashboards/Fitness/index';
-import UI from './UI';
-import Mail from '../../../Mail/index';
-import Chat from '../../../Chat/index';
-import Todo from '../../../Todo/index';
-import Forms from './Forms';
-import Tables from './Tables';
-import Charts from './Charts';
-import Maps from './Maps';
+import Crypto from './Crypto';
+import Documentation from './Documentation';
+import DefaultPages from './DefaultPages';
 import Account from './Account';
 import ECommerce from './ECommerce';
-import DefaultPages from './DefaultPages';
-import Documentation from './Documentation';
+import Maps from './Maps';
+import Charts from './Charts';
+import Tables from './Tables';
+import Forms from './Forms';
+import UI from './UI';
+
+import Chat from '../../../Chat/index';
+import Todo from '../../../Todo/index';
+
+import FitnessDashboard from '../../../Dashboards/Fitness/index';
+import DefaultDashboard from '../../../Dashboards/Default/index';
+import MobileAppDashboard from '../../../Dashboards/MobileApp/index';
+import BookingDashboard from '../../../Dashboards/Booking/index';
+
+import Mail from '../../../Mail/index';
 
 export default () => (
   <div>
     <Layout />
     <div className="container__wrap">
-      <Route path="/e_commerce_dashboard" component={Commerce} />
-      <Route path="/online_marketing_dashboard" component={OnLineMarketingDashboard} />
-      <Route exact path="/app_dashboard" component={AppDashboard} />
-      <Route path="/booking_dashboard" component={BookingDashboard} />
-      <Route path="/finance_dashboard" component={Finance} />
-      <Route path="/fitness_dashboard" component={FitnessDashboard} />
+      <Route path="/dashboard_default" component={DefaultDashboard} />
+      <Route path="/dashboard_e_commerce" component={Commerce} />
+      <Route path="/dashboard_fitness" component={FitnessDashboard} />
+      <Route path="/dashboard_crypto" component={Crypto} />
+      <Route exact path="/dashboard_mobile_app" component={MobileAppDashboard} />
+      <Route path="/dashboard_booking" component={BookingDashboard} />
       <Route path="/ui" component={UI} />
       <Route path="/mail" component={Mail} />
       <Route path="/chat" component={Chat} />

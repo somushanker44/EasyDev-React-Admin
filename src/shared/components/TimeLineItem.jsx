@@ -40,7 +40,8 @@ const TimeLineItem = ({
   <div className="timeline__item">
     {img
       ? <div className="timeline__icon"><img src={img} alt="img" /></div>
-      : <TimeLineIcon type={type} />}
+      : <TimeLineIcon type={type} />
+    }
     <CardBody className="timeline__content">
       <h5 className="timeline__title">{title}</h5>
       <h4 className="subhead timeline__date">{date}</h4>

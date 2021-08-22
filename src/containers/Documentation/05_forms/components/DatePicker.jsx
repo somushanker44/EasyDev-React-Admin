@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const DatePicker = () => (
   <Card className="card--not-full-height">
@@ -9,7 +9,7 @@ const DatePicker = () => (
         <h5 className="bold-text">Datepickers</h5>
       </div>
       <p>DatePickers are based on <a href="https://github.com/Hacker0x01/react-datepicker">react-datepicker</a>.
-        The template has three types of datepickers.
+            The template has three types of datepickers.
       </p>
       <p>1. Simple datepicker</p>
       <CodeHighlither>

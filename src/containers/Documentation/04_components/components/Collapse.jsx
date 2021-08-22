@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody, Table } from 'reactstrap';
-import CodeHighlither from '@/shared/components/CodeHighlither';
+import CodeHighlither from '../../../../shared/components/CodeHighlither';
 
 const Collapse = () => (
   <Card className="card--not-full-height">
@@ -13,15 +13,18 @@ const Collapse = () => (
         this component here:
       </p>
       <CodeHighlither>
-        {`import React from 'react';
+        {`import React, {PureComponent} from 'react';
 import Collapse from 'template/src/components/Collapse';
 
-const Example = () => (
-  <Collapse title='What is the most featured item?' className='boxed'>
-    <p>No comfort written conduct at prevent manners on.</p>
-  </Collapse>
-);
-export default Example;`}
+export default class Example extends PureComponent {
+  render() {
+    return (
+      <Collapse title='What is the most featured item?' className='boxed'>
+        <p>No comfort written conduct at prevent manners on.</p>
+      </Collapse>
+    )
+  }
+}`}
       </CodeHighlither>
       <p>Props of Collapse:</p>
       <Table responsive className="table--bordered table--head-accent">

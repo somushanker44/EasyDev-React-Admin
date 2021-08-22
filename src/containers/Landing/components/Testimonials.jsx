@@ -31,8 +31,8 @@ const Testimonials = () => (
                   <StarIcon />
                 </div>
                 <p className="landing__testimonial-review">We have used many themes on many projects but none
-                  that have been so easy to work with. The design has delighted our customer and the code is easy
-                  to work with. This is the best theme we have used so far.
+                that have been so easy to work with. The design has delighted our customer and the code is easy
+                to work with. This is the best theme we have used so far.
                 </p>
               </CardBody>
             </Card>
@@ -55,7 +55,7 @@ const Testimonials = () => (
                   <StarIcon />
                 </div>
                 <p className="landing__testimonial-review">The components have been deigned well, which is
-                  enabling us to customize it quickly.
+                enabling us to customize it quickly.
                 </p>
               </CardBody>
             </Card>
